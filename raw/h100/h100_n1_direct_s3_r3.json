@@ -1,0 +1,168 @@
+{
+ "bench_version": 2,
+ "tag": "h100_n1_direct",
+ "mode": "zero3",
+ "stage": 3,
+ "rep": 3,
+ "world": 4,
+ "nodes": 1,
+ "device_kind": "cuda",
+ "backend": "nccl",
+ "params_b": 2.54688512,
+ "model": {
+  "layers": 30,
+  "hidden": 2560,
+  "heads": 20,
+  "ffn": 6912,
+  "vocab": 32768,
+  "seq": 2048,
+  "micro": 1
+ },
+ "iters": 40,
+ "warmup": 10,
+ "measure_wall_s": 742.9225652278401,
+ "step_max_ms": {
+  "p50": 18332.08887698129,
+  "p95": 28164.57807738334,
+  "mean": 18571.581714623608
+ },
+ "peak_mem_bytes_max": 21955404288,
+ "peak_mem_bytes_per_rank": [
+  21955404288,
+  21955404288,
+  21955404288,
+  21955404288
+ ],
+ "rank0_phases_ms": {
+  "fwd_p50": 6702.659158036113,
+  "bwd_p50": 6606.689917854965,
+  "step_p50": 5533.76654535532,
+  "barrier_p50": 4.230411257594824
+ },
+ "barrier_ms_mean_per_rank": [
+  4.083135444670916,
+  1.2448002002201974,
+  0.41756771970540285,
+  2.3687386070378125
+ ],
+ "comms_per_rank0": {
+  "barrier": {
+   "count": 40,
+   "time_ms": 162.84362971782684
+  },
+  "allgather_fn": {
+   "count": 5800,
+   "time_ms": 507988.74366655946
+  },
+  "reduce_scatter_fn": {
+   "count": 440,
+   "time_ms": 3844.3074710667133
+  },
+  "all_reduce": {
+   "count": 40,
+   "time_ms": 105.07643176242709
+  },
+  "all_gather_into_tensor": {
+   "count": 2440,
+   "time_ms": 217819.3848193623
+  }
+ },
+ "comms_all_ranks": [
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 162.84362971782684
+   },
+   "allgather_fn": {
+    "count": 5800,
+    "time_ms": 507988.74366655946
+   },
+   "reduce_scatter_fn": {
+    "count": 440,
+    "time_ms": 3844.3074710667133
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 105.07643176242709
+   },
+   "all_gather_into_tensor": {
+    "count": 2440,
+    "time_ms": 217819.3848193623
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 49.328140914440155
+   },
+   "allgather_fn": {
+    "count": 5800,
+    "time_ms": 508390.63776051626
+   },
+   "reduce_scatter_fn": {
+    "count": 440,
+    "time_ms": 3237.3707783408463
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 92.43674669414759
+   },
+   "all_gather_into_tensor": {
+    "count": 2440,
+    "time_ms": 217941.52626767755
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 16.23649662360549
+   },
+   "allgather_fn": {
+    "count": 5800,
+    "time_ms": 508769.88293696195
+   },
+   "reduce_scatter_fn": {
+    "count": 440,
+    "time_ms": 2803.620256483555
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 86.8550380691886
+   },
+   "all_gather_into_tensor": {
+    "count": 2440,
+    "time_ms": 217975.75922915712
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 94.28231930360198
+   },
+   "allgather_fn": {
+    "count": 5800,
+    "time_ms": 508234.01815537363
+   },
+   "reduce_scatter_fn": {
+    "count": 440,
+    "time_ms": 3631.236984860152
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 99.7734684497118
+   },
+   "all_gather_into_tensor": {
+    "count": 2440,
+    "time_ms": 217902.13820291683
+   }
+  }
+ ],
+ "env": {
+  "transport_note": "ib-gdr-disabled",
+  "NCCL_NET_GDR_LEVEL": "LOC",
+  "job": "3481929",
+  "nodelist": "c561-003",
+  "torch": "2.11.0+cu128"
+ },
+ "ts": "2026-09-09 10:26:09"
+}

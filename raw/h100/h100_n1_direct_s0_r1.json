@@ -1,0 +1,108 @@
+{
+ "bench_version": 2,
+ "tag": "h100_n1_direct",
+ "mode": "ddp",
+ "stage": 0,
+ "rep": 1,
+ "world": 4,
+ "nodes": 1,
+ "device_kind": "cuda",
+ "backend": "nccl",
+ "params_b": 2.54688512,
+ "model": {
+  "layers": 30,
+  "hidden": 2560,
+  "heads": 20,
+  "ffn": 6912,
+  "vocab": 32768,
+  "seq": 2048,
+  "micro": 1
+ },
+ "iters": 40,
+ "warmup": 10,
+ "measure_wall_s": 12.31532221287489,
+ "step_max_ms": {
+  "p50": 302.5767239741981,
+  "p95": 312.4934849329293,
+  "mean": 306.9122340180911
+ },
+ "peak_mem_bytes_max": 62182503424,
+ "peak_mem_bytes_per_rank": [
+  62182503424,
+  62182503424,
+  62182503424,
+  62182503424
+ ],
+ "rank0_phases_ms": {
+  "fwd_p50": 29.19455198571086,
+  "bwd_p50": 113.66519145667553,
+  "step_p50": 158.79987413063645,
+  "barrier_p50": 1.135719008743763
+ },
+ "barrier_ms_mean_per_rank": [
+  1.0890692821703851,
+  2.229133527725935,
+  1.836287567857653,
+  2.7712065493687987
+ ],
+ "comms_per_rank0": {
+  "barrier": {
+   "count": 40,
+   "time_ms": 43.07672381401062
+  },
+  "all_reduce": {
+   "count": 200,
+   "time_ms": 2800.7055106572807
+  }
+ },
+ "comms_all_ranks": [
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 43.07672381401062
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 2800.7055106572807
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 88.6674402281642
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 2655.1560764200985
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 72.95769359916449
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 2657.645967323333
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 110.35794019699097
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 2670.8076898939908
+   }
+  }
+ ],
+ "env": {
+  "transport_note": "ib-gdr-disabled",
+  "NCCL_NET_GDR_LEVEL": "LOC",
+  "job": "3481929",
+  "nodelist": "c561-003",
+  "torch": "2.11.0+cu128"
+ },
+ "ts": "2026-09-09 09:40:57"
+}

@@ -1,0 +1,251 @@
+{
+ "tag": "pvc_n2",
+ "mode": "ddp",
+ "stage": 0,
+ "rep": 3,
+ "world": 16,
+ "nodes": 2,
+ "device_kind": "xpu",
+ "backend": "xccl",
+ "params_b": 2.54688512,
+ "model": {
+  "layers": 30,
+  "hidden": 2560,
+  "heads": 20,
+  "ffn": 6912,
+  "vocab": 32768,
+  "seq": 2048,
+  "micro": 1
+ },
+ "iters": 40,
+ "warmup": 10,
+ "measure_wall_s": 70.86261046002619,
+ "step_max_ms": {
+  "p50": 1765.0019461289048,
+  "p95": 1824.8199890367687,
+  "mean": 1770.2969968668185
+ },
+ "peak_mem_bytes_max": 62110734336,
+ "peak_mem_bytes_per_rank": [
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336
+ ],
+ "rank0_phases_ms": {
+  "fwd_p50": 114.55355095677078,
+  "bwd_p50": 1335.1415910292417,
+  "step_p50": 311.7791609838605,
+  "barrier_p50": 5.279144970700145
+ },
+ "barrier_ms_mean_per_rank": [
+  5.401653586886823,
+  2.449638972757384,
+  4.4744985294528306,
+  4.061093676136807,
+  5.2693072822876275,
+  3.6287051101680845,
+  5.359055055305362,
+  3.3661823254078627,
+  0.8342965797055513,
+  3.559089940972626,
+  4.747519001830369,
+  3.5946809453889728,
+  1.0924184636678547,
+  4.002271132776514,
+  5.195523286238313,
+  1.529280055547133
+ ],
+ "comms_per_rank0": {
+  "broadcast": {
+   "count": 0,
+   "time_ms": 0.0
+  },
+  "all_reduce": {
+   "count": 200,
+   "time_ms": 120.1434674262758
+  }
+ },
+ "comms_all_ranks": [
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 120.1434674262758
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 122.27863431999162
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 120.35038459739482
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 122.19902680309536
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 119.8833514770458
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 121.37248678294861
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 120.07511878383374
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 122.55799658148314
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 120.87831912796437
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 122.43600655473153
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 120.8349587589031
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 123.88578604563992
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 121.59440505271388
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 122.88790831354623
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 120.52757019462581
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 123.60593297479534
+   }
+  }
+ ],
+ "env": {
+  "transport_note": "pvc-tcp-hoststaged",
+  "NCCL_NET_GDR_LEVEL": "",
+  "job": "3472848",
+  "nodelist": "c551-[002-003]",
+  "torch": "2.13.0+xpu"
+ },
+ "ts": "2026-09-06 06:52:36"
+}

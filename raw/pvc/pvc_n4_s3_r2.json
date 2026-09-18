@@ -1,0 +1,707 @@
+{
+ "tag": "pvc_n4",
+ "mode": "zero3",
+ "stage": 3,
+ "rep": 2,
+ "world": 32,
+ "nodes": 4,
+ "device_kind": "xpu",
+ "backend": "xccl",
+ "params_b": 2.54688512,
+ "model": {
+  "layers": 30,
+  "hidden": 2560,
+  "heads": 20,
+  "ffn": 6912,
+  "vocab": 32768,
+  "seq": 2048,
+  "micro": 1
+ },
+ "iters": 24,
+ "warmup": 6,
+ "measure_wall_s": 238.5067054508254,
+ "step_max_ms": {
+  "p50": 9735.25680298917,
+  "p95": 12862.706928979605,
+  "mean": 9935.23735755783
+ },
+ "peak_mem_bytes_max": 12948094464,
+ "peak_mem_bytes_per_rank": [
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464,
+  12948094464
+ ],
+ "rank0_phases_ms": {
+  "fwd_p50": 3504.548674914986,
+  "bwd_p50": 4616.070613032207,
+  "step_p50": 1918.9357289578766,
+  "barrier_p50": 2.3010489530861378
+ },
+ "barrier_ms_mean_per_rank": [
+  2.6334709740088633,
+  2.72634593420662,
+  2.7019251817061254,
+  2.680798090295866,
+  2.324899639158199,
+  1.4524926761320482,
+  2.885545662138611,
+  2.5977150459463396,
+  2.5621706154197454,
+  2.8206471470184624,
+  2.9183773537321636,
+  1.686865696683526,
+  3.0641346626604595,
+  2.3837216722313315,
+  2.1419284651832036,
+  2.727876310624803,
+  2.029953970729063,
+  2.8608271192448833,
+  1.1427581678920735,
+  2.907327958382666,
+  2.220380207290873,
+  2.366108111649131,
+  2.693031342156852,
+  2.4081337420890727,
+  3.035556622004757,
+  2.81719391932711,
+  2.370828849961981,
+  1.7720483107647549,
+  2.12852779077366,
+  2.5135700610311082,
+  2.5758066622074693,
+  2.2515453456435353
+ ],
+ "comms_per_rank0": {
+  "barrier": {
+   "count": 24,
+   "time_ms": 61.70057947747409
+  },
+  "all_gather_into_tensor": {
+   "count": 4944,
+   "time_ms": 56812.98883352429
+  },
+  "reduce_scatter_tensor": {
+   "count": 264,
+   "time_ms": 30137.458021985367
+  },
+  "all_reduce": {
+   "count": 24,
+   "time_ms": 804.8593616113067
+  }
+ },
+ "comms_all_ranks": [
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 61.70057947747409
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 56812.98883352429
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 30137.458021985367
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 804.8593616113067
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 63.95407347008586
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 54665.34785623662
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 37962.51900680363
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 67.60384608060122
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 63.36544291116297
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 62010.08563116193
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 30090.464875102043
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 897.3064883612096
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 62.8555896691978
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 60018.59742728993
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 31808.826242107898
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 637.4861244112253
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 54.3134652543813
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 60988.53197647259
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 30069.65040322393
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 922.6699047721922
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 33.364974427968264
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 51971.17792000063
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 37293.56734966859
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 171.35740933008492
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 67.77144153602421
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 57058.94398712553
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 30858.23256894946
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 709.3251959886402
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 60.86536520160735
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 51249.39832952805
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 35611.287869280204
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 301.49382492527366
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 60.00589393079281
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 59104.848420247436
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 31686.052337754518
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 622.9764190502465
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 66.20854255743325
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 50467.42656035349
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 37555.47407316044
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 80.51482541486621
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 68.55353363789618
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 57093.4002448339
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 31006.686287233606
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 701.5083199366927
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 38.99007267318666
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 56342.20130206086
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 32712.434419430792
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 469.4400504231453
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 72.06894597038627
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 61722.48603007756
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 31418.65924722515
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 729.1761268861592
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 55.712249130010605
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 53468.80031260662
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 37387.61366251856
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 158.2470538560301
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 49.93074852973223
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 57342.28661074303
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 32561.817524256185
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 525.4629517439753
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 63.98559361696243
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 53307.25412117317
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 35630.835466086864
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 273.55508133769035
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 47.24192735739052
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 54855.979388114065
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 30941.05913466774
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 677.1971832495183
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 67.1826396137476
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 54920.07870436646
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 37814.58138185553
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 85.97631892189384
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 25.92733991332352
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 56617.51846317202
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 30682.635826058686
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 754.6877157874405
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 68.30309797078371
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 59504.92621748708
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 32531.876450171694
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 490.25401868857443
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 51.80393694899976
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 57758.67210375145
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 30733.262768480927
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 787.0671565178782
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 55.292368633672595
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 49434.63451648131
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 36867.791024036705
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 161.87198786064982
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 63.15948534756899
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 59292.05455747433
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 32127.327238442376
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 590.2732622344047
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 56.30347761325538
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 51714.42126180045
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 35437.79779947363
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 286.61086689680815
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 71.37085450813174
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 62374.23925474286
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 30931.708835298195
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 748.6976471263915
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 66.12852099351585
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 55243.43170854263
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 37875.24182815105
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 87.0614293962717
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 55.41626433841884
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 59554.84700622037
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 30405.964728211984
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 827.3565210402012
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 41.04495653882623
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 53993.92528273165
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 31971.528207650408
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 556.3708392437547
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 49.598608165979385
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 57182.15689412318
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 30183.368269819766
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 853.7089829333127
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 58.84338798932731
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 55657.1266783867
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 37283.497548429295
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 190.3484114445746
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 60.33308571204543
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 57625.654604053125
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 31540.22900410928
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 656.1676647979766
+   }
+  },
+  {
+   "barrier": {
+    "count": 24,
+    "time_ms": 52.559784380719066
+   },
+   "all_gather_into_tensor": {
+    "count": 4944,
+    "time_ms": 54244.704040000215
+   },
+   "reduce_scatter_tensor": {
+    "count": 264,
+    "time_ms": 35783.44602091238
+   },
+   "all_reduce": {
+    "count": 24,
+    "time_ms": 309.80586144141853
+   }
+  }
+ ],
+ "env": {
+  "transport_note": "pvc-tcp-hoststaged",
+  "NCCL_NET_GDR_LEVEL": "",
+  "job": "3472923",
+  "nodelist": "c552-[005-008]",
+  "torch": "2.13.0+xpu"
+ },
+ "ts": "2026-09-06 08:21:40"
+}

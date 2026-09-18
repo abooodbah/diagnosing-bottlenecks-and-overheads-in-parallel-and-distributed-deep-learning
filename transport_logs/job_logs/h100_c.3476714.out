@@ -1,0 +1,602 @@
+
+Currently Loaded Modules:
+  1) python/3.12.11
+=== zmig h100 nodes=2 job=3476714 nodelist=c561-[003,007] ===
+c561-003.stampede3.tacc.utexas.edu: GPU 0: NVIDIA H100 (UUID: GPU-92bd631d-3353-b27e-0f2e-69020cc02059); 2.11.0+cu128 True 4
+c561-007.stampede3.tacc.utexas.edu: GPU 0: NVIDIA H100 (UUID: GPU-ce0338e7-dbb2-73cc-5f66-d56423c0e912); 2.11.0+cu128 True 4
+=== COMPACT (budget-fit) ===
+--- llama stage=0 rep=1 transport=direct port=25715 06:19:23 ---
+[bench] world=8 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=9.0s
+[rank1]:[E909 06:20:14.720531150 ProcessGroupNCCL.cpp:612] [Rank 1] Collective WorkNCCL(SeqNum=1, OpType=BROADCAST, NumelIn=83886080, NumelOut=83886080, Timeout(ms)=600000) raised the following async exception: NCCL error: remote process exited or there was a network error, NCCL version 2.28.9
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+NET/IB: Got completion from peer 10.168.122.176<41339> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2770 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x1528ea13605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x380 (0x1528eb30b340 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x80 (0x1528eb3126e0 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::Watchdog::runLoop() + 0xa84 (0x1528eb317474 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::Watchdog::run() + 0x157 (0x1528eb319597 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0xdbae4 (0x1529beedbae4 in /usr/lib64/libstdc++.so.6)
+frame #6: <unknown function> + 0x8b2ea (0x1529ff28b2ea in /usr/lib64/libc.so.6)
+frame #7: <unknown function> + 0x1103c0 (0x1529ff3103c0 in /usr/lib64/libc.so.6)
+
+[rank1]:[E909 06:20:15.726435225 ProcessGroupNCCL.cpp:2303] [PG ID 1 PG GUID 1 Rank 1]  failure detected by watchdog at work sequence id: 1 PG status: last enqueued work: 1, last completed work: -1
+[rank1]:[E909 06:20:15.729270996 ProcessGroupNCCL.cpp:733] Stack trace of the failed collective: 
+#0 broadcast from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:2968
+#1 wrapper from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83
+#2 timed from /scratch/08447/abd2000/zmig/llama_bench.py:179
+#3 broadcast from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py:236
+#4 broadcast from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py:229
+#5 log_wrapper from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py:122
+#6 _broadcast_model from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py:1687
+#7 _configure_distributed_model from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py:1818
+#8 __init__ from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py:338
+#9 initialize from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/__init__.py:229
+#10 main from /scratch/08447/abd2000/zmig/llama_bench.py:307
+#11 <module> from /scratch/08447/abd2000/zmig/llama_bench.py:435
+
+[rank1]:[E909 06:20:15.729312403 ProcessGroupNCCL.cpp:2636] [PG ID 1 PG GUID 1 Rank 1] First PG on this rank to signal dumping.
+[rank0]:[E909 06:20:15.993793712 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 0] Observed flight recorder dump signal from another rank via TCPStore.
+[rank0]:[E909 06:20:15.993882747 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 0] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank0]:[E909 06:20:15.993986146 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 0] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank2]:[E909 06:20:15.011236832 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 2] Observed flight recorder dump signal from another rank via TCPStore.
+[rank2]:[E909 06:20:15.011334153 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 2] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank2]:[E909 06:20:15.011488609 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 2] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank4]:[E909 06:20:15.040170265 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 4] Observed flight recorder dump signal from another rank via TCPStore.
+[rank6]:[E909 06:20:15.040191102 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 6] Observed flight recorder dump signal from another rank via TCPStore.
+[rank4]:[E909 06:20:15.040288835 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 4] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank6]:[E909 06:20:15.040303110 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 6] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank7]:[E909 06:20:15.040416011 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 7] Observed flight recorder dump signal from another rank via TCPStore.
+[rank5]:[E909 06:20:15.040489877 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 5] Observed flight recorder dump signal from another rank via TCPStore.
+[rank7]:[E909 06:20:15.040542818 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 7] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank5]:[E909 06:20:15.040613833 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 5] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank4]:[E909 06:20:15.042734371 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 4] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank5]:[E909 06:20:15.042739980 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 5] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank6]:[E909 06:20:15.042735855 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 6] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank7]:[E909 06:20:15.042738333 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 7] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank1]:[E909 06:20:15.114780515 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 1] Received a dump signal due to a collective timeout from this local rank and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank1]:[E909 06:20:15.114845193 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 1] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank3]:[E909 06:20:15.467640815 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 3] Observed flight recorder dump signal from another rank via TCPStore.
+[rank3]:[E909 06:20:15.467765748 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 3] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank3]:[E909 06:20:15.467897032 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 3] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank1]:[E909 06:21:15.729396881 ProcessGroupNCCL.cpp:750] [Rank 1] Some NCCL operations have failed or timed out. Due to the asynchronous nature of CUDA kernels, subsequent GPU operations might run on corrupted/incomplete data.
+[rank1]:[E909 06:21:15.729413525 ProcessGroupNCCL.cpp:764] [Rank 1] To avoid data inconsistency, we are taking the entire process down.
+[rank1]:[E909 06:21:15.729456201 ProcessGroupNCCL.cpp:2119] [PG ID 1 PG GUID 1 Rank 1] Process group watchdog thread terminated with exception: NCCL error: remote process exited or there was a network error, NCCL version 2.28.9
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+NET/IB: Got completion from peer 10.168.122.176<41339> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2770 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x1528ea13605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x380 (0x1528eb30b340 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x80 (0x1528eb3126e0 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::Watchdog::runLoop() + 0xa84 (0x1528eb317474 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::Watchdog::run() + 0x157 (0x1528eb319597 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0xdbae4 (0x1529beedbae4 in /usr/lib64/libstdc++.so.6)
+frame #6: <unknown function> + 0x8b2ea (0x1529ff28b2ea in /usr/lib64/libc.so.6)
+frame #7: <unknown function> + 0x1103c0 (0x1529ff3103c0 in /usr/lib64/libc.so.6)
+
+terminate called after throwing an instance of 'c10::DistBackendError'
+  what():  [PG ID 1 PG GUID 1 Rank 1] Process group watchdog thread terminated with exception: NCCL error: remote process exited or there was a network error, NCCL version 2.28.9
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+NET/IB: Got completion from peer 10.168.122.176<41339> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2770 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x1528ea13605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x380 (0x1528eb30b340 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x80 (0x1528eb3126e0 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::Watchdog::runLoop() + 0xa84 (0x1528eb317474 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::Watchdog::run() + 0x157 (0x1528eb319597 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0xdbae4 (0x1529beedbae4 in /usr/lib64/libstdc++.so.6)
+frame #6: <unknown function> + 0x8b2ea (0x1529ff28b2ea in /usr/lib64/libc.so.6)
+frame #7: <unknown function> + 0x1103c0 (0x1529ff3103c0 in /usr/lib64/libc.so.6)
+
+Exception raised from run at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2125 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x1528ea13605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0x9b5d75 (0x1528eab79d75 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: <unknown function> + 0xdbae4 (0x1529beedbae4 in /usr/lib64/libstdc++.so.6)
+frame #3: <unknown function> + 0x8b2ea (0x1529ff28b2ea in /usr/lib64/libc.so.6)
+frame #4: <unknown function> + 0x1103c0 (0x1529ff3103c0 in /usr/lib64/libc.so.6)
+
+srun: error: c561-003: task 1: Aborted (core dumped)
+[rank0]:[F909 06:28:15.007089366 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 0] [PG ID 0 PG GUID 0 Rank 0] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank2]:[F909 06:28:15.019016664 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 2] [PG ID 0 PG GUID 0 Rank 2] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank7]:[F909 06:28:15.067358668 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 7] [PG ID 0 PG GUID 0 Rank 7] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank4]:[F909 06:28:15.076257745 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 4] [PG ID 0 PG GUID 0 Rank 4] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank6]:[F909 06:28:15.076519208 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 6] [PG ID 0 PG GUID 0 Rank 6] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank5]:[F909 06:28:15.077435465 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 5] [PG ID 0 PG GUID 0 Rank 5] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank3]:[F909 06:28:15.475772742 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 3] [PG ID 0 PG GUID 0 Rank 3] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+srun: error: c561-003: task 2: Aborted (core dumped)
+srun: error: c561-003: task 0: Aborted (core dumped)
+srun: error: c561-007: task 7: Aborted (core dumped)
+srun: error: c561-007: tasks 4,6: Aborted (core dumped)
+srun: error: c561-003: task 3: Aborted (core dumped)
+srun: error: c561-007: task 5: Aborted (core dumped)
+--- rc=134 ---
+--- llama stage=2 rep=1 transport=direct port=25716 06:28:22 ---
+[bench] world=8 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=8.8s
+[rank1]:[E909 06:28:58.426296077 ProcessGroupNCCL.cpp:612] [Rank 1] Collective WorkNCCL(SeqNum=1, OpType=BROADCAST, NumelIn=83886080, NumelOut=83886080, Timeout(ms)=600000) raised the following async exception: NCCL error: remote process exited or there was a network error, NCCL version 2.28.9
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+NET/IB: Got completion from peer 10.168.122.176<53409> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2770 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x14ab9993605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x380 (0x14ab9ab0b340 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x80 (0x14ab9ab126e0 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::Watchdog::runLoop() + 0xa84 (0x14ab9ab17474 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::Watchdog::run() + 0x157 (0x14ab9ab19597 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0xdbae4 (0x14ac6e6dbae4 in /usr/lib64/libstdc++.so.6)
+frame #6: <unknown function> + 0x8b2ea (0x14acaec8b2ea in /usr/lib64/libc.so.6)
+frame #7: <unknown function> + 0x1103c0 (0x14acaed103c0 in /usr/lib64/libc.so.6)
+
+[rank1]:[E909 06:28:58.427437596 ProcessGroupNCCL.cpp:2303] [PG ID 1 PG GUID 1 Rank 1]  failure detected by watchdog at work sequence id: 1 PG status: last enqueued work: 1, last completed work: -1
+[rank1]:[E909 06:28:58.427744035 ProcessGroupNCCL.cpp:733] Stack trace of the failed collective: 
+#0 broadcast from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:2968
+#1 wrapper from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83
+#2 timed from /scratch/08447/abd2000/zmig/llama_bench.py:179
+#3 broadcast from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py:236
+#4 broadcast from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py:229
+#5 log_wrapper from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py:122
+#6 _broadcast_model from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py:1687
+#7 _configure_distributed_model from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py:1818
+#8 __init__ from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py:338
+#9 initialize from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/__init__.py:229
+#10 main from /scratch/08447/abd2000/zmig/llama_bench.py:307
+#11 <module> from /scratch/08447/abd2000/zmig/llama_bench.py:435
+
+[rank1]:[E909 06:28:58.427781218 ProcessGroupNCCL.cpp:2636] [PG ID 1 PG GUID 1 Rank 1] First PG on this rank to signal dumping.
+[rank4]:[E909 06:28:58.459122141 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 4] Observed flight recorder dump signal from another rank via TCPStore.
+[rank4]:[E909 06:28:58.459237370 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 4] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank4]:[E909 06:28:58.459362984 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 4] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank5]:[E909 06:28:58.473096386 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 5] Observed flight recorder dump signal from another rank via TCPStore.
+[rank5]:[E909 06:28:58.473232029 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 5] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank5]:[E909 06:28:58.473361920 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 5] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank0]:[E909 06:28:58.469784321 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 0] Observed flight recorder dump signal from another rank via TCPStore.
+[rank7]:[E909 06:28:58.488012516 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 7] Observed flight recorder dump signal from another rank via TCPStore.
+[rank0]:[E909 06:28:58.469875967 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 0] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank7]:[E909 06:28:58.488140290 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 7] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank7]:[E909 06:28:58.488337515 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 7] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank6]:[E909 06:28:58.492414264 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 6] Observed flight recorder dump signal from another rank via TCPStore.
+[rank6]:[E909 06:28:58.492525527 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 6] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank6]:[E909 06:28:58.492649318 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 6] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank0]:[E909 06:28:58.469996955 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 0] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank2]:[E909 06:28:59.856939217 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 2] Observed flight recorder dump signal from another rank via TCPStore.
+[rank2]:[E909 06:28:59.857023233 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 2] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank2]:[E909 06:28:59.857163121 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 2] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank3]:[E909 06:28:59.268021117 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 3] Observed flight recorder dump signal from another rank via TCPStore.
+[rank3]:[E909 06:28:59.268121949 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 3] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank3]:[E909 06:28:59.268238303 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 3] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank1]:[E909 06:28:59.351868986 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 1] Received a dump signal due to a collective timeout from this local rank and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank1]:[E909 06:28:59.351946629 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 1] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank1]:[E909 06:29:58.427864734 ProcessGroupNCCL.cpp:750] [Rank 1] Some NCCL operations have failed or timed out. Due to the asynchronous nature of CUDA kernels, subsequent GPU operations might run on corrupted/incomplete data.
+[rank1]:[E909 06:29:58.427882824 ProcessGroupNCCL.cpp:764] [Rank 1] To avoid data inconsistency, we are taking the entire process down.
+[rank1]:[E909 06:29:58.427923630 ProcessGroupNCCL.cpp:2119] [PG ID 1 PG GUID 1 Rank 1] Process group watchdog thread terminated with exception: NCCL error: remote process exited or there was a network error, NCCL version 2.28.9
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+NET/IB: Got completion from peer 10.168.122.176<53409> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2770 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x14ab9993605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x380 (0x14ab9ab0b340 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x80 (0x14ab9ab126e0 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::Watchdog::runLoop() + 0xa84 (0x14ab9ab17474 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::Watchdog::run() + 0x157 (0x14ab9ab19597 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0xdbae4 (0x14ac6e6dbae4 in /usr/lib64/libstdc++.so.6)
+frame #6: <unknown function> + 0x8b2ea (0x14acaec8b2ea in /usr/lib64/libc.so.6)
+frame #7: <unknown function> + 0x1103c0 (0x14acaed103c0 in /usr/lib64/libc.so.6)
+
+terminate called after throwing an instance of 'c10::DistBackendError'
+  what():  [PG ID 1 PG GUID 1 Rank 1] Process group watchdog thread terminated with exception: NCCL error: remote process exited or there was a network error, NCCL version 2.28.9
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+NET/IB: Got completion from peer 10.168.122.176<53409> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2770 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x14ab9993605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x380 (0x14ab9ab0b340 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x80 (0x14ab9ab126e0 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::Watchdog::runLoop() + 0xa84 (0x14ab9ab17474 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::Watchdog::run() + 0x157 (0x14ab9ab19597 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0xdbae4 (0x14ac6e6dbae4 in /usr/lib64/libstdc++.so.6)
+frame #6: <unknown function> + 0x8b2ea (0x14acaec8b2ea in /usr/lib64/libc.so.6)
+frame #7: <unknown function> + 0x1103c0 (0x14acaed103c0 in /usr/lib64/libc.so.6)
+
+Exception raised from run at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2125 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x14ab9993605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0x9b5d75 (0x14ab9a379d75 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: <unknown function> + 0xdbae4 (0x14ac6e6dbae4 in /usr/lib64/libstdc++.so.6)
+frame #3: <unknown function> + 0x8b2ea (0x14acaec8b2ea in /usr/lib64/libc.so.6)
+frame #4: <unknown function> + 0x1103c0 (0x14acaed103c0 in /usr/lib64/libc.so.6)
+
+srun: error: c561-003: task 1: Aborted (core dumped)
+[rank4]:[F909 06:36:58.466326808 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 4] [PG ID 0 PG GUID 0 Rank 4] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank5]:[F909 06:36:58.480849014 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 5] [PG ID 0 PG GUID 0 Rank 5] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank6]:[F909 06:36:58.500437188 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 6] [PG ID 0 PG GUID 0 Rank 6] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank0]:[F909 06:36:58.477828269 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 0] [PG ID 0 PG GUID 0 Rank 0] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank7]:[F909 06:36:58.519656615 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 7] [PG ID 0 PG GUID 0 Rank 7] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank2]:[F909 06:36:59.864948900 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 2] [PG ID 0 PG GUID 0 Rank 2] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank3]:[F909 06:36:59.279769719 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 3] [PG ID 0 PG GUID 0 Rank 3] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+srun: error: c561-003: task 2: Aborted (core dumped)
+srun: error: c561-007: task 6: Aborted (core dumped)
+srun: error: c561-007: task 7: Aborted (core dumped)
+srun: error: c561-003: task 0: Aborted (core dumped)
+srun: error: c561-007: task 4: Aborted (core dumped)
+srun: error: c561-003: task 3: Aborted (core dumped)
+srun: error: c561-007: task 5: Aborted (core dumped)
+--- rc=134 ---
+--- llama stage=3 rep=1 transport=direct port=25717 06:37:06 ---
+[bench] world=8 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=8.9s
+[rank1]:[E909 06:37:34.386651419 ProcessGroupNCCL.cpp:612] [Rank 1] Collective WorkNCCL(SeqNum=1, OpType=BROADCAST, NumelIn=83886080, NumelOut=83886080, Timeout(ms)=600000) raised the following async exception: NCCL error: remote process exited or there was a network error, NCCL version 2.28.9
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+NET/IB: Got completion from peer 10.168.122.176<56451> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2770 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x14944533605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x380 (0x14944650b340 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x80 (0x1494465126e0 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::Watchdog::runLoop() + 0xa84 (0x149446517474 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::Watchdog::run() + 0x157 (0x149446519597 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0xdbae4 (0x14951a0dbae4 in /usr/lib64/libstdc++.so.6)
+frame #6: <unknown function> + 0x8b2ea (0x14955a68b2ea in /usr/lib64/libc.so.6)
+frame #7: <unknown function> + 0x1103c0 (0x14955a7103c0 in /usr/lib64/libc.so.6)
+
+[rank1]:[E909 06:37:34.387774278 ProcessGroupNCCL.cpp:2303] [PG ID 1 PG GUID 1 Rank 1]  failure detected by watchdog at work sequence id: 1 PG status: last enqueued work: 1, last completed work: -1
+[rank1]:[E909 06:37:34.388116097 ProcessGroupNCCL.cpp:733] Stack trace of the failed collective: 
+#0 broadcast from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:2968
+#1 wrapper from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83
+#2 timed from /scratch/08447/abd2000/zmig/llama_bench.py:179
+#3 broadcast from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py:236
+#4 broadcast from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py:229
+#5 log_wrapper from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py:122
+#6 _broadcast_model from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py:1687
+#7 _configure_distributed_model from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py:1818
+#8 __init__ from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py:338
+#9 initialize from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/__init__.py:229
+#10 main from /scratch/08447/abd2000/zmig/llama_bench.py:307
+#11 <module> from /scratch/08447/abd2000/zmig/llama_bench.py:435
+
+[rank1]:[E909 06:37:34.388153694 ProcessGroupNCCL.cpp:2636] [PG ID 1 PG GUID 1 Rank 1] First PG on this rank to signal dumping.
+[rank4]:[E909 06:37:34.466786072 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 4] Observed flight recorder dump signal from another rank via TCPStore.
+[rank5]:[E909 06:37:34.466863352 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 5] Observed flight recorder dump signal from another rank via TCPStore.
+[rank4]:[E909 06:37:34.466902504 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 4] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank5]:[E909 06:37:34.466997632 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 5] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank4]:[E909 06:37:34.467033379 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 4] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank5]:[E909 06:37:34.467131355 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 5] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank7]:[E909 06:37:34.482387958 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 7] Observed flight recorder dump signal from another rank via TCPStore.
+[rank7]:[E909 06:37:34.482510246 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 7] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank7]:[E909 06:37:34.482628544 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 7] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank6]:[E909 06:37:34.486825803 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 6] Observed flight recorder dump signal from another rank via TCPStore.
+[rank6]:[E909 06:37:34.486946746 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 6] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank6]:[E909 06:37:34.487101742 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 6] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank0]:[E909 06:37:34.466687245 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 0] Observed flight recorder dump signal from another rank via TCPStore.
+[rank0]:[E909 06:37:34.466783323 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 0] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank0]:[E909 06:37:34.466895639 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 0] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank2]:[E909 06:37:35.215890796 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 2] Observed flight recorder dump signal from another rank via TCPStore.
+[rank1]:[E909 06:37:35.215915064 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 1] Received a dump signal due to a collective timeout from this local rank and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank2]:[E909 06:37:35.215971197 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 2] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank1]:[E909 06:37:35.215991301 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 1] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank2]:[E909 06:37:35.216088818 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 2] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank3]:[E909 06:37:35.232823211 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 3] Observed flight recorder dump signal from another rank via TCPStore.
+[rank3]:[E909 06:37:35.232913861 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 3] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank3]:[E909 06:37:35.233042472 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 3] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank1]:[E909 06:38:34.388232350 ProcessGroupNCCL.cpp:750] [Rank 1] Some NCCL operations have failed or timed out. Due to the asynchronous nature of CUDA kernels, subsequent GPU operations might run on corrupted/incomplete data.
+[rank1]:[E909 06:38:34.388248009 ProcessGroupNCCL.cpp:764] [Rank 1] To avoid data inconsistency, we are taking the entire process down.
+[rank1]:[E909 06:38:34.388282270 ProcessGroupNCCL.cpp:2119] [PG ID 1 PG GUID 1 Rank 1] Process group watchdog thread terminated with exception: NCCL error: remote process exited or there was a network error, NCCL version 2.28.9
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+NET/IB: Got completion from peer 10.168.122.176<56451> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2770 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x14944533605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x380 (0x14944650b340 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x80 (0x1494465126e0 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::Watchdog::runLoop() + 0xa84 (0x149446517474 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::Watchdog::run() + 0x157 (0x149446519597 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0xdbae4 (0x14951a0dbae4 in /usr/lib64/libstdc++.so.6)
+frame #6: <unknown function> + 0x8b2ea (0x14955a68b2ea in /usr/lib64/libc.so.6)
+frame #7: <unknown function> + 0x1103c0 (0x14955a7103c0 in /usr/lib64/libc.so.6)
+
+terminate called after throwing an instance of 'c10::DistBackendError'
+  what():  [PG ID 1 PG GUID 1 Rank 1] Process group watchdog thread terminated with exception: NCCL error: remote process exited or there was a network error, NCCL version 2.28.9
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+NET/IB: Got completion from peer 10.168.122.176<56451> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2770 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x14944533605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x380 (0x14944650b340 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x80 (0x1494465126e0 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::Watchdog::runLoop() + 0xa84 (0x149446517474 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::Watchdog::run() + 0x157 (0x149446519597 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0xdbae4 (0x14951a0dbae4 in /usr/lib64/libstdc++.so.6)
+frame #6: <unknown function> + 0x8b2ea (0x14955a68b2ea in /usr/lib64/libc.so.6)
+frame #7: <unknown function> + 0x1103c0 (0x14955a7103c0 in /usr/lib64/libc.so.6)
+
+Exception raised from run at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2125 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x14944533605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0x9b5d75 (0x149445d79d75 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: <unknown function> + 0xdbae4 (0x14951a0dbae4 in /usr/lib64/libstdc++.so.6)
+frame #3: <unknown function> + 0x8b2ea (0x14955a68b2ea in /usr/lib64/libc.so.6)
+frame #4: <unknown function> + 0x1103c0 (0x14955a7103c0 in /usr/lib64/libc.so.6)
+
+srun: error: c561-003: task 1: Aborted (core dumped)
+[rank4]:[F909 06:45:34.481967025 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 4] [PG ID 0 PG GUID 0 Rank 4] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank5]:[F909 06:45:34.482837438 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 5] [PG ID 0 PG GUID 0 Rank 5] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank7]:[F909 06:45:34.496153557 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 7] [PG ID 0 PG GUID 0 Rank 7] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank0]:[F909 06:45:34.474908629 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 0] [PG ID 0 PG GUID 0 Rank 0] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank6]:[F909 06:45:34.498374283 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 6] [PG ID 0 PG GUID 0 Rank 6] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank2]:[F909 06:45:35.230333864 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 2] [PG ID 0 PG GUID 0 Rank 2] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank3]:[F909 06:45:35.245213664 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 3] [PG ID 0 PG GUID 0 Rank 3] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+srun: error: c561-003: task 0: Aborted (core dumped)
+srun: error: c561-003: task 2: Aborted (core dumped)
+srun: error: c561-007: task 6: Aborted (core dumped)
+srun: error: c561-007: task 4: Aborted (core dumped)
+srun: error: c561-003: task 3: Aborted (core dumped)
+srun: error: c561-007: task 7: Aborted (core dumped)
+srun: error: c561-007: task 5: Aborted (core dumped)
+--- rc=134 ---
+--- llama stage=3 rep=1 transport=host port=25718 06:45:42 ---
+[bench] world=8 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=8.9s
+/scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[bench] warmup...
+[bench] measuring...
+[bench] iter 1/40 last=8375ms
+[bench] iter 11/40 last=13836ms
+[bench] iter 21/40 last=19421ms
+[bench] iter 31/40 last=24886ms
+[bench] WROTE h100_n2_host-staged_s3_r1.json step_p50=18847.0ms peak_mem=15.7GiB
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+NCCL version 2.28.9+cuda12.9
+--- rc=0 ---
+--- llama stage=0 rep=2 transport=direct port=25719 07:00:13 ---
+[bench] world=8 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=8.8s
+
+[2026-09-09 07:00:46] c561-003:930719:930913 [1] transport/net_ib.cc:2546 NCCL WARN NET/IB: Got completion from peer 10.168.122.176<59483> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+[rank1]:[E909 07:00:46.250724302 ProcessGroupNCCL.cpp:612] [Rank 1] Collective WorkNCCL(SeqNum=1, OpType=BROADCAST, NumelIn=83886080, NumelOut=83886080, Timeout(ms)=600000) raised the following async exception: NCCL error: remote process exited or there was a network error, NCCL version 2.28.9
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+NET/IB: Got completion from peer 10.168.122.176<59483> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2770 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x148522d3605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x380 (0x148523f0b340 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x80 (0x148523f126e0 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::Watchdog::runLoop() + 0xa84 (0x148523f17474 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::Watchdog::run() + 0x157 (0x148523f19597 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0xdbae4 (0x1485f7adbae4 in /usr/lib64/libstdc++.so.6)
+frame #6: <unknown function> + 0x8b2ea (0x148637e8b2ea in /usr/lib64/libc.so.6)
+frame #7: <unknown function> + 0x1103c0 (0x148637f103c0 in /usr/lib64/libc.so.6)
+
+[rank1]:[E909 07:00:46.251852570 ProcessGroupNCCL.cpp:2303] [PG ID 1 PG GUID 1 Rank 1]  failure detected by watchdog at work sequence id: 1 PG status: last enqueued work: 1, last completed work: -1
+[rank1]:[E909 07:00:46.252149518 ProcessGroupNCCL.cpp:733] Stack trace of the failed collective: 
+#0 broadcast from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:2968
+#1 wrapper from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83
+#2 timed from /scratch/08447/abd2000/zmig/llama_bench.py:184
+#3 broadcast from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py:236
+#4 broadcast from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py:229
+#5 log_wrapper from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py:122
+#6 _broadcast_model from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py:1687
+#7 _configure_distributed_model from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py:1818
+#8 __init__ from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py:338
+#9 initialize from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/__init__.py:229
+#10 main from /scratch/08447/abd2000/zmig/llama_bench.py:312
+#11 <module> from /scratch/08447/abd2000/zmig/llama_bench.py:440
+
+[rank1]:[E909 07:00:46.252192984 ProcessGroupNCCL.cpp:2636] [PG ID 1 PG GUID 1 Rank 1] First PG on this rank to signal dumping.
+NCCL version 2.28.9+cuda12.9
+[rank0]:[E909 07:00:46.255479457 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 0] Observed flight recorder dump signal from another rank via TCPStore.
+[rank0]:[E909 07:00:46.255570823 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 0] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank0]:[E909 07:00:46.255702955 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 0] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank7]:[E909 07:00:47.074069253 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 7] Observed flight recorder dump signal from another rank via TCPStore.
+[rank7]:[E909 07:00:47.074197363 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 7] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank7]:[E909 07:00:47.074380672 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 7] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank4]:[E909 07:00:47.075268441 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 4] Observed flight recorder dump signal from another rank via TCPStore.
+[rank4]:[E909 07:00:47.075385744 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 4] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank4]:[E909 07:00:47.075510096 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 4] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank2]:[E909 07:00:47.073492865 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 2] Observed flight recorder dump signal from another rank via TCPStore.
+[rank2]:[E909 07:00:47.073572258 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 2] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank2]:[E909 07:00:47.073674587 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 2] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank6]:[E909 07:00:47.089045676 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 6] Observed flight recorder dump signal from another rank via TCPStore.
+[rank6]:[E909 07:00:47.089161007 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 6] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank6]:[E909 07:00:47.089294091 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 6] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank5]:[E909 07:00:47.096835279 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 5] Observed flight recorder dump signal from another rank via TCPStore.
+[rank5]:[E909 07:00:47.096974182 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 5] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank5]:[E909 07:00:47.097121546 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 5] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank3]:[E909 07:00:47.175491275 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 3] Observed flight recorder dump signal from another rank via TCPStore.
+[rank3]:[E909 07:00:47.175600837 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 3] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank3]:[E909 07:00:47.175728132 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 3] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank1]:[E909 07:00:47.248534407 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 1] Received a dump signal due to a collective timeout from this local rank and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank1]:[E909 07:00:47.248604437 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 1] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank1]:[E909 07:01:46.252279791 ProcessGroupNCCL.cpp:750] [Rank 1] Some NCCL operations have failed or timed out. Due to the asynchronous nature of CUDA kernels, subsequent GPU operations might run on corrupted/incomplete data.
+[rank1]:[E909 07:01:46.252301076 ProcessGroupNCCL.cpp:764] [Rank 1] To avoid data inconsistency, we are taking the entire process down.
+[rank1]:[E909 07:01:46.252343369 ProcessGroupNCCL.cpp:2119] [PG ID 1 PG GUID 1 Rank 1] Process group watchdog thread terminated with exception: NCCL error: remote process exited or there was a network error, NCCL version 2.28.9
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+NET/IB: Got completion from peer 10.168.122.176<59483> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2770 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x148522d3605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x380 (0x148523f0b340 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x80 (0x148523f126e0 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::Watchdog::runLoop() + 0xa84 (0x148523f17474 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::Watchdog::run() + 0x157 (0x148523f19597 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0xdbae4 (0x1485f7adbae4 in /usr/lib64/libstdc++.so.6)
+frame #6: <unknown function> + 0x8b2ea (0x148637e8b2ea in /usr/lib64/libc.so.6)
+frame #7: <unknown function> + 0x1103c0 (0x148637f103c0 in /usr/lib64/libc.so.6)
+
+terminate called after throwing an instance of 'c10::DistBackendError'
+  what():  [PG ID 1 PG GUID 1 Rank 1] Process group watchdog thread terminated with exception: NCCL error: remote process exited or there was a network error, NCCL version 2.28.9
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+NET/IB: Got completion from peer 10.168.122.176<59483> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2770 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x148522d3605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x380 (0x148523f0b340 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x80 (0x148523f126e0 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::Watchdog::runLoop() + 0xa84 (0x148523f17474 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::Watchdog::run() + 0x157 (0x148523f19597 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0xdbae4 (0x1485f7adbae4 in /usr/lib64/libstdc++.so.6)
+frame #6: <unknown function> + 0x8b2ea (0x148637e8b2ea in /usr/lib64/libc.so.6)
+frame #7: <unknown function> + 0x1103c0 (0x148637f103c0 in /usr/lib64/libc.so.6)
+
+Exception raised from run at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2125 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x148522d3605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0x9b5d75 (0x148523779d75 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: <unknown function> + 0xdbae4 (0x1485f7adbae4 in /usr/lib64/libstdc++.so.6)
+frame #3: <unknown function> + 0x8b2ea (0x148637e8b2ea in /usr/lib64/libc.so.6)
+frame #4: <unknown function> + 0x1103c0 (0x148637f103c0 in /usr/lib64/libc.so.6)
+
+srun: error: c561-003: task 1: Aborted (core dumped)
+[rank0]:[F909 07:08:46.269436776 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 0] [PG ID 0 PG GUID 0 Rank 0] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank4]:[F909 07:08:47.087049349 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 4] [PG ID 0 PG GUID 0 Rank 4] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank7]:[F909 07:08:47.094210540 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 7] [PG ID 0 PG GUID 0 Rank 7] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank6]:[F909 07:08:47.097301881 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 6] [PG ID 0 PG GUID 0 Rank 6] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank2]:[F909 07:08:47.081103852 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 2] [PG ID 0 PG GUID 0 Rank 2] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank5]:[F909 07:08:47.106418948 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 5] [PG ID 0 PG GUID 0 Rank 5] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank3]:[F909 07:08:47.183555601 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 3] [PG ID 0 PG GUID 0 Rank 3] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+srun: error: c561-003: task 0: Aborted (core dumped)
+srun: error: c561-003: task 3: Aborted (core dumped)
+srun: error: c561-007: task 7: Aborted (core dumped)
+srun: error: c561-003: task 2: Aborted (core dumped)
+srun: error: c561-007: task 4: Aborted (core dumped)
+srun: error: c561-007: tasks 5-6: Aborted (core dumped)
+--- rc=134 ---
+--- llama stage=2 rep=2 transport=direct port=25720 07:08:54 ---
+[bench] world=8 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=8.8s
+
+[2026-09-09 07:09:31] c561-003:931074:931273 [1] transport/net_ib.cc:2546 NCCL WARN NET/IB: Got completion from peer 10.168.122.176<38971> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+[rank1]:[E909 07:09:31.858023772 ProcessGroupNCCL.cpp:612] [Rank 1] Collective WorkNCCL(SeqNum=1, OpType=BROADCAST, NumelIn=83886080, NumelOut=83886080, Timeout(ms)=600000) raised the following async exception: NCCL error: remote process exited or there was a network error, NCCL version 2.28.9
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+NET/IB: Got completion from peer 10.168.122.176<38971> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2770 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x151474f3605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x380 (0x15147610b340 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x80 (0x1514761126e0 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::Watchdog::runLoop() + 0xa84 (0x151476117474 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::Watchdog::run() + 0x157 (0x151476119597 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0xdbae4 (0x151549cdbae4 in /usr/lib64/libstdc++.so.6)
+frame #6: <unknown function> + 0x8b2ea (0x15158a08b2ea in /usr/lib64/libc.so.6)
+frame #7: <unknown function> + 0x1103c0 (0x15158a1103c0 in /usr/lib64/libc.so.6)
+
+[rank1]:[E909 07:09:31.859145781 ProcessGroupNCCL.cpp:2303] [PG ID 1 PG GUID 1 Rank 1]  failure detected by watchdog at work sequence id: 1 PG status: last enqueued work: 1, last completed work: -1
+[rank1]:[E909 07:09:31.859440024 ProcessGroupNCCL.cpp:733] Stack trace of the failed collective: 
+#0 broadcast from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:2968
+#1 wrapper from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83
+#2 timed from /scratch/08447/abd2000/zmig/llama_bench.py:184
+#3 broadcast from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py:236
+#4 broadcast from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py:229
+#5 log_wrapper from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py:122
+#6 _broadcast_model from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py:1687
+#7 _configure_distributed_model from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py:1818
+#8 __init__ from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py:338
+#9 initialize from /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/deepspeed/__init__.py:229
+#10 main from /scratch/08447/abd2000/zmig/llama_bench.py:312
+#11 <module> from /scratch/08447/abd2000/zmig/llama_bench.py:440
+
+[rank1]:[E909 07:09:31.859483828 ProcessGroupNCCL.cpp:2636] [PG ID 1 PG GUID 1 Rank 1] First PG on this rank to signal dumping.
+[rank6]:[E909 07:09:31.247686829 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 6] Observed flight recorder dump signal from another rank via TCPStore.
+[rank6]:[E909 07:09:31.247788929 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 6] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank6]:[E909 07:09:31.247912259 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 6] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank7]:[E909 07:09:31.262643906 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 7] Observed flight recorder dump signal from another rank via TCPStore.
+[rank7]:[E909 07:09:31.262778842 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 7] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank7]:[E909 07:09:31.262903652 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 7] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank4]:[E909 07:09:31.270007877 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 4] Observed flight recorder dump signal from another rank via TCPStore.
+[rank4]:[E909 07:09:31.270129687 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 4] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank5]:[E909 07:09:31.270169245 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 5] Observed flight recorder dump signal from another rank via TCPStore.
+[rank4]:[E909 07:09:31.270240014 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 4] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank5]:[E909 07:09:31.270279372 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 5] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank5]:[E909 07:09:31.270401969 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 5] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+NCCL version 2.28.9+cuda12.9
+[rank0]:[E909 07:09:31.257026979 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 0] Observed flight recorder dump signal from another rank via TCPStore.
+[rank0]:[E909 07:09:31.257120414 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 0] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank0]:[E909 07:09:31.257245784 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 0] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank2]:[E909 07:09:31.379297438 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 2] Observed flight recorder dump signal from another rank via TCPStore.
+[rank3]:[E909 07:09:31.379334220 ProcessGroupNCCL.cpp:1849] [PG ID 0 PG GUID 0 Rank 3] Observed flight recorder dump signal from another rank via TCPStore.
+[rank2]:[E909 07:09:31.379379448 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 2] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank3]:[E909 07:09:31.379431933 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 3] Received a dump signal due to a collective timeout from  rank 1 and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank1]:[E909 07:09:31.379481699 ProcessGroupNCCL.cpp:1914] [PG ID 0 PG GUID 0 Rank 1] Received a dump signal due to a collective timeout from this local rank and we will try our best to dump the debug info. Last enqueued NCCL work: -1, last completed NCCL work: -1.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank2]:[E909 07:09:31.379506078 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 2] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank1]:[E909 07:09:31.379573401 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 1] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank3]:[E909 07:09:31.379580208 ProcessGroupNCCL.cpp:1628] [PG ID 0 PG GUID 0 Rank 3] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1, only active collectives: 0
+[rank1]:[E909 07:10:31.859577348 ProcessGroupNCCL.cpp:750] [Rank 1] Some NCCL operations have failed or timed out. Due to the asynchronous nature of CUDA kernels, subsequent GPU operations might run on corrupted/incomplete data.
+[rank1]:[E909 07:10:31.859603398 ProcessGroupNCCL.cpp:764] [Rank 1] To avoid data inconsistency, we are taking the entire process down.
+[rank1]:[E909 07:10:31.859654606 ProcessGroupNCCL.cpp:2119] [PG ID 1 PG GUID 1 Rank 1] Process group watchdog thread terminated with exception: NCCL error: remote process exited or there was a network error, NCCL version 2.28.9
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+NET/IB: Got completion from peer 10.168.122.176<38971> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2770 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x151474f3605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x380 (0x15147610b340 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x80 (0x1514761126e0 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::Watchdog::runLoop() + 0xa84 (0x151476117474 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::Watchdog::run() + 0x157 (0x151476119597 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0xdbae4 (0x151549cdbae4 in /usr/lib64/libstdc++.so.6)
+frame #6: <unknown function> + 0x8b2ea (0x15158a08b2ea in /usr/lib64/libc.so.6)
+frame #7: <unknown function> + 0x1103c0 (0x15158a1103c0 in /usr/lib64/libc.so.6)
+
+terminate called after throwing an instance of 'c10::DistBackendError'
+  what():  [PG ID 1 PG GUID 1 Rank 1] Process group watchdog thread terminated with exception: NCCL error: remote process exited or there was a network error, NCCL version 2.28.9
+ncclRemoteError: A call failed possibly due to a network error or a remote process exiting prematurely.
+Last error:
+NET/IB: Got completion from peer 10.168.122.176<38971> with status=IBV_WC_LOC_PROT_ERR(4) opcode=IBV_WC_SEND(0) reqSize=524288 vendor_err=81 req_type=Send hca mlx5_0
+Exception raised from checkForNCCLErrorsInternal at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2770 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x151474f3605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::checkForNCCLErrorsInternal(std::shared_ptr<c10d::NCCLComm>&) + 0x380 (0x15147610b340 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::WorkNCCL::checkAndSetException() + 0x80 (0x1514761126e0 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::Watchdog::runLoop() + 0xa84 (0x151476117474 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: c10d::ProcessGroupNCCL::Watchdog::run() + 0x157 (0x151476119597 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #5: <unknown function> + 0xdbae4 (0x151549cdbae4 in /usr/lib64/libstdc++.so.6)
+frame #6: <unknown function> + 0x8b2ea (0x15158a08b2ea in /usr/lib64/libc.so.6)
+frame #7: <unknown function> + 0x1103c0 (0x15158a1103c0 in /usr/lib64/libc.so.6)
+
+Exception raised from run at /pytorch/torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:2125 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x9d (0x151474f3605d in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0x9b5d75 (0x151475979d75 in /scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: <unknown function> + 0xdbae4 (0x151549cdbae4 in /usr/lib64/libstdc++.so.6)
+frame #3: <unknown function> + 0x8b2ea (0x15158a08b2ea in /usr/lib64/libc.so.6)
+frame #4: <unknown function> + 0x1103c0 (0x15158a1103c0 in /usr/lib64/libc.so.6)
+
+srun: error: c561-003: task 1: Aborted (core dumped)
+[rank6]:[F909 07:17:31.272010352 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 6] [PG ID 0 PG GUID 0 Rank 6] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank7]:[F909 07:17:31.276256886 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 7] [PG ID 0 PG GUID 0 Rank 7] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank5]:[F909 07:17:31.290173509 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 5] [PG ID 0 PG GUID 0 Rank 5] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank4]:[F909 07:17:31.290914563 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 4] [PG ID 0 PG GUID 0 Rank 4] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank0]:[F909 07:17:31.272156610 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 0] [PG ID 0 PG GUID 0 Rank 0] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank3]:[F909 07:17:31.389446519 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 3] [PG ID 0 PG GUID 0 Rank 3] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+[rank2]:[F909 07:17:31.389481310 ProcessGroupNCCL.cpp:1653] [PG ID 0 PG GUID 0 Rank 2] [PG ID 0 PG GUID 0 Rank 2] Terminating the process after attempting to dump debug info, due to collective timeout or exception.
+srun: error: c561-007: task 7: Aborted (core dumped)
+srun: error: c561-003: task 3: Aborted (core dumped)
+srun: error: c561-007: task 6: Aborted (core dumped)
+srun: error: c561-003: task 0: Aborted (core dumped)
+srun: error: c561-007: task 5: Aborted (core dumped)
+srun: error: c561-003: task 2: Aborted (core dumped)
+srun: error: c561-007: task 4: Aborted (core dumped)
+--- rc=134 ---
+--- llama stage=3 rep=2 transport=direct port=25721 07:17:38 ---
+[bench] world=8 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=8.9s
+/scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[bench] warmup...
+[bench] measuring...
+[bench] iter 1/40 last=8346ms
+[bench] iter 11/40 last=13850ms
+[bench] iter 21/40 last=19317ms
+slurmstepd: error: *** JOB 3476714 ON c561-003 CANCELLED AT 2026-09-09T07:24:07 DUE TO TIME LIMIT ***
+slurmstepd: error: *** STEP 3476714.7 ON c561-003 CANCELLED AT 2026-09-09T07:24:07 DUE TO TIME LIMIT ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.

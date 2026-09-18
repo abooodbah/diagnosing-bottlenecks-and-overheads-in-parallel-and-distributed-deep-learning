@@ -1,0 +1,149 @@
+=== zmig h100 nodes=2 job=3473071 nodelist=c561-[002,006] ===
+c561-002.stampede3.tacc.utexas.edu: GPU 0: NVIDIA H100 (UUID: GPU-291b523a-d115-fc1b-400d-8347ec0738e7); /scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+c561-006.stampede3.tacc.utexas.edu: GPU 0: NVIDIA H100 (UUID: GPU-9e7d1a83-9da0-f379-db72-45ff81a0ea78); /scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+=== COMPACT (budget-fit) ===
+--- llama stage=0 rep=1 transport=direct port=26072 19:42:59 ---
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+srun: error: c561-006: tasks 4-7: Exited with exit code 127
+srun: error: c561-002: tasks 0-3: Exited with exit code 127
+--- rc=127 ---
+--- llama stage=2 rep=1 transport=direct port=26073 19:42:59 ---
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+srun: error: c561-002: tasks 0-3: Exited with exit code 127
+srun: error: c561-006: tasks 4-7: Exited with exit code 127
+--- rc=127 ---
+--- llama stage=3 rep=1 transport=direct port=26074 19:42:59 ---
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+srun: error: c561-006: tasks 4-7: Exited with exit code 127
+srun: error: c561-002: tasks 0-3: Exited with exit code 127
+--- rc=127 ---
+--- llama stage=3 rep=1 transport=host port=26075 19:43:00 ---
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+srun: error: c561-006: tasks 4-7: Exited with exit code 127
+srun: error: c561-002: tasks 0-3: Exited with exit code 127
+--- rc=127 ---
+--- llama stage=0 rep=2 transport=direct port=26076 19:43:00 ---
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+srun: error: c561-006: tasks 4-7: Exited with exit code 127
+srun: error: c561-002: tasks 0-3: Exited with exit code 127
+--- rc=127 ---
+--- llama stage=2 rep=2 transport=direct port=26077 19:43:00 ---
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+srun: error: c561-002: tasks 0-3: Exited with exit code 127
+srun: error: c561-006: tasks 4-7: Exited with exit code 127
+--- rc=127 ---
+--- llama stage=3 rep=2 transport=direct port=26078 19:43:00 ---
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+srun: error: c561-002: tasks 0-3: Exited with exit code 127
+srun: error: c561-006: tasks 4-7: Exited with exit code 127
+--- rc=127 ---
+--- llama stage=3 rep=2 transport=host port=26079 19:43:01 ---
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+srun: error: c561-002: tasks 0-3: Exited with exit code 127
+srun: error: c561-006: tasks 4-7: Exited with exit code 127
+--- rc=127 ---
+--- moe mode=balanced rep=1 19:43:01 ---
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+srun: error: c561-002: tasks 0-3: Exited with exit code 127
+srun: error: c561-006: tasks 4-7: Exited with exit code 127
+--- rc=127 ---
+--- moe mode=skewed rep=1 19:43:01 ---
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+srun: error: c561-006: tasks 4-7: Exited with exit code 127
+srun: error: c561-002: tasks 0-3: Exited with exit code 127
+--- rc=127 ---
+--- moe mode=balanced rep=2 19:43:01 ---
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+srun: error: c561-002: tasks 0-3: Exited with exit code 127
+srun: error: c561-006: tasks 4-7: Exited with exit code 127
+--- rc=127 ---
+--- moe mode=skewed rep=2 19:43:02 ---
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+/scratch/08447/abd2000/nnopp-h100/venv/bin/python: error while loading shared libraries: libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+srun: error: c561-006: tasks 4-7: Exited with exit code 127
+srun: error: c561-002: tasks 0-3: Exited with exit code 127
+--- rc=127 ---
+=== COMPACT DONE 19:43:02 ===

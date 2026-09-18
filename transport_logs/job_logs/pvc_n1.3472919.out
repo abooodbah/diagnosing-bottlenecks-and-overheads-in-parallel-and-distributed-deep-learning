@@ -1,0 +1,559 @@
+
+Currently Loaded Modules:
+  1) python/3.12.11
+
+=== zmig pvc nodes=1 job=3472919 nodelist=c551-003 ===
+c551-003.stampede3.tacc.utexas.edu: 2.13.0+xpu True 8
+--- llama stage=0 rep=1 extra='' port=25920 09:31:43 ---
+[bench] world=8 device_kind=xpu backend=xccl host=c551-003.stampede3.tacc.utexas.edu
+[bench] params=2.547B build=9.4s
+2026:09:06-09:32:08:3558962 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-09:32:08:3558962 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-09:32:08:3558962 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-09:32:08:3558962 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:32:08:3558968 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:32:08:3558965 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:32:08:3558962 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:32:08:3558965 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:32:08:3558968 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:32:08:3558969 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:32:08:3558969 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:32:08:3558964 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:32:08:3558964 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:32:08:3558963 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:32:08:3558963 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:32:08:3558967 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:32:08:3558967 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:32:08:3558966 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:32:08:3558966 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:32:10:3558966:[4] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:32:10:3558964:[2] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:32:10:3558965:[3] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:32:10:3558967:[5] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:32:10:3558969:[7] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:32:10:3558962:[0] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:32:10:3558968:[6] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:32:10:3558963:[1] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+[bench] warmup...
+[rank3]:[W906 09:32:11.340463840 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank6]:[W906 09:32:11.340463747 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[rank0]:[W906 09:32:11.341500189 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank2]:[W906 09:32:11.342837014 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank4]:[W906 09:32:11.342883196 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank1]:[W906 09:32:11.343595882 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank7]:[W906 09:32:11.343605663 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank5]:[W906 09:32:11.343667405 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] measuring...
+[bench] iter 1/40 last=802ms
+[bench] iter 11/40 last=798ms
+[bench] iter 21/40 last=797ms
+[bench] iter 31/40 last=822ms
+[bench] WROTE pvc_n1_s0_r1.json step_p50=803.3ms peak_mem=57.8GiB
+--- rc=0 ---
+--- llama stage=0 rep=2 extra='' port=25921 09:32:55 ---
+[bench] world=8 device_kind=xpu backend=xccl host=c551-003.stampede3.tacc.utexas.edu
+[bench] params=2.547B build=9.5s
+2026:09:06-09:33:18:3560065 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:33:18:3560065 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:33:18:3560063 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:33:18:3560063 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:33:18:3560061 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:33:18:3560061 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:33:18:3560066 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:33:18:3560066 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:33:18:3560059 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-09:33:18:3560059 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-09:33:18:3560059 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-09:33:18:3560059 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:33:18:3560060 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:33:18:3560059 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:33:18:3560060 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:33:18:3560062 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:33:18:3560062 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:33:18:3560064 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:33:18:3560064 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:33:20:3560059:[0] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:33:20:3560065:[6] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:33:20:3560060:[1] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:33:20:3560061:[2] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:33:20:3560063:[4] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:33:20:3560064:[5] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:33:20:3560066:[7] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:33:20:3560062:[3] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+[rank2]:[W906 09:33:21.179155258 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank4]:[W906 09:33:21.179875645 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank6]:[W906 09:33:21.182706403 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[rank0]:[W906 09:33:21.189153052 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank1]:[W906 09:33:21.189352257 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank3]:[W906 09:33:21.189467132 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank7]:[W906 09:33:21.194516765 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank5]:[W906 09:33:21.197754901 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] measuring...
+[bench] iter 1/40 last=807ms
+[bench] iter 11/40 last=793ms
+[bench] iter 21/40 last=790ms
+[bench] iter 31/40 last=793ms
+[bench] WROTE pvc_n1_s0_r2.json step_p50=799.4ms peak_mem=57.8GiB
+--- rc=0 ---
+--- llama stage=0 rep=3 extra='' port=25922 09:34:04 ---
+[bench] world=8 device_kind=xpu backend=xccl host=c551-003.stampede3.tacc.utexas.edu
+[bench] params=2.547B build=9.4s
+2026:09:06-09:34:29:3561129 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:34:29:3561133 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:34:29:3561129 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:34:29:3561133 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:34:29:3561134 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:34:29:3561134 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:34:29:3561135 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:34:29:3561135 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:34:29:3561128 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-09:34:29:3561128 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-09:34:29:3561128 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-09:34:29:3561128 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:34:29:3561132 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:34:29:3561128 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:34:29:3561132 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:34:29:3561130 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:34:29:3561130 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:34:29:3561131 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:34:29:3561131 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:34:31:3561128:[0] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:34:31:3561130:[2] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:34:31:3561135:[7] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:34:31:3561131:[3] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:34:31:3561132:[4] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:34:31:3561129:[1] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:34:31:3561134:[6] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:34:31:3561133:[5] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[rank0]:[W906 09:34:32.959730314 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank6]:[W906 09:34:32.961379126 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank5]:[W906 09:34:32.961979897 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank2]:[W906 09:34:32.963144942 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank4]:[W906 09:34:32.963634666 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank3]:[W906 09:34:32.963922081 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank1]:[W906 09:34:32.970853129 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank7]:[W906 09:34:32.973608013 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] measuring...
+[bench] iter 1/40 last=799ms
+[bench] iter 11/40 last=813ms
+[bench] iter 21/40 last=792ms
+[bench] iter 31/40 last=790ms
+[bench] WROTE pvc_n1_s0_r3.json step_p50=802.2ms peak_mem=57.8GiB
+--- rc=0 ---
+--- llama stage=2 rep=1 extra='' port=25923 09:35:15 ---
+[bench] world=8 device_kind=xpu backend=xccl host=c551-003.stampede3.tacc.utexas.edu
+[bench] params=2.547B build=9.5s
+2026:09:06-09:35:43:3562221 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:35:43:3562221 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:35:43:3562220 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:35:43:3562220 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:35:43:3562226 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:35:43:3562226 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:35:43:3562224 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:35:43:3562224 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:35:43:3562223 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:35:43:3562223 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:35:43:3562219 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-09:35:43:3562219 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-09:35:43:3562219 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-09:35:43:3562219 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:35:43:3562219 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:35:43:3562225 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:35:43:3562225 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:35:43:3562222 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:35:43:3562222 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:35:45:3562222:[3] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:35:45:3562221:[2] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:35:45:3562223:[4] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:35:45:3562224:[5] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:35:45:3562225:[6] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:35:45:3562219:[0] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:35:45:3562220:[1] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:35:45:3562226:[7] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+[rank3]:[W906 09:35:46.916693960 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank2]:[W906 09:35:46.916794408 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank4]:[W906 09:35:46.919230566 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank6]:[W906 09:35:46.921082504 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank1]:[W906 09:35:46.921558079 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] warmup...
+[rank5]:[W906 09:35:46.926042598 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[rank0]:[W906 09:35:46.926173412 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank7]:[W906 09:35:46.928417271 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+[bench] measuring...
+[bench] iter 1/40 last=581ms
+[bench] iter 11/40 last=588ms
+[bench] iter 21/40 last=602ms
+[bench] iter 31/40 last=610ms
+[bench] WROTE pvc_n1_s2_r1.json step_p50=600.6ms peak_mem=16.8GiB
+--- rc=0 ---
+--- llama stage=2 rep=2 extra='' port=25924 09:36:20 ---
+[bench] world=8 device_kind=xpu backend=xccl host=c551-003.stampede3.tacc.utexas.edu
+[bench] params=2.547B build=9.5s
+2026:09:06-09:36:40:3563268 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:36:40:3563268 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:36:41:3563266 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:36:41:3563266 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:36:41:3563263 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:36:41:3563262 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:36:41:3563263 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:36:41:3563262 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:36:41:3563267 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:36:41:3563267 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:36:41:3563264 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:36:41:3563264 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:36:41:3563265 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:36:41:3563265 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:36:41:3563261 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-09:36:41:3563261 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-09:36:41:3563261 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-09:36:41:3563261 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:36:41:3563261 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:36:43:3563267:[6] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:36:43:3563261:[0] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:36:43:3563268:[7] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:36:43:3563262:[1] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:36:43:3563264:[3] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:36:43:3563266:[5] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:36:43:3563263:[2] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:36:43:3563265:[4] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+[rank5]:[W906 09:36:43.671421198 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank3]:[W906 09:36:43.674484905 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank2]:[W906 09:36:43.674673886 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank6]:[W906 09:36:43.675544851 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank7]:[W906 09:36:43.675839910 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank1]:[W906 09:36:43.677139232 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[rank0]:[W906 09:36:43.679345007 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank4]:[W906 09:36:43.684651507 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+[bench] measuring...
+[bench] iter 1/40 last=578ms
+[bench] iter 11/40 last=592ms
+[bench] iter 21/40 last=601ms
+[bench] iter 31/40 last=607ms
+[bench] WROTE pvc_n1_s2_r2.json step_p50=601.6ms peak_mem=16.8GiB
+--- rc=0 ---
+--- llama stage=2 rep=3 extra='' port=25925 09:37:17 ---
+[bench] world=8 device_kind=xpu backend=xccl host=c551-003.stampede3.tacc.utexas.edu
+[bench] params=2.547B build=9.5s
+2026:09:06-09:37:36:3564172 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:37:36:3564172 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:37:36:3564173 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:37:36:3564173 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:37:36:3564171 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-09:37:36:3564171 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-09:37:36:3564171 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-09:37:36:3564171 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:37:36:3564171 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:37:37:3564177 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:37:37:3564177 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:37:37:3564175 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:37:37:3564175 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:37:37:3564178 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:37:37:3564178 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:37:37:3564174 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:37:37:3564174 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:37:37:3564176 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:37:37:3564176 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:37:39:3564173:[2] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:37:39:3564174:[3] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:37:39:3564175:[4] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:37:39:3564176:[5] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:37:39:3564171:[0] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:37:39:3564172:[1] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:37:39:3564177:[6] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:37:39:3564178:[7] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+[rank1]:[W906 09:37:39.769450429 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank2]:[W906 09:37:39.769560804 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank5]:[W906 09:37:39.769734590 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank3]:[W906 09:37:39.769864416 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] warmup...
+[rank7]:[W906 09:37:39.773224458 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank4]:[W906 09:37:39.773299566 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[rank0]:[W906 09:37:39.774216264 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank6]:[W906 09:37:39.774442624 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+[bench] measuring...
+[bench] iter 1/40 last=578ms
+[bench] iter 11/40 last=592ms
+[bench] iter 21/40 last=601ms
+[bench] iter 31/40 last=615ms
+[bench] WROTE pvc_n1_s2_r3.json step_p50=601.0ms peak_mem=16.8GiB
+--- rc=0 ---
+--- llama stage=3 rep=1 extra='' port=25926 09:38:13 ---
+[bench] world=8 device_kind=xpu backend=xccl host=c551-003.stampede3.tacc.utexas.edu
+[bench] params=2.547B build=9.5s
+2026:09:06-09:38:34:3565135 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:38:34:3565135 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:38:34:3565133 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:38:34:3565133 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:38:35:3565134 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:38:35:3565134 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:38:35:3565129 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-09:38:35:3565129 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-09:38:35:3565129 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-09:38:35:3565129 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:38:35:3565129 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:38:35:3565136 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:38:35:3565136 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:38:35:3565130 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:38:35:3565130 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:38:35:3565131 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:38:35:3565131 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:38:35:3565132 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:38:35:3565132 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:38:37:3565129:[0] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:38:37:3565130:[1] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:38:37:3565131:[2] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:38:37:3565133:[4] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:38:37:3565134:[5] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:38:37:3565132:[3] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:38:37:3565136:[7] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:38:37:3565135:[6] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+[bench] measuring...
+[bench] iter 1/40 last=4778ms
+[bench] iter 11/40 last=7651ms
+[bench] iter 21/40 last=10528ms
+[bench] iter 31/40 last=13447ms
+[bench] WROTE pvc_n1_s3_r1.json step_p50=10289.1ms peak_mem=15.6GiB
+--- rc=0 ---
+--- llama stage=3 rep=2 extra='' port=25927 09:46:17 ---
+[bench] world=8 device_kind=xpu backend=xccl host=c551-003.stampede3.tacc.utexas.edu
+[bench] params=2.547B build=9.3s
+2026:09:06-09:46:38:3569778 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-09:46:38:3569778 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-09:46:38:3569778 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-09:46:38:3569778 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:46:38:3569778 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:46:39:3569781 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:46:39:3569781 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:46:39:3569780 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:46:39:3569780 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:46:39:3569779 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:46:39:3569779 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:46:39:3569785 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:46:39:3569785 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:46:39:3569784 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:46:39:3569784 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:46:39:3569782 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:46:39:3569783 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:46:39:3569782 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:46:39:3569783 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:46:41:3569778:[0] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:46:41:3569780:[2] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:46:41:3569781:[3] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:46:41:3569785:[7] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:46:41:3569782:[4] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:46:41:3569783:[5] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:46:41:3569779:[1] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:46:41:3569784:[6] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+[bench] measuring...
+[bench] iter 1/40 last=4783ms
+[bench] iter 11/40 last=7726ms
+[bench] iter 21/40 last=10595ms
+[bench] iter 31/40 last=13570ms
+[bench] WROTE pvc_n1_s3_r2.json step_p50=10298.2ms peak_mem=15.6GiB
+--- rc=0 ---
+--- llama stage=3 rep=3 extra='' port=25928 09:54:23 ---
+[bench] world=8 device_kind=xpu backend=xccl host=c551-003.stampede3.tacc.utexas.edu
+[bench] params=2.547B build=9.5s
+2026:09:06-09:54:43:3574391 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:54:43:3574391 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:54:43:3574384 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-09:54:43:3574384 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-09:54:43:3574384 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-09:54:43:3574384 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:54:43:3574384 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:54:44:3574389 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:54:44:3574389 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:54:44:3574387 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:54:44:3574388 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:54:44:3574387 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:54:44:3574388 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:54:44:3574385 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:54:44:3574385 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:54:44:3574386 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:54:44:3574386 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:54:44:3574390 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-09:54:44:3574390 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-09:54:46:3574389:[5] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:54:46:3574390:[6] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:54:46:3574384:[0] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:54:46:3574385:[1] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:54:46:3574386:[2] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:54:46:3574387:[3] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:54:46:3574388:[4] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+2026:09:06-09:54:46:3574391:[7] |CCL_WARN| Receiver cache limit is reached: mem_handle_cache size: 1000, limit: 1000, it will remove older elements from the cache. Cache size can be increased with 'CCL_ZE_CACHE_OPEN_IPC_HANDLES_THRESHOLD=value'
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+[bench] measuring...
+[bench] iter 1/40 last=4779ms
+[bench] iter 11/40 last=7647ms
+[bench] iter 21/40 last=10536ms
+[bench] iter 31/40 last=13579ms
+[bench] WROTE pvc_n1_s3_r3.json step_p50=10281.8ms peak_mem=15.6GiB
+--- rc=0 ---
+=== JOB DONE 10:02:26 ===

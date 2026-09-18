@@ -1,0 +1,1855 @@
+
+Currently Loaded Modules:
+  1) intel/24.0   2) impi/21.11   3) python/3.12.11
+
+ 
+
+I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.11 IMPI_FAB=/opt/intel/oneapi/mpi/2021.11/opt/mpi/libfabric/lib
+=== zmig pvc nodes=2 job=3472792 nodelist=c551-[002-003] ===
+c551-002.stampede3.tacc.utexas.edu: 2.13.0+xpu True 8
+c551-003.stampede3.tacc.utexas.edu: 2.13.0+xpu True 8
+=== SMOKE ===
+=== trying preset impi-fab ===
+--- llama stage=0 rep=1 extra='--tiny' port=25793 04:17:11 ---
+[bench] world=16 device_kind=xpu backend=xccl host=c551-002.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=0.046B build=0.2s
+2026:09:06-04:17:27:1857254 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-04:17:27:1857254 |CCL_WARN| value of CCL_LOCAL_RANK changed to be 0 (default:-1)
+2026:09:06-04:17:27:1857254 |CCL_WARN| value of CCL_LOCAL_SIZE changed to be 8 (default:-1)
+2026:09:06-04:17:27:1857254 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-04:17:27:1857254 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-04:17:27:1857256 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:27:1857257 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:27:1857261 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:27:1857254 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:27:1857259 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:27:1857255 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:27:1857258 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:27:1857260 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:31:3378219 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:31:3378213 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:31:3378220 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:31:3378214 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:31:3378215 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:31:3378216 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:31:3378217 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:31:3378218 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+libfabric:3378216:1788686253::tcp:ep_ctrl:xnet_recv_cm_msg():63<warn> Failed to read cm header
+2026:09:06-04:17:33:1857254:[0] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:1857254:[0] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:17:33:1857255:[1] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:1857255:[1] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:17:33:1857256:[2] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:1857256:[2] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:17:33:3378216:[11] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:3378216:[11] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:17:33:1857257:[3] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:1857257:[3] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:17:33:1857258:[4] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:1857258:[4] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:17:33:1857259:[5] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:1857259:[5] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:17:33:1857260:[6] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:1857260:[6] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:17:33:1857261:[7] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:1857261:[7] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:17:33:3378218:[13] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:3378218:[13] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:17:33:3378219:[14] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:3378219:[14] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:17:33:3378213:[8] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:3378213:[8] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:17:33:3378214:[9] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:3378214:[9] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:17:33:3378215:[10] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:3378215:[10] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:17:33:3378217:[12] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:3378217:[12] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:17:33:3378220:[15] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:17:33:3378220:[15] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank1]:     main()
+[rank1]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank1]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank1]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank1]:     engine = DeepSpeedEngine(args=args,
+[rank1]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank1]:     self._configure_distributed_model(model)
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank1]:     self._broadcast_model()
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank1]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank1]:     return func(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank1]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank1]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank1]:     return func(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank1]:     work = group.broadcast([tensor], opts)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank3]:     main()
+[rank3]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank3]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank3]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank3]:     engine = DeepSpeedEngine(args=args,
+[rank3]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank3]:     self._configure_distributed_model(model)
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank3]:     self._broadcast_model()
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank3]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank3]:     return func(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank3]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank3]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank3]:     return func(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank3]:     work = group.broadcast([tensor], opts)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+[rank4]: Traceback (most recent call last):
+[rank4]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank4]:     main()
+[rank4]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank4]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank4]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank4]:     engine = DeepSpeedEngine(args=args,
+[rank4]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank4]:     self._configure_distributed_model(model)
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank4]:     self._broadcast_model()
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank4]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank4]:     return func(*args, **kwargs)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank4]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank4]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank4]:     return func(*args, **kwargs)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank4]:     work = group.broadcast([tensor], opts)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+[rank5]: Traceback (most recent call last):
+[rank5]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank5]:     main()
+[rank5]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank5]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank5]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank5]:     engine = DeepSpeedEngine(args=args,
+[rank5]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank5]:     self._configure_distributed_model(model)
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank5]:     self._broadcast_model()
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank5]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank5]:     return func(*args, **kwargs)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank5]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank5]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank5]:     return func(*args, **kwargs)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank5]:     work = group.broadcast([tensor], opts)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+[rank6]: Traceback (most recent call last):
+[rank6]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank6]:     main()
+[rank6]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank6]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank6]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank6]:     engine = DeepSpeedEngine(args=args,
+[rank6]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank6]:     self._configure_distributed_model(model)
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank6]:     self._broadcast_model()
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank6]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank6]:     return func(*args, **kwargs)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank6]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank6]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank6]:     return func(*args, **kwargs)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank6]:     work = group.broadcast([tensor], opts)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+[rank7]: Traceback (most recent call last):
+[rank7]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank7]:     main()
+[rank7]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank7]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank7]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank7]:     engine = DeepSpeedEngine(args=args,
+[rank7]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank7]:     self._configure_distributed_model(model)
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank7]:     self._broadcast_model()
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank7]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank7]:     return func(*args, **kwargs)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank7]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank7]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank7]:     return func(*args, **kwargs)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank7]:     work = group.broadcast([tensor], opts)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank2]:     main()
+[rank2]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank2]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank2]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank2]:     engine = DeepSpeedEngine(args=args,
+[rank2]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank2]:     self._configure_distributed_model(model)
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank2]:     self._broadcast_model()
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank2]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank2]:     return func(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank2]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank2]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank2]:     return func(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank2]:     work = group.broadcast([tensor], opts)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank0]:     main()
+[rank0]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank0]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank0]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank0]:     engine = DeepSpeedEngine(args=args,
+[rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank0]:     self._configure_distributed_model(model)
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank0]:     self._broadcast_model()
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank0]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank0]:     return func(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank0]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank0]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank0]:     return func(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank0]:     work = group.broadcast([tensor], opts)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[rank8]: Traceback (most recent call last):
+[rank8]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank8]:     main()
+[rank8]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank8]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank8]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank8]:     engine = DeepSpeedEngine(args=args,
+[rank8]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank8]:     self._configure_distributed_model(model)
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank8]:     self._broadcast_model()
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank8]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank8]:     return func(*args, **kwargs)
+[rank8]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank8]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank8]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank8]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank8]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank8]:     return func(*args, **kwargs)
+[rank8]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank8]:     work = group.broadcast([tensor], opts)
+[rank8]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank8]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+[rank9]: Traceback (most recent call last):
+[rank9]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank9]:     main()
+[rank9]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank9]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank9]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank9]:     engine = DeepSpeedEngine(args=args,
+[rank9]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank9]:     self._configure_distributed_model(model)
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank9]:     self._broadcast_model()
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank9]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank9]:     return func(*args, **kwargs)
+[rank9]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank9]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank9]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank9]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank9]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank9]:     return func(*args, **kwargs)
+[rank9]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank9]:     work = group.broadcast([tensor], opts)
+[rank9]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank9]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+[rank11]: Traceback (most recent call last):
+[rank11]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank11]:     main()
+[rank11]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank11]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank11]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank11]:     engine = DeepSpeedEngine(args=args,
+[rank11]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank11]:     self._configure_distributed_model(model)
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank11]:     self._broadcast_model()
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank11]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank11]:     return func(*args, **kwargs)
+[rank11]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank11]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank11]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank11]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank11]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank11]:     return func(*args, **kwargs)
+[rank11]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank11]:     work = group.broadcast([tensor], opts)
+[rank11]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank11]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+[rank12]: Traceback (most recent call last):
+[rank12]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank12]:     main()
+[rank12]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank12]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank12]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank12]:     engine = DeepSpeedEngine(args=args,
+[rank12]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank12]:     self._configure_distributed_model(model)
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank12]:     self._broadcast_model()
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank12]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank12]:     return func(*args, **kwargs)
+[rank12]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank12]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank12]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank12]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank12]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank12]:     return func(*args, **kwargs)
+[rank12]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank12]:     work = group.broadcast([tensor], opts)
+[rank12]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank12]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+[rank13]: Traceback (most recent call last):
+[rank13]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank13]:     main()
+[rank13]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank13]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank13]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank13]:     engine = DeepSpeedEngine(args=args,
+[rank13]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank13]:     self._configure_distributed_model(model)
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank13]:     self._broadcast_model()
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank13]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank13]:     return func(*args, **kwargs)
+[rank13]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank13]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank13]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank13]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank13]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank13]:     return func(*args, **kwargs)
+[rank13]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank13]:     work = group.broadcast([tensor], opts)
+[rank13]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank13]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+[rank14]: Traceback (most recent call last):
+[rank14]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank14]:     main()
+[rank14]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank14]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank14]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank14]:     engine = DeepSpeedEngine(args=args,
+[rank14]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank14]:     self._configure_distributed_model(model)
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank14]:     self._broadcast_model()
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank14]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank14]:     return func(*args, **kwargs)
+[rank14]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank14]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank14]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank14]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank14]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank14]:     return func(*args, **kwargs)
+[rank14]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank14]:     work = group.broadcast([tensor], opts)
+[rank14]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank14]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+[rank15]: Traceback (most recent call last):
+[rank15]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank15]:     main()
+[rank15]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank15]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank15]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank15]:     engine = DeepSpeedEngine(args=args,
+[rank15]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank15]:     self._configure_distributed_model(model)
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank15]:     self._broadcast_model()
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank15]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank15]:     return func(*args, **kwargs)
+[rank15]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank15]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank15]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank15]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank15]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank15]:     return func(*args, **kwargs)
+[rank15]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank15]:     work = group.broadcast([tensor], opts)
+[rank15]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank15]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+[rank10]: Traceback (most recent call last):
+[rank10]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank10]:     main()
+[rank10]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank10]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank10]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank10]:     engine = DeepSpeedEngine(args=args,
+[rank10]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank10]:     self._configure_distributed_model(model)
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank10]:     self._broadcast_model()
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank10]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank10]:     return func(*args, **kwargs)
+[rank10]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank10]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank10]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank10]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank10]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank10]:     return func(*args, **kwargs)
+[rank10]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank10]:     work = group.broadcast([tensor], opts)
+[rank10]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank10]: RuntimeError: oneCCL: exec.cpp:122 start_workers: EXCEPTION: failed to start worker # 0
+srun: error: c551-002: task 4: Exited with exit code 1
+srun: error: c551-002: task 7: Exited with exit code 1
+srun: error: c551-003: tasks 10,12,14-15: Exited with exit code 1
+srun: error: c551-002: task 0: Exited with exit code 1
+srun: error: c551-003: tasks 9,11: Exited with exit code 1
+srun: error: c551-003: tasks 8,13: Exited with exit code 1
+srun: error: c551-002: task 1: Exited with exit code 1
+srun: error: c551-002: tasks 3,5-6: Exited with exit code 1
+srun: error: c551-002: task 2: Exited with exit code 1
+--- rc=1 ---
+=== trying preset atl-mpi ===
+--- llama stage=0 rep=1 extra='--tiny' port=25794 04:17:35 ---
+[bench] world=16 device_kind=xpu backend=xccl host=c551-002.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=0.046B build=0.2s
+2026:09:06-04:17:45:1857737 |CCL_WARN| value of CCL_LOCAL_RANK changed to be 0 (default:-1)
+2026:09:06-04:17:45:1857737 |CCL_WARN| value of CCL_LOCAL_SIZE changed to be 8 (default:-1)
+2026:09:06-04:17:45:1857737 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-04:17:45:1857737 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-04:17:45:1857744 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:45:1857741 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:45:1857737 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:45:1857743 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:45:1857738 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:45:1857740 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:45:1857742 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:45:1857739 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:46:3378693 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:46:3378688 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:46:3378689 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:46:3378690 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:46:3378692 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:46:3378694 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:46:3378687 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:46:3378691 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+[1788686267.647606315] c551-002.stampede3.tacc.utexas.edu:rank2.python: Failed to modify UD QP to INIT on hfi1_0: Operation not permitted
+[1788686267.647387667] c551-002.stampede3.tacc.utexas.edu:rank7.python: Failed to modify UD QP to INIT on hfi1_0: Operation not permitted
+libfabric:1857739:1788686267::psm3:core:psmx3_trx_ctxt_alloc():321<warn> c551-002.stampede3.tacc.utexas.edu:rank2: psm3_ep_open returns 8, errno=1
+libfabric:1857744:1788686267::psm3:core:psmx3_trx_ctxt_alloc():321<warn> c551-002.stampede3.tacc.utexas.edu:rank7: psm3_ep_open returns 8, errno=1
+[1788686267.647087214] c551-002.stampede3.tacc.utexas.edu:rank0.python: Failed to modify UD QP to INIT on hfi1_0: Operation not permitted
+libfabric:1857737:1788686267::psm3:core:psmx3_trx_ctxt_alloc():321<warn> c551-002.stampede3.tacc.utexas.edu:rank0: psm3_ep_open returns 8, errno=1
+[1788686267.647838833] c551-002.stampede3.tacc.utexas.edu:rank6.python: Failed to modify UD QP to INIT on hfi1_0: Operation not permitted
+libfabric:1857743:1788686267::psm3:core:psmx3_trx_ctxt_alloc():321<warn> c551-002.stampede3.tacc.utexas.edu:rank6: psm3_ep_open returns 8, errno=1
+[1788686267.649966132] c551-003.stampede3.tacc.utexas.edu:rank10.python: Failed to modify UD QP to INIT on hfi1_0: Operation not permitted
+libfabric:3378689:1788686267::psm3:core:psmx3_trx_ctxt_alloc():321<warn> c551-003.stampede3.tacc.utexas.edu:rank10: psm3_ep_open returns 8, errno=1
+[1788686267.647320103] c551-002.stampede3.tacc.utexas.edu:rank5.python: Failed to modify UD QP to INIT on hfi1_0: Operation not permitted
+libfabric:1857742:1788686267::psm3:core:psmx3_trx_ctxt_alloc():321<warn> c551-002.stampede3.tacc.utexas.edu:rank5: psm3_ep_open returns 8, errno=1
+[1788686267.649969080] c551-003.stampede3.tacc.utexas.edu:rank9.python: Failed to modify UD QP to INIT on hfi1_0: Operation not permitted
+libfabric:3378688:1788686267::psm3:core:psmx3_trx_ctxt_alloc():321<warn> c551-003.stampede3.tacc.utexas.edu:rank9: psm3_ep_open returns 8, errno=1
+Abort(941769871) on node 0 (rank 0 in comm 0): Fatal error in internal_Init_thread: Other MPI error, error stack:
+internal_Init_thread(43701)..: MPI_Init_thread(argc=(nil), argv=(nil), required=3, provided=0x7ffdf321b8bc) failed
+MPII_Init_thread(118)........: 
+MPID_Init(1778)..............: 
+MPIDI_OFI_mpi_init_hook(1739): 
+create_vni_context(2363).....: OFI endpoint open failed (ofi_init.c:2363:create_vni_context:Invalid argument)
+Abort(539116687) on node 0 (rank 0 in comm 0): Fatal error in internal_Init_thread: Other MPI error, error stack:
+internal_Init_thread(43701)..: MPI_Init_thread(argc=(nil), argv=(nil), required=3, provided=0x7ffc13cddd0c) failed
+MPII_Init_thread(118)........: 
+MPID_Init(1778)..............: 
+MPIDI_OFI_mpi_init_hook(1739): 
+create_vni_context(2363).....: OFI endpoint open failed (ofi_init.c:2363:create_vni_context:Invalid argument)
+Abort(270681231) on node 0 (rank 0 in comm 0): Fatal error in internal_Init_thread: Other MPI error, error stack:
+internal_Init_thread(43701)..: MPI_Init_thread(argc=(nil), argv=(nil), required=3, provided=0x7ffcb96641cc) failed
+MPII_Init_thread(118)........: 
+MPID_Init(1778)..............: 
+MPIDI_OFI_mpi_init_hook(1739): 
+create_vni_context(2363).....: OFI endpoint open failed (ofi_init.c:2363:create_vni_context:Invalid argument)
+Abort(270681231) on node 0 (rank 0 in comm 0): Fatal error in internal_Init_thread: Other MPI error, error stack:
+internal_Init_thread(43701)..: MPI_Init_thread(argc=(nil), argv=(nil), required=3, provided=0x7ffd6bbee6dc) failed
+MPII_Init_thread(118)........: 
+MPID_Init(1778)..............: 
+MPIDI_OFI_mpi_init_hook(1739): 
+create_vni_context(2363).....: OFI endpoint open failed (ofi_init.c:2363:create_vni_context:Invalid argument)
+Abort(2245775) on node 0 (rank 0 in comm 0): Fatal error in internal_Init_thread: Other MPI error, error stack:
+internal_Init_thread(43701)..: MPI_Init_thread(argc=(nil), argv=(nil), required=3, provided=0x7ffd465d1b4c) failed
+MPII_Init_thread(118)........: 
+MPID_Init(1778)..............: 
+MPIDI_OFI_mpi_init_hook(1739): 
+create_vni_context(2363).....: OFI endpoint open failed (ofi_init.c:2363:create_vni_context:Invalid argument)
+Abort(69354639) on node 0 (rank 0 in comm 0): Fatal error in internal_Init_thread: Other MPI error, error stack:
+internal_Init_thread(43701)..: MPI_Init_thread(argc=(nil), argv=(nil), required=3, provided=0x7ffebdefbcdc) failed
+MPII_Init_thread(118)........: 
+MPID_Init(1778)..............: 
+MPIDI_OFI_mpi_init_hook(1739): 
+create_vni_context(2363).....: OFI endpoint open failed (ofi_init.c:2363:create_vni_context:Invalid argument)
+Abort(270681231) on node 0 (rank 0 in comm 0): Fatal error in internal_Init_thread: Other MPI error, error stack:
+internal_Init_thread(43701)..: MPI_Init_thread(argc=(nil), argv=(nil), required=3, provided=0x7fff441833ec) failed
+MPII_Init_thread(118)........: 
+MPID_Init(1778)..............: 
+MPIDI_OFI_mpi_init_hook(1739): 
+create_vni_context(2363).....: OFI endpoint open failed (ofi_init.c:2363:create_vni_context:Invalid argument)
+[1788686267.647987781] c551-002.stampede3.tacc.utexas.edu:rank4.python: Failed to modify UD QP to INIT on hfi1_0: Operation not permitted
+libfabric:1857741:1788686267::psm3:core:psmx3_trx_ctxt_alloc():321<warn> c551-002.stampede3.tacc.utexas.edu:rank4: psm3_ep_open returns 8, errno=1
+Abort(270681231) on node 0 (rank 0 in comm 0): Fatal error in internal_Init_thread: Other MPI error, error stack:
+internal_Init_thread(43701)..: MPI_Init_thread(argc=(nil), argv=(nil), required=3, provided=0x7ffcf80ae5fc) failed
+MPII_Init_thread(118)........: 
+MPID_Init(1778)..............: 
+MPIDI_OFI_mpi_init_hook(1739): 
+create_vni_context(2363).....: OFI endpoint open failed (ofi_init.c:2363:create_vni_context:Invalid argument)
+[1788686267.650270473] c551-003.stampede3.tacc.utexas.edu:rank15.python: Failed to modify UD QP to INIT on hfi1_0: Operation not permitted
+libfabric:3378694:1788686267::psm3:core:psmx3_trx_ctxt_alloc():321<warn> c551-003.stampede3.tacc.utexas.edu:rank15: psm3_ep_open returns 8, errno=1
+Abort(807552143) on node 0 (rank 0 in comm 0): Fatal error in internal_Init_thread: Other MPI error, error stack:
+internal_Init_thread(43701)..: MPI_Init_thread(argc=(nil), argv=(nil), required=3, provided=0x7fff43dbcacc) failed
+MPII_Init_thread(118)........: 
+MPID_Init(1778)..............: 
+MPIDI_OFI_mpi_init_hook(1739): 
+create_vni_context(2363).....: OFI endpoint open failed (ofi_init.c:2363:create_vni_context:Invalid argument)
+[1788686267.648275207] c551-002.stampede3.tacc.utexas.edu:rank1.python: Failed to modify UD QP to INIT on hfi1_0: Operation not permitted
+libfabric:1857738:1788686267::psm3:core:psmx3_trx_ctxt_alloc():321<warn> c551-002.stampede3.tacc.utexas.edu:rank1: psm3_ep_open returns 8, errno=1
+Abort(404898959) on node 0 (rank 0 in comm 0): Fatal error in internal_Init_thread: Other MPI error, error stack:
+internal_Init_thread(43701)..: MPI_Init_thread(argc=(nil), argv=(nil), required=3, provided=0x7ffe08ab040c) failed
+MPII_Init_thread(118)........: 
+MPID_Init(1778)..............: 
+MPIDI_OFI_mpi_init_hook(1739): 
+create_vni_context(2363).....: OFI endpoint open failed (ofi_init.c:2363:create_vni_context:Invalid argument)
+slurmstepd: error: *** STEP 3472792.2 ON c551-002 CANCELLED AT 2026-09-06T04:17:47 ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: c551-002: tasks 0-7: Killed
+srun: error: c551-003: tasks 8-15: Killed
+--- rc=137 ---
+=== trying preset tcp-diag ===
+--- llama stage=0 rep=1 extra='--tiny' port=25795 04:17:47 ---
+[bench] world=16 device_kind=xpu backend=xccl host=c551-002.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=0.046B build=0.2s
+2026:09:06-04:17:58:1858134 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-04:17:58:1858134 |CCL_WARN| value of CCL_LOCAL_RANK changed to be 0 (default:-1)
+2026:09:06-04:17:58:1858134 |CCL_WARN| value of CCL_LOCAL_SIZE changed to be 8 (default:-1)
+2026:09:06-04:17:58:1858134 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-04:17:58:1858134 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-04:17:58:1858139 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:58:1858135 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:58:1858137 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:58:1858141 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:58:1858140 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:58:1858134 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:58:1858136 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:17:58:1858138 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:18:00:3379072 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:18:00:3379070 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:18:00:3379066 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:18:00:3379068 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:18:00:3379071 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:18:00:3379065 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:18:00:3379067 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-04:18:00:3379069 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+libfabric:1858134:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:1858134:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:1858140:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:1858140:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:1858141:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:1858141:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:1858135:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:1858135:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:1858136:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:1858136:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:1858137:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:1858137:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:1858138:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:1858138:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:1858139:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:1858139:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:3379065:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:3379065:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:3379066:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:3379066:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:3379067:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:3379067:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:3379068:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:3379068:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:3379069:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:3379069:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:3379070:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:3379070:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:3379071:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:3379071:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:3379072:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_CUDA not supported
+libfabric:3379072:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_ROCR not supported
+libfabric:3379070:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:3379070:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:3379070:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937173
+libfabric:3379066:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:3379066:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:3379066:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937173
+libfabric:3379068:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:3379068:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:3379072:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:3379072:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:3379068:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937173
+libfabric:3379072:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937173
+libfabric:1858137:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:1858137:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:1858139:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:1858139:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:1858139:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937024
+libfabric:1858135:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:1858135:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:1858135:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937024
+libfabric:1858137:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937024
+libfabric:1858141:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:1858141:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:1858141:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937024
+libfabric:1858140:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:1858140:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:1858140:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937024
+libfabric:1858138:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:1858138:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:1858138:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937024
+libfabric:1858134:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:1858134:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:3379069:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:3379069:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:1858134:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937024
+libfabric:3379071:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:3379071:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:3379071:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937173
+libfabric:3379065:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:3379065:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:3379067:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:3379067:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:1858136:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_NEURON not supported
+libfabric:1858136:1788686281::core:core:ofi_hmem_init():416<info> Hmem iface FI_HMEM_SYNAPSEAI not supported
+libfabric:3379069:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937173
+libfabric:3379065:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937173
+libfabric:3379067:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937173
+libfabric:1858136:1788686281::core:mr:ofi_default_cache_size():79<info> default cache size=5630937024
+libfabric:1858135:1788686281::psm3:core:fi_prov_ini():898<info> c551-002.stampede3.tacc.utexas.edu:rank1: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:1858138:1788686281::psm3:core:fi_prov_ini():898<info> c551-002.stampede3.tacc.utexas.edu:rank4: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:1858134:1788686281::psm3:core:fi_prov_ini():898<info> c551-002.stampede3.tacc.utexas.edu:rank0: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:1858136:1788686281::psm3:core:fi_prov_ini():898<info> c551-002.stampede3.tacc.utexas.edu:rank2: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:1858137:1788686281::psm3:core:fi_prov_ini():898<info> c551-002.stampede3.tacc.utexas.edu:rank3: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:1858139:1788686281::psm3:core:fi_prov_ini():898<info> c551-002.stampede3.tacc.utexas.edu:rank5: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:1858140:1788686281::psm3:core:fi_prov_ini():898<info> c551-002.stampede3.tacc.utexas.edu:rank6: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:1858141:1788686281::psm3:core:fi_prov_ini():898<info> c551-002.stampede3.tacc.utexas.edu:rank7: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:1858135:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-002.stampede3.tacc.utexas.edu:rank1: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:1858135:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank1: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:1858135:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank1: variable FI_PSM3_UUID=<not set>
+libfabric:1858138:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-002.stampede3.tacc.utexas.edu:rank4: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:1858138:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank4: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:1858138:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank4: variable FI_PSM3_UUID=<not set>
+libfabric:1858138:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank4: read int var FI_PSM3_DELAY=0
+libfabric:1858138:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank4: read int var FI_PSM3_TIMEOUT=0
+libfabric:1858138:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank4: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:1858140:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-002.stampede3.tacc.utexas.edu:rank6: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:1858140:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank6: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:1858140:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank6: variable FI_PSM3_UUID=<not set>
+libfabric:1858140:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank6: read int var FI_PSM3_DELAY=0
+libfabric:1858140:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank6: read int var FI_PSM3_TIMEOUT=0
+libfabric:1858140:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank6: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:1858140:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank6: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:1858140:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank6: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:1858140:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank6: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:1858134:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-002.stampede3.tacc.utexas.edu:rank0: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:1858134:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank0: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:1858134:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank0: variable FI_PSM3_UUID=<not set>
+libfabric:1858134:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank0: read int var FI_PSM3_DELAY=0
+libfabric:1858134:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank0: read int var FI_PSM3_TIMEOUT=0
+libfabric:1858134:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank0: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:1858134:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank0: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:1858134:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank0: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:1858134:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank0: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:1858134:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank0: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:1858134:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank0: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:1858134:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank0: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:1858134:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank0: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:1858134:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank0: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:1858134:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank0: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:1858134:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:1858135:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank1: read int var FI_PSM3_DELAY=0
+libfabric:1858135:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank1: read int var FI_PSM3_TIMEOUT=0
+libfabric:1858135:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank1: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:1858135:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank1: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:1858135:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank1: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:1858135:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank1: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:1858135:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank1: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:1858135:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank1: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:1858135:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank1: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:1858135:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank1: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:1858135:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank1: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:1858135:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank1: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:1858135:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:1858135:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+libfabric:1858136:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-002.stampede3.tacc.utexas.edu:rank2: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:1858136:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank2: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:1858136:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank2: variable FI_PSM3_UUID=<not set>
+libfabric:1858136:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank2: read int var FI_PSM3_DELAY=0
+libfabric:1858136:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank2: read int var FI_PSM3_TIMEOUT=0
+libfabric:1858136:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank2: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:1858136:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank2: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:1858136:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank2: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:1858136:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank2: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:1858136:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank2: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:1858136:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank2: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:1858136:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank2: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:1858136:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank2: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:1858136:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank2: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:1858136:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank2: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:1858136:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:1858136:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+libfabric:1858137:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-002.stampede3.tacc.utexas.edu:rank3: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:1858137:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank3: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:1858137:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank3: variable FI_PSM3_UUID=<not set>
+libfabric:1858137:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank3: read int var FI_PSM3_DELAY=0
+libfabric:1858137:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank3: read int var FI_PSM3_TIMEOUT=0
+libfabric:1858137:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank3: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:1858137:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank3: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:1858137:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank3: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:1858137:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank3: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:1858137:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank3: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:1858137:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank3: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:1858137:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank3: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:1858137:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank3: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:1858137:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank3: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:1858137:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank3: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:1858137:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:1858137:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+libfabric:1858138:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank4: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:1858138:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank4: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:1858138:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank4: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:1858138:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank4: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:1858138:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank4: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:1858138:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank4: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:1858138:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank4: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:1858138:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank4: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:1858138:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank4: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:1858138:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:1858138:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+libfabric:1858139:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-002.stampede3.tacc.utexas.edu:rank5: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:1858139:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank5: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:1858139:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank5: variable FI_PSM3_UUID=<not set>
+libfabric:1858139:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank5: read int var FI_PSM3_DELAY=0
+libfabric:1858139:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank5: read int var FI_PSM3_TIMEOUT=0
+libfabric:1858139:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank5: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:1858139:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank5: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:1858139:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank5: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:1858139:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank5: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:1858139:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank5: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:1858139:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank5: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:1858139:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank5: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:1858139:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank5: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:1858139:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank5: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:1858139:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank5: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:1858139:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:1858139:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+libfabric:1858140:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank6: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:1858140:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank6: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:1858140:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank6: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:1858140:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank6: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:1858140:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank6: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:1858140:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank6: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:1858140:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:1858140:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+libfabric:1858141:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-002.stampede3.tacc.utexas.edu:rank7: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:1858141:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank7: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:1858141:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank7: variable FI_PSM3_UUID=<not set>
+libfabric:1858141:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank7: read int var FI_PSM3_DELAY=0
+libfabric:1858141:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank7: read int var FI_PSM3_TIMEOUT=0
+libfabric:1858141:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank7: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:1858141:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank7: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:1858141:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank7: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:1858141:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-002.stampede3.tacc.utexas.edu:rank7: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:1858141:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank7: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:1858141:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-002.stampede3.tacc.utexas.edu:rank7: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:1858141:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank7: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:1858141:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-002.stampede3.tacc.utexas.edu:rank7: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:1858141:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank7: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:1858141:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-002.stampede3.tacc.utexas.edu:rank7: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:1858141:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:1858141:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+libfabric:1858134:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+libfabric:1858138:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+libfabric:1858138:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:1858138:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+2026:09:06-04:18:01:1858138:[4] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:1858138:[4] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+2026:09:06-04:18:01:1858138:[4] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:1858138:[4] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:1858138:[4] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+2026:09:06-04:18:01:1858138:[4] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+2026:09:06-04:18:01:1858138:[4] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:1858138:[4] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+failed to initialize ATL
+libfabric:1858139:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+libfabric:1858139:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:1858139:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+2026:09:06-04:18:01:1858139:[5] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:1858139:[5] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+2026:09:06-04:18:01:1858139:[5] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:1858139:[5] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:1858139:[5] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+2026:09:06-04:18:01:1858139:[5] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+2026:09:06-04:18:01:1858139:[5] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:1858139:[5] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+failed to initialize ATL
+libfabric:1858140:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+libfabric:1858140:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:1858140:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+2026:09:06-04:18:01:1858140:[6] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:1858140:[6] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+2026:09:06-04:18:01:1858140:[6] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:1858140:[6] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:1858140:[6] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+2026:09:06-04:18:01:1858140:[6] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+libfabric:1858141:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+libfabric:1858141:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:1858141:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+libfabric:1858136:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+2026:09:06-04:18:01:1858140:[6] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:1858140:[6] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+failed to initialize ATL
+libfabric:1858136:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:1858136:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+2026:09:06-04:18:01:1858141:[7] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:1858141:[7] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+2026:09:06-04:18:01:1858141:[7] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:1858141:[7] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:1858141:[7] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+2026:09:06-04:18:01:1858141:[7] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+2026:09:06-04:18:01:1858141:[7] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:1858141:[7] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+libfabric:1858135:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+libfabric:1858135:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:1858135:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+2026:09:06-04:18:01:1858136:[2] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:1858136:[2] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+2026:09:06-04:18:01:1858136:[2] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:1858136:[2] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:1858136:[2] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+2026:09:06-04:18:01:1858136:[2] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+2026:09:06-04:18:01:1858136:[2] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:1858136:[2] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+failed to initialize ATL
+libfabric:1858137:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+libfabric:1858137:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:1858137:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+failed to initialize ATL
+2026:09:06-04:18:01:1858135:[1] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:1858135:[1] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+2026:09:06-04:18:01:1858135:[1] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:1858135:[1] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:1858135:[1] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+2026:09:06-04:18:01:1858135:[1] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+2026:09:06-04:18:01:1858135:[1] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:1858135:[1] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+failed to initialize ATL
+2026:09:06-04:18:01:1858137:[3] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:1858137:[3] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+2026:09:06-04:18:01:1858137:[3] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:1858137:[3] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:1858137:[3] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+2026:09:06-04:18:01:1858137:[3] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+2026:09:06-04:18:01:1858137:[3] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:1858137:[3] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+failed to initialize ATL
+libfabric:1858134:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+libfabric:1858134:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:1858134:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+2026:09:06-04:18:01:1858134:[0] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:1858134:[0] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+2026:09:06-04:18:01:1858134:[0] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:1858134:[0] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:1858134:[0] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+2026:09:06-04:18:01:1858134:[0] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+2026:09:06-04:18:01:1858134:[0] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:1858134:[0] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+failed to initialize ATL
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+libfabric:3379067:1788686281::psm3:core:fi_prov_ini():898<info> c551-003.stampede3.tacc.utexas.edu:rank10: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:3379065:1788686281::psm3:core:fi_prov_ini():898<info> c551-003.stampede3.tacc.utexas.edu:rank8: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:3379068:1788686281::psm3:core:fi_prov_ini():898<info> c551-003.stampede3.tacc.utexas.edu:rank11: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:3379069:1788686281::psm3:core:fi_prov_ini():898<info> c551-003.stampede3.tacc.utexas.edu:rank12: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:3379070:1788686281::psm3:core:fi_prov_ini():898<info> c551-003.stampede3.tacc.utexas.edu:rank13: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:3379071:1788686281::psm3:core:fi_prov_ini():898<info> c551-003.stampede3.tacc.utexas.edu:rank14: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:3379066:1788686281::psm3:core:fi_prov_ini():898<info> c551-003.stampede3.tacc.utexas.edu:rank9: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:3379072:1788686281::psm3:core:fi_prov_ini():898<info> c551-003.stampede3.tacc.utexas.edu:rank15: build options: VERSION=801.0=8.1.0.0, HAVE_PSM3_SRC=1, PSM3_CUDA=0
+libfabric:3379065:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-003.stampede3.tacc.utexas.edu:rank8: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:3379065:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank8: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:3379065:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank8: variable FI_PSM3_UUID=<not set>
+libfabric:3379065:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank8: read int var FI_PSM3_DELAY=0
+libfabric:3379065:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank8: read int var FI_PSM3_TIMEOUT=0
+libfabric:3379065:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank8: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:3379065:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank8: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:3379065:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank8: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:3379065:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank8: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:3379065:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank8: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:3379065:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank8: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:3379065:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank8: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:3379065:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank8: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:3379066:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-003.stampede3.tacc.utexas.edu:rank9: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:3379066:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank9: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:3379066:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank9: variable FI_PSM3_UUID=<not set>
+libfabric:3379066:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank9: read int var FI_PSM3_DELAY=0
+libfabric:3379066:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank9: read int var FI_PSM3_TIMEOUT=0
+libfabric:3379066:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank9: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:3379066:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank9: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:3379066:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank9: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:3379066:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank9: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:3379066:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank9: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:3379066:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank9: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:3379066:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank9: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:3379066:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank9: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:3379066:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank9: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:3379066:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank9: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:3379066:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:3379066:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+libfabric:3379067:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-003.stampede3.tacc.utexas.edu:rank10: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:3379067:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank10: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:3379067:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank10: variable FI_PSM3_UUID=<not set>
+libfabric:3379067:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank10: read int var FI_PSM3_DELAY=0
+libfabric:3379067:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank10: read int var FI_PSM3_TIMEOUT=0
+libfabric:3379067:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank10: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:3379067:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank10: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:3379067:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank10: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:3379067:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank10: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:3379067:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank10: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:3379067:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank10: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:3379067:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank10: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:3379067:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank10: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:3379067:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank10: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:3379067:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank10: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:3379067:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:3379067:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+libfabric:3379068:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-003.stampede3.tacc.utexas.edu:rank11: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:3379068:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank11: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:3379068:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank11: variable FI_PSM3_UUID=<not set>
+libfabric:3379068:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank11: read int var FI_PSM3_DELAY=0
+libfabric:3379068:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank11: read int var FI_PSM3_TIMEOUT=0
+libfabric:3379068:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank11: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:3379068:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank11: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:3379068:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank11: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:3379068:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank11: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:3379068:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank11: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:3379068:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank11: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:3379068:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank11: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:3379068:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank11: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:3379068:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank11: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:3379068:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank11: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:3379068:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:3379068:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+libfabric:3379069:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-003.stampede3.tacc.utexas.edu:rank12: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:3379069:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank12: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:3379069:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank12: variable FI_PSM3_UUID=<not set>
+libfabric:3379069:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank12: read int var FI_PSM3_DELAY=0
+libfabric:3379069:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank12: read int var FI_PSM3_TIMEOUT=0
+libfabric:3379069:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank12: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:3379069:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank12: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:3379069:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank12: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:3379069:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank12: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:3379069:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank12: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:3379069:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank12: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:3379069:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank12: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:3379069:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank12: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:3379069:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank12: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:3379069:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank12: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:3379069:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:3379069:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+libfabric:3379070:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-003.stampede3.tacc.utexas.edu:rank13: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:3379070:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank13: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:3379070:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank13: variable FI_PSM3_UUID=<not set>
+libfabric:3379070:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank13: read int var FI_PSM3_DELAY=0
+libfabric:3379070:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank13: read int var FI_PSM3_TIMEOUT=0
+libfabric:3379070:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank13: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:3379070:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank13: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:3379070:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank13: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:3379070:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank13: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:3379070:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank13: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:3379070:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank13: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:3379070:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank13: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:3379070:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank13: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:3379070:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank13: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:3379070:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank13: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:3379070:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:3379070:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+libfabric:3379071:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-003.stampede3.tacc.utexas.edu:rank14: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:3379071:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank14: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:3379071:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank14: variable FI_PSM3_UUID=<not set>
+libfabric:3379071:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank14: read int var FI_PSM3_DELAY=0
+libfabric:3379071:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank14: read int var FI_PSM3_TIMEOUT=0
+libfabric:3379071:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank14: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:3379071:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank14: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:3379071:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank14: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:3379071:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank14: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:3379071:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank14: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:3379071:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank14: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:3379071:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank14: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:3379071:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank14: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:3379071:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank14: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:3379071:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank14: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:3379071:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:3379071:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+libfabric:3379072:1788686281::psm3:core:psmx3_param_get_bool():100<info> c551-003.stampede3.tacc.utexas.edu:rank15: read bool var FI_PSM3_NAME_SERVER=0
+libfabric:3379072:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank15: variable FI_PSM3_TAGGED_RMA=<not set>
+libfabric:3379072:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank15: variable FI_PSM3_UUID=<not set>
+libfabric:3379072:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank15: read int var FI_PSM3_DELAY=0
+libfabric:3379072:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank15: read int var FI_PSM3_TIMEOUT=0
+libfabric:3379072:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank15: variable FI_PSM3_PROG_INTERVAL=<not set>
+libfabric:3379072:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank15: variable FI_PSM3_PROG_AFFINITY=<not set>
+libfabric:3379072:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank15: variable FI_PSM3_INJECT_SIZE=<not set>
+libfabric:3379072:1788686281::psm3:core:psmx3_param_get_int():115<info> c551-003.stampede3.tacc.utexas.edu:rank15: read int var FI_PSM3_LOCK_LEVEL=1
+libfabric:3379072:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank15: variable FI_PSM3_LAZY_CONN=<not set>
+libfabric:3379072:1788686281::psm3:core:psmx3_param_get_int():111<info> c551-003.stampede3.tacc.utexas.edu:rank15: variable FI_PSM3_CONN_TIMEOUT=<not set>
+libfabric:3379072:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank15: variable FI_PSM3_DISCONNECT=<not set>
+libfabric:3379072:1788686281::psm3:core:psmx3_param_get_str():126<info> c551-003.stampede3.tacc.utexas.edu:rank15: variable FI_PSM3_TAG_LAYOUT=<not set>
+libfabric:3379072:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank15: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:3379072:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank15: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:3379072:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:3379072:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+libfabric:3379065:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank8: variable FI_PSM3_YIELD_MODE=<not set>
+libfabric:3379065:1788686281::psm3:core:psmx3_param_get_bool():96<info> c551-003.stampede3.tacc.utexas.edu:rank8: variable FI_PSM3_WAIT_ENABLE=<not set>
+libfabric:3379065:1788686281::core:core:ofi_register_provider():476<info> registering provider: psm3 (801.0)
+libfabric:3379065:1788686281::core:core:ofi_register_provider():503<info> "psm3" filtered by provider include/exclude list, skipping
+[rank4]: Traceback (most recent call last):
+[rank4]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank4]:     main()
+[rank4]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank4]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank4]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank4]:     engine = DeepSpeedEngine(args=args,
+[rank4]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank4]:     self._configure_distributed_model(model)
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank4]:     self._broadcast_model()
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank4]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank4]:     return func(*args, **kwargs)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank4]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank4]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank4]:     return func(*args, **kwargs)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank4]:     work = group.broadcast([tensor], opts)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank1]:     main()
+[rank1]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank1]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank1]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank1]:     engine = DeepSpeedEngine(args=args,
+[rank1]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank1]:     self._configure_distributed_model(model)
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank1]:     self._broadcast_model()
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank1]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank1]:     return func(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank1]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank1]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank1]:     return func(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank1]:     work = group.broadcast([tensor], opts)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank2]:     main()
+[rank2]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank2]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank2]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank2]:     engine = DeepSpeedEngine(args=args,
+[rank2]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank2]:     self._configure_distributed_model(model)
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank2]:     self._broadcast_model()
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank2]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank2]:     return func(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank2]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank2]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank2]:     return func(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank2]:     work = group.broadcast([tensor], opts)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank3]:     main()
+[rank3]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank3]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank3]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank3]:     engine = DeepSpeedEngine(args=args,
+[rank3]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank3]:     self._configure_distributed_model(model)
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank3]:     self._broadcast_model()
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank3]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank3]:     return func(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank3]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank3]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank3]:     return func(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank3]:     work = group.broadcast([tensor], opts)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank5]: Traceback (most recent call last):
+[rank5]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank5]:     main()
+[rank5]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank5]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank5]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank5]:     engine = DeepSpeedEngine(args=args,
+[rank5]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank5]:     self._configure_distributed_model(model)
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank5]:     self._broadcast_model()
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank5]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank5]:     return func(*args, **kwargs)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank5]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank5]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank5]:     return func(*args, **kwargs)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank5]:     work = group.broadcast([tensor], opts)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank7]: Traceback (most recent call last):
+[rank7]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank7]:     main()
+[rank7]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank7]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank7]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank7]:     engine = DeepSpeedEngine(args=args,
+[rank7]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank7]:     self._configure_distributed_model(model)
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank7]:     self._broadcast_model()
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank7]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank7]:     return func(*args, **kwargs)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank7]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank7]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank7]:     return func(*args, **kwargs)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank7]:     work = group.broadcast([tensor], opts)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank6]: Traceback (most recent call last):
+[rank6]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank6]:     main()
+[rank6]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank6]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank6]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank6]:     engine = DeepSpeedEngine(args=args,
+[rank6]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank6]:     self._configure_distributed_model(model)
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank6]:     self._broadcast_model()
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank6]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank6]:     return func(*args, **kwargs)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank6]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank6]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank6]:     return func(*args, **kwargs)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank6]:     work = group.broadcast([tensor], opts)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+libfabric:3379071:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+libfabric:3379071:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:3379071:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+2026:09:06-04:18:01:3379071:[14] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:3379071:[14] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+2026:09:06-04:18:01:3379071:[14] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:3379071:[14] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:3379071:[14] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+libfabric:3379069:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+2026:09:06-04:18:01:3379071:[14] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+2026:09:06-04:18:01:3379071:[14] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:3379071:[14] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+failed to initialize ATL
+libfabric:3379069:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:3379069:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+2026:09:06-04:18:01:3379069:[12] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:3379069:[12] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+2026:09:06-04:18:01:3379069:[12] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:3379069:[12] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:3379069:[12] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+2026:09:06-04:18:01:3379069:[12] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+2026:09:06-04:18:01:3379069:[12] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:3379069:[12] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+failed to initialize ATL
+libfabric:3379070:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+libfabric:3379070:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:3379070:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+libfabric:3379072:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+libfabric:3379072:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:3379072:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+2026:09:06-04:18:01:3379070:[13] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:3379070:[13] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+libfabric:3379066:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+libfabric:3379066:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:3379066:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+2026:09:06-04:18:01:3379070:[13] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:3379070:[13] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:3379070:[13] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+2026:09:06-04:18:01:3379070:[13] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+2026:09:06-04:18:01:3379070:[13] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:3379070:[13] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+failed to initialize ATL
+2026:09:06-04:18:01:3379072:[15] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:3379072:[15] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+2026:09:06-04:18:01:3379072:[15] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:3379072:[15] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:3379072:[15] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+2026:09:06-04:18:01:3379072:[15] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+2026:09:06-04:18:01:3379072:[15] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:3379072:[15] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+failed to initialize ATL
+2026:09:06-04:18:01:3379066:[9] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:3379066:[9] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+2026:09:06-04:18:01:3379066:[9] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:3379066:[9] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:3379066:[9] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+2026:09:06-04:18:01:3379066:[9] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+2026:09:06-04:18:01:3379066:[9] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:3379066:[9] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+failed to initialize ATL
+libfabric:3379067:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+libfabric:3379067:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:3379068:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+libfabric:3379068:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:3379067:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+libfabric:3379068:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+2026:09:06-04:18:01:3379067:[10] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:3379068:[11] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:3379068:[11] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+2026:09:06-04:18:01:3379067:[10] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+2026:09:06-04:18:01:3379067:[10] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:3379067:[10] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:3379067:[10] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+2026:09:06-04:18:01:3379068:[11] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:3379068:[11] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:3379068:[11] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+2026:09:06-04:18:01:3379068:[11] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+2026:09:06-04:18:01:3379068:[11] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:3379068:[11] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+failed to initialize ATL
+2026:09:06-04:18:01:3379067:[10] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+2026:09:06-04:18:01:3379067:[10] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:3379067:[10] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+failed to initialize ATL
+libfabric:3379065:1788686281::core:core:ofi_register_provider():476<info> registering provider: ofi_hook_noop (118.10)
+libfabric:3379065:1788686281::core:core:ofi_register_provider():476<info> registering provider: off_coll (118.10)
+libfabric:3379065:1788686281::core:core:fi_getinfo_():1304<warn> Can't find provider with the highest priority
+2026:09:06-04:18:01:3379065:[8] |CCL_ERROR| atl_ofi_helper.cpp:1213 atl_ofi_get_prov_list: fi_getinfo error: ret -61, providers 0
+2026:09:06-04:18:01:3379065:[8] |CCL_ERROR| atl_ofi_helper.cpp:1253 atl_ofi_get_prov_list: can't create providers for name tcp
+2026:09:06-04:18:01:3379065:[8] |CCL_ERROR| atl_ofi_helper.cpp:1607 atl_ofi_open_nw_provs: atl_ofi_get_prov_list(ctx, prov_name, base_hints, &prov_list)
+ fails with status: 1
+2026:09:06-04:18:01:3379065:[8] |CCL_ERROR| atl_ofi_helper.cpp:1769 atl_ofi_open_nw_provs: can not open network providers
+2026:09:06-04:18:01:3379065:[8] |CCL_ERROR| atl_ofi.cpp:1347 open_providers: atl_ofi_open_nw_provs failed with status: 1
+2026:09:06-04:18:01:3379065:[8] |CCL_ERROR| atl_ofi.cpp:272 init: open_providers(prov_env, coord, attr, base_hints, open_nw_provs, fi_version, pmi, true )
+ fails with status: 1
+2026:09:06-04:18:01:3379065:[8] |CCL_ERROR| atl_ofi.cpp:347 init: can't find suitable provider
+2026:09:06-04:18:01:3379065:[8] |CCL_ERROR| atl_ofi_comm.cpp:848 init_transport: condition transport->init(nullptr, nullptr, &attr, nullptr, pmi) == ATL_STATUS_SUCCESS failed
+failed to initialize ATL
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank0]:     main()
+[rank0]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank0]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank0]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank0]:     engine = DeepSpeedEngine(args=args,
+[rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank0]:     self._configure_distributed_model(model)
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank0]:     self._broadcast_model()
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank0]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank0]:     return func(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank0]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank0]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank0]:     return func(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank0]:     work = group.broadcast([tensor], opts)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank15]: Traceback (most recent call last):
+[rank15]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank15]:     main()
+[rank15]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank15]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank15]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank15]:     engine = DeepSpeedEngine(args=args,
+[rank15]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank15]:     self._configure_distributed_model(model)
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank15]:     self._broadcast_model()
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank15]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank15]:     return func(*args, **kwargs)
+[rank15]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank15]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank15]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank15]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank15]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank15]:     return func(*args, **kwargs)
+[rank15]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank15]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank15]:     work = group.broadcast([tensor], opts)
+[rank15]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank15]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank8]: Traceback (most recent call last):
+[rank8]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank8]:     main()
+[rank8]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank8]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank8]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank8]:     engine = DeepSpeedEngine(args=args,
+[rank8]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank8]:     self._configure_distributed_model(model)
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank8]:     self._broadcast_model()
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank8]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank8]:     return func(*args, **kwargs)
+[rank8]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank8]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank8]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank8]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank8]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank8]:     return func(*args, **kwargs)
+[rank8]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank8]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank8]:     work = group.broadcast([tensor], opts)
+[rank8]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank8]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank9]: Traceback (most recent call last):
+[rank9]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank9]:     main()
+[rank9]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank9]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank9]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank9]:     engine = DeepSpeedEngine(args=args,
+[rank9]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank9]:     self._configure_distributed_model(model)
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank9]:     self._broadcast_model()
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank9]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank9]:     return func(*args, **kwargs)
+[rank9]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank9]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank9]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank9]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank9]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank9]:     return func(*args, **kwargs)
+[rank9]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank9]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank9]:     work = group.broadcast([tensor], opts)
+[rank9]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank9]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank11]: Traceback (most recent call last):
+[rank11]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank11]:     main()
+[rank11]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank11]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank11]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank11]:     engine = DeepSpeedEngine(args=args,
+[rank11]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank11]:     self._configure_distributed_model(model)
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank11]:     self._broadcast_model()
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank11]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank11]:     return func(*args, **kwargs)
+[rank11]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank11]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank11]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank11]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank11]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank11]:     return func(*args, **kwargs)
+[rank11]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank11]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank11]:     work = group.broadcast([tensor], opts)
+[rank11]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank11]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank12]: Traceback (most recent call last):
+[rank12]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank12]:     main()
+[rank12]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank12]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank12]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank12]:     engine = DeepSpeedEngine(args=args,
+[rank12]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank12]:     self._configure_distributed_model(model)
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank12]:     self._broadcast_model()
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank12]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank12]:     return func(*args, **kwargs)
+[rank12]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank12]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank12]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank12]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank12]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank12]:     return func(*args, **kwargs)
+[rank12]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank12]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank12]:     work = group.broadcast([tensor], opts)
+[rank12]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank12]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank13]: Traceback (most recent call last):
+[rank13]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank13]:     main()
+[rank13]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank13]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank13]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank13]:     engine = DeepSpeedEngine(args=args,
+[rank13]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank13]:     self._configure_distributed_model(model)
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank13]:     self._broadcast_model()
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank13]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank13]:     return func(*args, **kwargs)
+[rank13]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank13]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank13]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank13]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank13]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank13]:     return func(*args, **kwargs)
+[rank13]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank13]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank13]:     work = group.broadcast([tensor], opts)
+[rank13]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank13]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank14]: Traceback (most recent call last):
+[rank14]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank14]:     main()
+[rank14]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank14]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank14]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank14]:     engine = DeepSpeedEngine(args=args,
+[rank14]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank14]:     self._configure_distributed_model(model)
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank14]:     self._broadcast_model()
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank14]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank14]:     return func(*args, **kwargs)
+[rank14]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank14]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank14]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank14]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank14]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank14]:     return func(*args, **kwargs)
+[rank14]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank14]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank14]:     work = group.broadcast([tensor], opts)
+[rank14]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank14]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank10]: Traceback (most recent call last):
+[rank10]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 390, in <module>
+[rank10]:     main()
+[rank10]:   File "/scratch/08447/abd2000/zmig/llama_bench.py", line 272, in main
+[rank10]:     engine, _opt, _, _ = deepspeed.initialize(
+[rank10]:                          ^^^^^^^^^^^^^^^^^^^^^
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/__init__.py", line 229, in initialize
+[rank10]:     engine = DeepSpeedEngine(args=args,
+[rank10]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 338, in __init__
+[rank10]:     self._configure_distributed_model(model)
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1818, in _configure_distributed_model
+[rank10]:     self._broadcast_model()
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/runtime/engine.py", line 1687, in _broadcast_model
+[rank10]:     dist.broadcast(p.data, groups._get_broadcast_src_rank(), group=self.seq_data_parallel_group)
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 122, in log_wrapper
+[rank10]:     return func(*args, **kwargs)
+[rank10]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/comm.py", line 229, in broadcast
+[rank10]:     return cdb.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank10]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/deepspeed/comm/torch.py", line 236, in broadcast
+[rank10]:     return torch.distributed.broadcast(tensor=tensor, src=src, group=group, async_op=async_op)
+[rank10]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+[rank10]:     return func(*args, **kwargs)
+[rank10]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank10]:   File "/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 3145, in broadcast
+[rank10]:     work = group.broadcast([tensor], opts)
+[rank10]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank10]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+srun: error: c551-002: tasks 0,5,7: Exited with exit code 1
+srun: error: c551-002: task 6: Exited with exit code 1
+srun: error: c551-003: tasks 8,12: Exited with exit code 1
+srun: error: c551-003: tasks 10,13-15: Exited with exit code 1
+srun: error: c551-003: tasks 9,11: Exited with exit code 1
+srun: error: c551-002: tasks 1,4: Exited with exit code 1
+srun: error: c551-002: tasks 2-3: Exited with exit code 1
+--- rc=1 ---
+=== NO WORKING PRESET ===

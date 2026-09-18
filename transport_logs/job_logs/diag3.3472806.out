@@ -1,0 +1,45 @@
+
+Currently Loaded Modules:
+  1) python/3.12.11
+
+torch 2.13.0+xpu True 8
+== scrub matrix ==
+###PROBE n1-scrub nodes=1 env: ZMIG_NOLOCAL=1 ZMIG_SCRUB_PMI=1
+2026:09:06-04:37:33:1875129:[4] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:37:33:1875129:[4] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:37:33:1875130:[5] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:37:33:1875130:[5] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:37:33:1875131:[6] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:37:33:1875131:[6] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+###END n1-scrub
+###PROBE n2-scrub nodes=2 env: ZMIG_NOLOCAL=1 ZMIG_SCRUB_PMI=1
+2026:09:06-04:37:46:1875404:[1] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:37:46:1875404:[1] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:37:46:1875405:[2] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:37:46:1875403:[0] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:37:46:1875403:[0] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:37:46:1875405:[2] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+###END n2-scrub
+###PROBE n2-scrub-tcp nodes=2 env: ZMIG_NOLOCAL=1 ZMIG_SCRUB_PMI=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=/scratch/08447/abd2000/nnopp-pvc/venv/lib CCL_ATL_HMEM=0
+2026:09:06-04:37:52:1875734:[0] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:37:52:1875734:[0] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:37:52:1875735:[1] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:37:52:1875735:[1] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:37:52:1875736:[2] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:37:52:1875736:[2] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+###END n2-scrub-tcp
+###PROBE n2-scrub-locals nodes=2 env: ZMIG_NOLOCAL=0 ZMIG_SCRUB_PMI=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=/scratch/08447/abd2000/nnopp-pvc/venv/lib CCL_ATL_HMEM=0
+2026:09:06-04:37:58:1876012:[0] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:37:58:1876012:[0] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:37:58:1876013:[1] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:37:58:1876013:[1] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:37:58:1876014:[2] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:37:58:1876014:[2] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+###END n2-scrub-locals
+== torchrun cross-check (single node) ==
+2026:09:06-04:38:08:1876444:[1] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:38:08:1876444:[1] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:38:08:1876445:[2] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:38:08:1876445:[2] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:38:08:1876447:[4] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+== DIAG3 DONE ==

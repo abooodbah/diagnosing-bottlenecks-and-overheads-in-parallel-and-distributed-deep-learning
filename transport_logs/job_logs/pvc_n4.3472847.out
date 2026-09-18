@@ -1,0 +1,1066 @@
+
+Currently Loaded Modules:
+  1) python/3.12.11
+
+=== zmig pvc nodes=4 job=3472847 nodelist=c552-[004-007] ===
+c552-004.stampede3.tacc.utexas.edu: 2.13.0+xpu True 8
+c552-007.stampede3.tacc.utexas.edu: 2.13.0+xpu True 8
+c552-006.stampede3.tacc.utexas.edu: 2.13.0+xpu True 8
+c552-005.stampede3.tacc.utexas.edu: 2.13.0+xpu True 8
+--- llama stage=0 rep=1 extra='' port=25848 05:19:32 ---
+[bench] world=32 device_kind=xpu backend=xccl host=c552-004.stampede3.tacc.utexas.edu
+[bench] params=2.547B build=9.4s
+2026:09:06-05:19:59:354085 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:19:59:354087 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:19:59:354082 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:19:59:354082 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:19:59:354085 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:19:59:354087 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:354084 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:354084 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:550947 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:354086 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:354086 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:354083 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:354083 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:550948 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:550947 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:550948 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:354080 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-05:20:00:354080 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-05:20:00:354080 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-05:20:00:354080 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:354081 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:354080 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:354081 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:550945 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:550945 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:550949 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:550949 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:3160101 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:550942 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:550942 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:550946 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:550946 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:550944 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:3160101 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:550944 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:3160104 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:3160104 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:550943 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:550943 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:2555172 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:2555172 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:2555170 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:2555170 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:2555171 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:2555171 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:3160103 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:3160103 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:3160099 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:3160099 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:3160097 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:3160097 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:3160100 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:3160100 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:2555173 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:2555173 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:2555174 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:2555174 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:2555169 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:2555169 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:3160098 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:3160098 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:2555175 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:2555175 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:3160102 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:3160102 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:20:00:2555168 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:20:00:2555168 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+libfabric:2555169:1788690004::tcp:ep_ctrl:xnet_recv_cm_msg():56<warn> Failed to read cm header, ret: 0, sockerr: 115
+[rank9]:[W906 05:21:48.955526685 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 9]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank14]:[W906 05:21:48.955525841 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 14]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank10]:[W906 05:21:48.152906639 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 10]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank24]:[W906 05:21:48.412218196 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 24]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank2]:[W906 05:21:48.090491120 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank5]:[W906 05:21:48.090490996 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank3]:[W906 05:21:48.090749070 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank12]:[W906 05:21:48.296189940 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 12]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank11]:[W906 05:21:48.296639752 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 11]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank1]:[W906 05:21:48.107104100 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank20]:[W906 05:21:48.311277811 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 20]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank16]:[W906 05:21:48.311838903 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 16]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank18]:[W906 05:21:48.311883525 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 18]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank19]:[W906 05:21:48.313286094 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 19]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank7]:[W906 05:21:48.115872326 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank4]:[W906 05:21:48.119904485 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank13]:[W906 05:21:48.323200511 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 13]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank23]:[W906 05:21:48.323788654 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 23]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank8]:[W906 05:21:48.325835205 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 8]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank21]:[W906 05:21:48.325242716 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 21]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank6]:[W906 05:21:48.136355906 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank22]:[W906 05:21:48.356554058 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 22]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank17]:[W906 05:21:48.362910934 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 17]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank15]:[W906 05:21:48.367764316 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 15]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank27]:[W906 05:21:48.599120841 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 27]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank26]:[W906 05:21:48.615319655 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 26]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank29]:[W906 05:21:48.649252731 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 29]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank28]:[W906 05:21:48.654446877 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 28]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank30]:[W906 05:21:48.687720072 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 30]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[rank0]:[W906 05:21:48.278601665 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank25]:[W906 05:21:48.718936966 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 25]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank31]:[W906 05:21:48.747776430 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 31]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] measuring...
+[bench] WROTE pvc_n4_s0_r1.json step_p50=3577.9ms peak_mem=57.8GiB
+--- rc=0 ---
+--- llama stage=0 rep=2 extra='' port=25849 05:26:54 ---
+[bench] world=32 device_kind=xpu backend=xccl host=c552-004.stampede3.tacc.utexas.edu
+2026:09:06-05:27:15:3164384 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:15:3164384 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:15:2557254 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:15:2557254 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:15:2557251 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:15:2557251 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:15:3164383 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:15:3164383 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:15:2557255 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:15:2557255 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:15:2557248 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:15:2557248 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:15:2557252 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:15:2557252 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:15:3164385 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:15:3164385 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:15:3164382 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:15:3164382 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:15:3164381 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:15:2557249 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:15:3164381 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:15:2557249 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:15:2557253 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:15:2557253 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:15:3164387 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:15:3164387 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:15:3164388 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:15:3164388 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:15:3164386 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:15:3164386 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:16:2557250 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:16:2557250 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+[bench] params=2.547B build=9.4s
+2026:09:06-05:27:16:555239 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:16:555239 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:16:555234 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:16:555234 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:16:555232 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:16:555232 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:16:555235 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:16:555235 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:16:555236 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:16:555236 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:16:555238 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:16:555238 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:16:555237 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:16:555237 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:16:356448 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:16:356452 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:16:356448 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:16:356452 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:17:356446 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:17:356446 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:17:555233 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:17:555233 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:17:356445 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-05:27:17:356445 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-05:27:17:356445 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-05:27:17:356445 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:17:356451 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:17:356445 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:17:356451 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:17:356449 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:17:356449 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:17:356447 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:17:356447 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:27:17:356450 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:27:17:356450 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+libfabric:2557249:1788690440::tcp:ep_ctrl:xnet_recv_cm_msg():56<warn> Failed to read cm header, ret: 0, sockerr: 115
+libfabric:555233:1788690440::tcp:ep_ctrl:xnet_recv_cm_msg():56<warn> Failed to read cm header, ret: 0, sockerr: 115
+libfabric:3164387:1788690440::tcp:ep_ctrl:xnet_recv_cm_msg():56<warn> Failed to read cm header, ret: 0, sockerr: 115
+[rank15]:[W906 05:31:03.365419192 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 15]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank20]:[W906 05:31:05.021264257 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 20]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank3]:[W906 05:31:05.121030966 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank1]:[W906 05:31:05.140097937 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank7]:[W906 05:31:05.182867403 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank4]:[W906 05:31:05.196238327 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank14]:[W906 05:31:05.486624444 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 14]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank12]:[W906 05:31:05.516663410 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 12]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank17]:[W906 05:31:05.553638515 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 17]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank5]:[W906 05:31:05.427577576 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank2]:[W906 05:31:05.431544005 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank26]:[W906 05:31:05.861214488 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 26]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank25]:[W906 05:31:05.862630898 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 25]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank19]:[W906 05:31:05.646987550 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 19]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank10]:[W906 05:31:05.653533114 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 10]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank11]:[W906 05:31:05.654163876 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 11]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank6]:[W906 05:31:05.461811162 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank24]:[W906 05:31:05.883870848 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 24]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank23]:[W906 05:31:05.675952106 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 23]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank21]:[W906 05:31:05.679812356 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 21]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank13]:[W906 05:31:05.681175669 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 13]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank22]:[W906 05:31:05.682905204 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 22]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank16]:[W906 05:31:05.683968807 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 16]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank18]:[W906 05:31:05.695237688 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 18]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank8]:[W906 05:31:05.699780221 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 8]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank9]:[W906 05:31:05.704040899 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 9]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank28]:[W906 05:31:05.962516221 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 28]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank27]:[W906 05:31:06.981589601 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 27]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[rank0]:[W906 05:31:06.564714501 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank30]:[W906 05:31:06.989775476 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 30]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank29]:[W906 05:31:06.991437558 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 29]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank31]:[W906 05:31:06.009438107 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 31]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] measuring...
+[bench] WROTE pvc_n4_s0_r2.json step_p50=3212.8ms peak_mem=57.8GiB
+--- rc=0 ---
+--- llama stage=0 rep=3 extra='' port=25850 05:35:28 ---
+[bench] world=32 device_kind=xpu backend=xccl host=c552-004.stampede3.tacc.utexas.edu
+2026:09:06-05:35:49:359008 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:359005 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:359008 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:359005 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:359006 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:359006 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:3169295 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:3169295 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:359007 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:359007 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+[bench] params=2.547B build=10.3s
+2026:09:06-05:35:49:359009 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:359009 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:359011 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:359011 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:3169298 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:3169298 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:3169300 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:3169300 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:3169296 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:3169296 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:359010 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:359010 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:3169299 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:3169299 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:2559574 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:3169297 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:3169297 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:2559574 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:2559580 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:2559580 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:2559581 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:2559581 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:3169301 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:3169301 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:3169302 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:560099 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:3169302 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:2559575 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:2559575 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:560101 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:560099 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:560101 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:2559578 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:2559578 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:2559577 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:2559577 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:2559576 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:2559576 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:2559579 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:2559579 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:560098 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:560098 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:560103 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:560103 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:359004 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-05:35:49:359004 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-05:35:49:359004 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-05:35:49:359004 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:359004 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:560104 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:560104 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:560105 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:560105 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:49:560100 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:49:560100 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:35:50:560102 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:35:50:560102 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+libfabric:2559574:1788690953::tcp:ep_ctrl:xnet_recv_cm_msg():56<warn> Failed to read cm header, ret: 0, sockerr: 115
+libfabric:2559578:1788690953::tcp:ep_ctrl:xnet_recv_cm_msg():56<warn> Failed to read cm header, ret: 0, sockerr: 11
+[rank29]:[W906 05:37:20.766191872 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 29]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank22]:[W906 05:37:20.588123954 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 22]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank4]:[W906 05:37:20.420064332 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank5]:[W906 05:37:20.487220102 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank9]:[W906 05:37:20.701168391 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 9]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank10]:[W906 05:37:20.728378603 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 10]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank24]:[W906 05:37:20.951673167 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 24]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank1]:[W906 05:37:21.554612204 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank2]:[W906 05:37:21.563236755 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank8]:[W906 05:37:21.763232159 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 8]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank14]:[W906 05:37:21.771612642 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 14]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank15]:[W906 05:37:21.782431626 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 15]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank16]:[W906 05:37:21.783732981 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 16]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank12]:[W906 05:37:21.796991159 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 12]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank7]:[W906 05:37:21.603075511 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank20]:[W906 05:37:21.804812776 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 20]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank21]:[W906 05:37:21.805041182 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 21]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank3]:[W906 05:37:21.614068922 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank19]:[W906 05:37:21.815046210 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 19]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank13]:[W906 05:37:21.820287918 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 13]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank11]:[W906 05:37:21.825596310 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 11]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank17]:[W906 05:37:21.837685920 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 17]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank18]:[W906 05:37:21.838049222 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 18]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank23]:[W906 05:37:21.856491875 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 23]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank6]:[W906 05:37:21.659887484 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank27]:[W906 05:37:21.161734653 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 27]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank25]:[W906 05:37:21.162625445 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 25]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[rank0]:[W906 05:37:21.773236595 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank28]:[W906 05:37:21.223555370 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 28]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank30]:[W906 05:37:21.242303558 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 30]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank26]:[W906 05:37:21.273486921 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 26]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank31]:[W906 05:37:21.274975644 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 31]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] measuring...
+[bench] WROTE pvc_n4_s0_r3.json step_p50=4863.6ms peak_mem=57.8GiB
+--- rc=0 ---
+--- llama stage=2 rep=1 extra='' port=25851 05:42:17 ---
+[bench] world=32 device_kind=xpu backend=xccl host=c552-004.stampede3.tacc.utexas.edu
+2026:09:06-05:42:38:3173310 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:38:3173310 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:38:3173305 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:38:3173305 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:38:2561467 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:38:2561467 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:38:2561469 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:38:2561469 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:38:2561468 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:38:2561468 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:3173312 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:3173312 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:2561466 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:2561466 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:3173315 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:3173315 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:3173314 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:3173314 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:2561464 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:2561464 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:2561465 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:3173306 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:2561465 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:3173306 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:2561463 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:2561463 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:2561462 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:2561462 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:3173313 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:3173313 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:3173316 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:3173316 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+[bench] params=2.547B build=9.3s
+2026:09:06-05:42:39:564117 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:564117 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:564114 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:564114 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:564113 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:564113 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:564112 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:564112 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:564115 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:564115 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:564116 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:564116 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:39:564118 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:39:564118 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:40:361243 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:40:361243 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:40:361241 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-05:42:40:361241 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-05:42:40:361241 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-05:42:40:361241 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:40:361241 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:40:361242 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:40:361242 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:40:361244 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:40:361245 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:40:361244 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:40:361245 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:40:361246 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:40:361246 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:40:564111 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:40:564111 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:40:361247 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:40:361247 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:42:40:361248 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:42:40:361248 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+libfabric:2561465:1788691363::tcp:ep_ctrl:xnet_recv_cm_msg():56<warn> Failed to read cm header, ret: 0, sockerr: 115
+libfabric:564112:1788691363::tcp:ep_ctrl:xnet_recv_cm_msg():56<warn> Failed to read cm header, ret: 0, sockerr: 115
+[rank13]:[W906 05:44:48.363668651 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 13]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank18]:[W906 05:44:48.384264823 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 18]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank21]:[W906 05:44:48.398769603 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 21]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank27]:[W906 05:44:48.693828511 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 27]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank28]:[W906 05:44:48.708303258 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 28]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank1]:[W906 05:44:48.337402068 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank3]:[W906 05:44:48.341089862 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank9]:[W906 05:44:48.594540316 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 9]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank17]:[W906 05:44:48.596516604 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 17]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank5]:[W906 05:44:48.403938533 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank11]:[W906 05:44:48.650779962 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 11]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank20]:[W906 05:44:48.654587268 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 20]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank2]:[W906 05:44:48.496304340 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank6]:[W906 05:44:48.502329931 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank14]:[W906 05:44:48.704932070 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 14]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank15]:[W906 05:44:48.704923837 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 15]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank16]:[W906 05:44:48.717106544 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 16]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank10]:[W906 05:44:48.723051572 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 10]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank4]:[W906 05:44:48.524484025 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank8]:[W906 05:44:48.723552115 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 8]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank12]:[W906 05:44:48.725101158 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 12]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank7]:[W906 05:44:48.533725512 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank19]:[W906 05:44:48.737161120 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 19]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank23]:[W906 05:44:48.738210798 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 23]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank22]:[W906 05:44:49.759971158 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 22]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank29]:[W906 05:44:49.019646722 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 29]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank24]:[W906 05:44:49.074833901 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 24]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[rank0]:[W906 05:44:49.661128256 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank26]:[W906 05:44:49.083547889 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 26]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank30]:[W906 05:44:49.087535207 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 30]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank31]:[W906 05:44:49.106451064 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 31]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank25]:[W906 05:44:49.108208741 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 25]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+[bench] measuring...
+[bench] WROTE pvc_n4_s2_r1.json step_p50=7767.7ms peak_mem=14.2GiB
+--- rc=0 ---
+--- llama stage=2 rep=2 extra='' port=25852 05:51:22 ---
+[bench] world=32 device_kind=xpu backend=xccl host=c552-004.stampede3.tacc.utexas.edu
+[bench] params=2.547B build=9.5s
+2026:09:06-05:51:42:2563895 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:42:2563899 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:42:2563895 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:42:2563899 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:42:2563897 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:42:2563897 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:363911 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:363911 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:2563898 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:2563898 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:2563896 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:2563896 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:2563893 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:2563894 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:2563893 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:2563894 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:363914 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:363914 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:2563900 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:2563900 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:3178474 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:363916 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:363916 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:3178474 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:3178475 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:3178475 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:363910 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-05:51:43:363910 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-05:51:43:363910 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-05:51:43:363913 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:363910 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:363913 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:363910 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:569223 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:363917 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:363917 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:363915 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:363915 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:569218 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:569223 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:569218 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:569219 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:569219 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:569220 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:569220 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:569224 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:569224 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:569222 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:569222 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:569217 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:569217 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:569221 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:569221 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:3178472 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:3178472 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:3178476 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:3178476 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:363912 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:363912 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:3178477 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:3178477 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:3178470 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:3178470 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:43:3178471 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:43:3178471 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-05:51:44:3178473 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-05:51:44:3178473 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+libfabric:569222:1788691907::tcp:ep_ctrl:xnet_recv_cm_msg():56<warn> Failed to read cm header, ret: 0, sockerr: 115
+libfabric:569219:1788691907::tcp:ep_ctrl:xnet_recv_cm_msg():56<warn> Failed to read cm header, ret: 0, sockerr: 115
+[rank26]:[W906 05:59:30.569489101 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 26]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank10]:[W906 05:59:32.394806941 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 10]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank12]:[W906 05:59:34.875587248 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 12]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank20]:[W906 05:59:34.336996680 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 20]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank25]:[W906 05:59:34.726663421 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 25]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank27]:[W906 05:59:34.765294111 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 27]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank29]:[W906 05:59:34.971420332 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 29]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank1]:[W906 05:59:35.664634888 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank3]:[W906 05:59:35.681900496 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank4]:[W906 05:59:35.689713192 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank5]:[W906 05:59:35.702610936 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank7]:[W906 05:59:35.709772329 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank6]:[W906 05:59:35.722838293 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank21]:[W906 05:59:35.922048890 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 21]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank2]:[W906 05:59:35.724147629 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank8]:[W906 05:59:35.935152089 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 8]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank16]:[W906 05:59:35.937324458 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 16]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank17]:[W906 05:59:35.938351414 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 17]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank11]:[W906 05:59:35.948432700 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 11]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank14]:[W906 05:59:35.948666002 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 14]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank15]:[W906 05:59:35.953268769 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 15]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank9]:[W906 05:59:35.959945380 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 9]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank22]:[W906 05:59:35.966040887 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 22]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank19]:[W906 05:59:35.969179188 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 19]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank13]:[W906 05:59:35.969969209 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 13]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank18]:[W906 05:59:35.972850890 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 18]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank24]:[W906 05:59:35.196659949 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 24]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank23]:[W906 05:59:35.980750527 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 23]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank31]:[W906 05:59:35.227353748 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 31]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank30]:[W906 05:59:35.240427659 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 30]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank28]:[W906 05:59:35.249193342 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 28]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[rank0]:[W906 05:59:35.838491811 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+[bench] measuring...
+[bench] WROTE pvc_n4_s2_r2.json step_p50=8359.1ms peak_mem=14.2GiB
+--- rc=0 ---
+--- llama stage=2 rep=3 extra='' port=25853 06:06:34 ---
+[bench] world=32 device_kind=xpu backend=xccl host=c552-004.stampede3.tacc.utexas.edu
+[bench] params=2.547B build=9.5s
+2026:09:06-06:06:54:577575 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:54:577575 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:54:577573 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:54:577573 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:54:577574 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:54:577574 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:54:577572 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:54:577572 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:54:368224 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:54:368224 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:54:577579 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:54:577579 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:54:577576 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:54:577576 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:54:577577 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:54:577577 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:54:368223 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:54:368223 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:54:368220 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:54:368220 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:54:577578 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:54:577578 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:2567706 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:2567706 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:2567704 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:2567704 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:2567708 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:2567708 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:3186825 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:3186822 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:3186822 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:3186825 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:3186820 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:3186820 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:3186824 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:3186824 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:3186821 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:3186821 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:368221 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:368221 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:368222 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:368222 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:3186818 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:3186818 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:368219 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:368219 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:3186823 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:3186823 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:3186819 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:3186819 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:368218 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-06:06:55:368218 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-06:06:55:368218 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-06:06:55:368218 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:368218 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:368225 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:368225 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:2567705 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:2567709 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:2567705 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:2567709 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:2567707 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:2567707 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:2567702 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:2567702 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:06:55:2567703 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:06:55:2567703 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+libfabric:577578:1788692818::tcp:ep_ctrl:xnet_recv_cm_msg():56<warn> Failed to read cm header, ret: 0, sockerr: 115
+libfabric:577574:1788692818::tcp:ep_ctrl:xnet_recv_cm_msg():56<warn> Failed to read cm header, ret: 0, sockerr: 115
+[rank12]:[W906 06:09:43.910582397 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 12]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank13]:[W906 06:09:44.110746553 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 13]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank25]:[W906 06:09:44.559708631 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 25]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank29]:[W906 06:09:44.630982097 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 29]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank9]:[W906 06:09:44.581959213 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 9]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank10]:[W906 06:09:44.589940147 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 10]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank11]:[W906 06:09:44.608932465 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 11]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank21]:[W906 06:09:45.794811185 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 21]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank26]:[W906 06:09:45.032835154 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 26]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank31]:[W906 06:09:45.054907051 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 31]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank23]:[W906 06:09:45.844996324 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 23]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank6]:[W906 06:09:45.681908774 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 6]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank14]:[W906 06:09:45.884728475 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 14]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank5]:[W906 06:09:45.686913093 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 5]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank2]:[W906 06:09:45.693033654 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 2]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank4]:[W906 06:09:45.693631393 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 4]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank8]:[W906 06:09:45.895508584 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 8]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank3]:[W906 06:09:45.697968410 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 3]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank17]:[W906 06:09:45.897737632 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 17]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank16]:[W906 06:09:45.898092051 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 16]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank22]:[W906 06:09:45.898222535 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 22]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank7]:[W906 06:09:45.702537425 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 7]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank19]:[W906 06:09:45.901575756 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 19]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank20]:[W906 06:09:45.902551688 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 20]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank15]:[W906 06:09:45.903456477 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 15]  using GPU 7 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank18]:[W906 06:09:45.912171657 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 18]  using GPU 2 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank1]:[W906 06:09:45.723612947 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank24]:[W906 06:09:45.152372857 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 24]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank27]:[W906 06:09:45.208143046 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 27]  using GPU 3 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank30]:[W906 06:09:45.214357097 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 30]  using GPU 6 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[rank28]:[W906 06:09:45.222695906 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 28]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[rank0]:[W906 06:09:45.816678731 ProcessGroupXCCL.cpp:1988] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can specify device_id in init_process_group() to force use of a particular device.
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+[bench] measuring...
+[bench] WROTE pvc_n4_s2_r3.json step_p50=8290.6ms peak_mem=14.2GiB
+--- rc=0 ---
+--- llama stage=3 rep=1 extra='' port=25854 06:16:42 ---
+[bench] world=32 device_kind=xpu backend=xccl host=c552-004.stampede3.tacc.utexas.edu
+[bench] params=2.547B build=9.5s
+2026:09:06-06:17:02:371168 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:02:371168 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:02:2570356 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:02:2570356 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:02:2570355 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:02:2570355 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:02:2570360 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:02:2570360 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:371164 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:371164 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:2570359 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:2570358 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:371167 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:2570359 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:2570358 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:371167 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:371166 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:371166 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:371165 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:371165 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:371161 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-06:17:03:371161 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-06:17:03:371161 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-06:17:03:371161 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:2570361 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:371161 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:2570361 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:2570362 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:2570362 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:2570357 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:2570357 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:371162 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:371163 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:371162 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:371163 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:3192553 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:3192553 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:3192556 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:3192556 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:583310 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:583306 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:583310 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:583306 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:3192552 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:583308 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:583308 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:3192552 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:3192554 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:3192554 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:583311 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:583311 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:583307 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:583307 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:583309 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:583309 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:3192555 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:3192555 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:583313 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:583313 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:3192557 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:3192550 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:583312 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:3192557 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:3192550 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:583312 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-06:17:03:3192551 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-06:17:03:3192551 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+libfabric:2570356:1788693427::tcp:ep_ctrl:xnet_recv_cm_msg():56<warn> Failed to read cm header, ret: 0, sockerr: 115
+libfabric:583310:1788693427::tcp:ep_ctrl:xnet_recv_cm_msg():56<warn> Failed to read cm header, ret: 0, sockerr: 115
+libfabric:583307:1788693427::tcp:ep_ctrl:xnet_recv_cm_msg():56<warn> Failed to read cm header, ret: 0, sockerr: 115
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.reduce_scatter_tensor` is deprecated. Please use `torch.distributed.reduce_scatter_single` instead.
+  return func(*args, **kwargs)
+[bench] measuring...

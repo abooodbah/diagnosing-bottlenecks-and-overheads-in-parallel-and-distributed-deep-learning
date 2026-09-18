@@ -1,0 +1,155 @@
+{
+ "tag": "pvc_n1",
+ "mode": "ddp",
+ "stage": 0,
+ "rep": 3,
+ "world": 8,
+ "nodes": 1,
+ "device_kind": "xpu",
+ "backend": "xccl",
+ "params_b": 2.54688512,
+ "model": {
+  "layers": 30,
+  "hidden": 2560,
+  "heads": 20,
+  "ffn": 6912,
+  "vocab": 32768,
+  "seq": 2048,
+  "micro": 1
+ },
+ "iters": 40,
+ "warmup": 10,
+ "measure_wall_s": 32.186421452090144,
+ "step_max_ms": {
+  "p50": 802.2462800145149,
+  "p95": 815.7194098457694,
+  "mean": 803.2244305184577
+ },
+ "peak_mem_bytes_max": 62110734336,
+ "peak_mem_bytes_per_rank": [
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336
+ ],
+ "rank0_phases_ms": {
+  "fwd_p50": 116.74617300741374,
+  "bwd_p50": 369.923064019531,
+  "step_p50": 316.706103971228,
+  "barrier_p50": 2.3044650442898273
+ },
+ "barrier_ms_mean_per_rank": [
+  2.7516929199919105,
+  2.2453472076449543,
+  4.60098828189075,
+  1.2150664522778243,
+  1.5173288411460817,
+  1.7681710771284997,
+  3.982668253593147,
+  1.807488058693707
+ ],
+ "comms_per_rank0": {
+  "barrier": {
+   "count": 40,
+   "time_ms": 107.41760209202766
+  },
+  "all_reduce": {
+   "count": 200,
+   "time_ms": 5001.354999374598
+  }
+ },
+ "comms_all_ranks": [
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 107.41760209202766
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 5001.354999374598
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 87.25431351922452
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 4455.369864124805
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 181.42094532959163
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 4938.47461277619
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 45.91997712850571
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 4083.110343897715
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 58.0543945543468
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 4708.794574486092
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 68.1055907625705
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 4283.876449102536
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 156.66065993718803
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 5030.388083541766
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 69.68438439071178
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 4257.392555708066
+   }
+  }
+ ],
+ "env": {
+  "transport_note": "pvc-tcp-hoststaged",
+  "NCCL_NET_GDR_LEVEL": "",
+  "job": "3472919",
+  "nodelist": "c551-003",
+  "torch": "2.13.0+xpu"
+ },
+ "ts": "2026-09-06 09:35:14"
+}

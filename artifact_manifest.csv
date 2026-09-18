@@ -1,0 +1,8 @@
+claim,raw_files,script,output
+ZeRO-2 peak memory falls 3.4x-4.1x,raw/pvc/*_s0_*.json raw/pvc/*_s2_*.json raw/h100/*_s0_*.json raw/h100/*_s2_*.json,scripts/analyze.py,processed/summary.csv; figures/zero_migration.png (a)
+ZeRO-2 four-node step +11.9% (H100 InfiniBand) vs +107.9% (Intel TCP),raw/h100/h100_n4_direct_s0_r*.json raw/h100/h100_n4_direct_s2_r*.json raw/pvc/pvc_n4_s0_r*.json raw/pvc/pvc_n4_s2_r*.json,scripts/analyze.py,processed/summary.csv; figures/zero_migration.png (a)
+"ZeRO-3 exposed step 18.3-19.2 s at 1/2/4 H100 nodes, 98-99% all-gather",raw/h100/h100_n1_direct_s3_r*.json raw/h100/h100_n2_direct_s3_r*.json raw/h100/h100_n4_direct_s3_r*.json,scripts/analyze.py,processed/summary.csv; figures/zero_migration.png (a)(b)
+"About 206 layer-wise gathers per step (145 framework, 61 torch.distributed)",raw/h100/h100_n1_direct_s3_r1.json (comms_per_rank0),scripts/analyze.py (decomposition),processed/summary.csv
+InfiniBand to TCP sockets moves the two-node ZeRO-3 step 11.9%,raw/h100/h100_n2_direct_s3_r*.json raw/h100/h100_n2_tcp-sockets_s3_r*.json,scripts/analyze.py,figures/zero_migration.png (c); figures/transport_contrast.png
+GPUDirect RDMA fault on the H100 node image,transport_logs/job_logs/h100_c.3476714.out,none (log evidence),quoted in the report
+MoE: Intel 434 ms balanced vs 171 ms skewed; H100 15.6 ms vs 28.6 ms,raw/pvc/*moe*.json raw/h100/*moe*.json,scripts/analyze.py,figures/moe_imbalance.png

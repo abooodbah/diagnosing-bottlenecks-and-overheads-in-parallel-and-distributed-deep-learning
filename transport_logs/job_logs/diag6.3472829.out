@@ -1,0 +1,17 @@
+allowed=0,2,4,6,8,10,12,14,16,18,20,22 nproc=4
+###PROBE n1-full nodes=1 venv=/scratch/08447/abd2000/nnopp-pvc/venv env: ZMIG_NOLOCAL=1
+ALLREDUCE-OK world=8 sum=8.0 t=1652.3ms
+###END n1-full
+###PROBE n1-aff8 nodes=1 venv=/scratch/08447/abd2000/nnopp-pvc/venv env: ZMIG_NOLOCAL=1 ZMIG_AFF8=1
+ALLREDUCE-OK world=8 sum=8.0 t=1396.3ms
+###END n1-aff8
+###PROBE n2-full-tcp nodes=2 venv=/scratch/08447/abd2000/nnopp-pvc/venv env: ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=/scratch/08447/abd2000/nnopp-pvc/venv/lib CCL_ATL_HMEM=0
+ALLREDUCE-OK world=16 sum=16.0 t=2700.7ms
+###END n2-full-tcp
+###PROBE n2-aff8-tcp nodes=2 venv=/scratch/08447/abd2000/nnopp-pvc/venv env: ZMIG_NOLOCAL=1 ZMIG_AFF8=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=/scratch/08447/abd2000/nnopp-pvc/venv/lib CCL_ATL_HMEM=0
+ALLREDUCE-OK world=16 sum=16.0 t=2134.7ms
+###END n2-aff8-tcp
+###PROBE n2-new-tcp nodes=2 venv=/scratch/08447/abd2000/zmig-venv env: ZMIG_NOLOCAL=1 ZMIG_AFF8=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=/scratch/08447/abd2000/zmig-venv/lib CCL_ATL_HMEM=0
+ALLREDUCE-OK world=16 sum=16.0 t=3854.8ms
+###END n2-new-tcp
+== DIAG6 DONE ==

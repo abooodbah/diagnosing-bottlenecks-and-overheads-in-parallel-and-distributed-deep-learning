@@ -1,0 +1,75 @@
+== phase 1: single node ==
+###PROBE n1-base nodes=1 env: ZMIG_NOLOCAL=1
+[rank0]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank1]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank2]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank3]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank6]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank7]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+###END n1-base rc=1
+###PROBE n1-locals nodes=1 env: ZMIG_NOLOCAL=0
+[rank5]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank6]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank1]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank4]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank7]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank2]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+###END n1-locals rc=1
+###PROBE n1-affauto nodes=1 env: ZMIG_NOLOCAL=1 CCL_WORKER_AFFINITY=auto
+[rank2]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank7]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank6]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank3]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank1]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank5]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+###END n1-affauto rc=1
+###PROBE n1-afflist nodes=1 env: ZMIG_NOLOCAL=1 CCL_WORKER_AFFINITY=88,89,90,91,92,93,94,95
+[rank7]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank1]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank5]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank2]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank3]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank4]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+###END n1-afflist rc=1
+== phase 2: two nodes (winner candidates + fabric variants) ==
+###PROBE n2-base nodes=2 env: ZMIG_NOLOCAL=1
+[rank7]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank6]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank2]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank5]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank1]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank3]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+###END n2-base rc=1
+###PROBE n2-impifab nodes=2 env: ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 CCL_ATL_HMEM=0 FI_PROVIDER_PATH=/opt/intel/oneapi/mpi/2021.11/opt/mpi/libfabric/lib/prov LD_LIBRARY_PATH=/opt/intel/oneapi/mpi/2021.11/opt/mpi/libfabric/lib:/scratch/08447/abd2000/nnopp-pvc/venv/lib:/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/lib:/opt/apps/python/3.12.11/lib:/opt/intel/oneapi/ccl/2021.11/lib:/opt/intel/oneapi/mpi/2021.11/lib:/opt/intel/oneapi/mkl/2024.0/lib:/opt/intel/oneapi/ipp/2021.10/lib:/opt/intel/oneapi/ippcp/2021.9/lib:/opt/intel/oneapi/dpl/2022.3/lib:/scratch/projects/compilers/intel24.0/oneapi/dnnl/2024.0/lib:/opt/intel/oneapi/debugger/2024.0/opt/debugger/lib:/scratch/projects/compilers/intel24.0/oneapi/dal/2024.0/lib:/opt/intel/oneapi/compiler/2024.0/include/sycl/ext/intel/esimd/emu:/opt/intel/oneapi/compiler/2024.0/opt/compiler/lib:/opt/intel/oneapi/compiler/2024.0/lib:/opt/intel/oneapi/tbb/2021.11/lib:/opt/intel/oneapi/compiler/2024.0/lib/clang/17/lib/x86_64-unknown-linux-gnu:/opt/apps/gcc/13.2.0/lib64:/opt/apps/gcc/13.2.0/lib:/usr/lib64
+2026:09:06-04:26:27:1866268:[1] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:26:27:1866268:[1] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:26:27:1866267:[0] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:26:27:1866267:[0] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:26:27:1866269:[2] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+###END n2-impifab rc=1
+###PROBE n2-impifab-aff nodes=2 env: ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 CCL_ATL_HMEM=0 FI_PROVIDER_PATH=/opt/intel/oneapi/mpi/2021.11/opt/mpi/libfabric/lib/prov LD_LIBRARY_PATH=/opt/intel/oneapi/mpi/2021.11/opt/mpi/libfabric/lib:/scratch/08447/abd2000/nnopp-pvc/venv/lib:/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/lib:/opt/apps/python/3.12.11/lib:/opt/intel/oneapi/ccl/2021.11/lib:/opt/intel/oneapi/mpi/2021.11/lib:/opt/intel/oneapi/mkl/2024.0/lib:/opt/intel/oneapi/ipp/2021.10/lib:/opt/intel/oneapi/ippcp/2021.9/lib:/opt/intel/oneapi/dpl/2022.3/lib:/scratch/projects/compilers/intel24.0/oneapi/dnnl/2024.0/lib:/opt/intel/oneapi/debugger/2024.0/opt/debugger/lib:/scratch/projects/compilers/intel24.0/oneapi/dal/2024.0/lib:/opt/intel/oneapi/compiler/2024.0/include/sycl/ext/intel/esimd/emu:/opt/intel/oneapi/compiler/2024.0/opt/compiler/lib:/opt/intel/oneapi/compiler/2024.0/lib:/opt/intel/oneapi/tbb/2021.11/lib:/opt/intel/oneapi/compiler/2024.0/lib/clang/17/lib/x86_64-unknown-linux-gnu:/opt/apps/gcc/13.2.0/lib64:/opt/apps/gcc/13.2.0/lib:/usr/lib64 CCL_WORKER_AFFINITY=88,89,90,91,92,93,94,95
+2026:09:06-04:26:34:1866523:[0] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:26:34:1866523:[0] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:26:34:1866524:[1] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:26:34:1866524:[1] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:26:34:1866525:[2] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+###END n2-impifab-aff rc=1
+###PROBE n2-venvfab-aff nodes=2 env: ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 CCL_ATL_HMEM=0 FI_PROVIDER_PATH=/scratch/08447/abd2000/nnopp-pvc/venv/lib CCL_WORKER_AFFINITY=88,89,90,91,92,93,94,95
+[rank1]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank2]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank15]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank12]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank11]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+[rank9]: RuntimeError: oneCCL: atl_ofi_comm.cpp:848 init_transport: EXCEPTION: failed to initialize ATL
+###END n2-venvfab-aff rc=1
+###PROBE n2-debug nodes=2 env: ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 CCL_ATL_HMEM=0 FI_PROVIDER_PATH=/opt/intel/oneapi/mpi/2021.11/opt/mpi/libfabric/lib/prov LD_LIBRARY_PATH=/opt/intel/oneapi/mpi/2021.11/opt/mpi/libfabric/lib:/scratch/08447/abd2000/nnopp-pvc/venv/lib:/scratch/08447/abd2000/nnopp-pvc/venv/lib/python3.12/site-packages/torch/lib:/opt/apps/python/3.12.11/lib:/opt/intel/oneapi/ccl/2021.11/lib:/opt/intel/oneapi/mpi/2021.11/lib:/opt/intel/oneapi/mkl/2024.0/lib:/opt/intel/oneapi/ipp/2021.10/lib:/opt/intel/oneapi/ippcp/2021.9/lib:/opt/intel/oneapi/dpl/2022.3/lib:/scratch/projects/compilers/intel24.0/oneapi/dnnl/2024.0/lib:/opt/intel/oneapi/debugger/2024.0/opt/debugger/lib:/scratch/projects/compilers/intel24.0/oneapi/dal/2024.0/lib:/opt/intel/oneapi/compiler/2024.0/include/sycl/ext/intel/esimd/emu:/opt/intel/oneapi/compiler/2024.0/opt/compiler/lib:/opt/intel/oneapi/compiler/2024.0/lib:/opt/intel/oneapi/tbb/2021.11/lib:/opt/intel/oneapi/compiler/2024.0/lib/clang/17/lib/x86_64-unknown-linux-gnu:/opt/apps/gcc/13.2.0/lib64:/opt/apps/gcc/13.2.0/lib:/usr/lib64 CCL_LOG_LEVEL=debug
+2026:09:06-04:26:45:1867012:[0] |CCL_INFO| start workers for local process [0:8]
+2026:09:06-04:26:45:1867012:[0] |CCL_DEBUG| base_thread.cpp:6 start: worker 0
+2026:09:06-04:26:45:1867012:[0] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:26:45:1867012:[0] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+failed to start worker # 0
+2026:09:06-04:26:45:1867013:[1] |CCL_INFO| start workers for local process [1:8]
+###END n2-debug rc=141
+== DIAG DONE ==

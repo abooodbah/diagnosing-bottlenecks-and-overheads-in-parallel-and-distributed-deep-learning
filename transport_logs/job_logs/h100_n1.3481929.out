@@ -1,0 +1,174 @@
+
+Currently Loaded Modules:
+  1) python/3.12.11
+=== zmig h100 nodes=1 job=3481929 nodelist=c561-003 ===
+c561-003.stampede3.tacc.utexas.edu: GPU 0: NVIDIA H100 (UUID: GPU-92bd631d-3353-b27e-0f2e-69020cc02059); 2.11.0+cu128 True 4
+--- llama stage=0 rep=1 transport=direct port=26930 09:40:08 ---
+[bench] world=4 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=9.0s
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+NCCL version 2.28.9+cuda12.9
+[rank0]:[W909 09:40:39.412414557 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[bench] measuring...
+[bench] iter 1/40 last=353ms
+[bench] iter 11/40 last=298ms
+[bench] iter 21/40 last=301ms
+[bench] iter 31/40 last=304ms
+[bench] WROTE h100_n1_direct_s0_r1.json step_p50=302.6ms peak_mem=57.9GiB
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+--- rc=0 ---
+--- llama stage=0 rep=2 transport=direct port=26931 09:41:00 ---
+[bench] world=4 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=8.9s
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+NCCL version 2.28.9+cuda12.9
+[rank0]:[W909 09:41:27.530283531 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[bench] measuring...
+[bench] iter 1/40 last=358ms
+[bench] iter 11/40 last=298ms
+[bench] iter 21/40 last=301ms
+[bench] iter 31/40 last=307ms
+[bench] WROTE h100_n1_direct_s0_r2.json step_p50=302.2ms peak_mem=57.9GiB
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+--- rc=0 ---
+--- llama stage=0 rep=3 transport=direct port=26932 09:41:46 ---
+[bench] world=4 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=8.9s
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+NCCL version 2.28.9+cuda12.9
+[rank0]:[W909 09:42:13.521281965 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[bench] measuring...
+[bench] iter 1/40 last=357ms
+[bench] iter 11/40 last=298ms
+[bench] iter 21/40 last=301ms
+[bench] iter 31/40 last=305ms
+[bench] WROTE h100_n1_direct_s0_r3.json step_p50=302.4ms peak_mem=57.9GiB
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+--- rc=0 ---
+--- llama stage=2 rep=1 transport=direct port=26933 09:42:32 ---
+[bench] world=4 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=8.9s
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+NCCL version 2.28.9+cuda12.9
+[rank0]:[W909 09:42:58.242371564 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[bench] measuring...
+[bench] iter 1/40 last=222ms
+[bench] iter 11/40 last=244ms
+[bench] iter 21/40 last=268ms
+[bench] iter 31/40 last=288ms
+[bench] WROTE h100_n1_direct_s2_r1.json step_p50=262.9ms peak_mem=20.8GiB
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+--- rc=0 ---
+--- llama stage=2 rep=2 transport=direct port=26934 09:43:15 ---
+[bench] world=4 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=9.0s
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+NCCL version 2.28.9+cuda12.9
+[rank0]:[W909 09:43:41.549041863 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[bench] measuring...
+[bench] iter 1/40 last=222ms
+[bench] iter 11/40 last=243ms
+[bench] iter 21/40 last=265ms
+[bench] iter 31/40 last=286ms
+[bench] WROTE h100_n1_direct_s2_r2.json step_p50=265.0ms peak_mem=20.8GiB
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+--- rc=0 ---
+--- llama stage=2 rep=3 transport=direct port=26935 09:43:58 ---
+[bench] world=4 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=8.8s
+[bench] warmup...
+/scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+NCCL version 2.28.9+cuda12.9
+[rank0]:[W909 09:44:24.458338485 ProcessGroupNCCL.cpp:5188] Guessing device ID based on global rank. This can cause a hang if rank to GPU mapping is heterogeneous. You can specify device_id in init_process_group()
+[bench] measuring...
+[bench] iter 1/40 last=222ms
+[bench] iter 11/40 last=246ms
+[bench] iter 21/40 last=267ms
+[bench] iter 31/40 last=288ms
+[bench] WROTE h100_n1_direct_s2_r3.json step_p50=262.6ms peak_mem=20.8GiB
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+--- rc=0 ---
+--- llama stage=3 rep=1 transport=direct port=26936 09:44:41 ---
+[bench] world=4 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=8.9s
+/scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[bench] warmup...
+[bench] measuring...
+[bench] iter 1/40 last=8051ms
+[bench] iter 11/40 last=13462ms
+[bench] iter 21/40 last=18939ms
+[bench] iter 31/40 last=24381ms
+[bench] WROTE h100_n1_direct_s3_r1.json step_p50=18411.1ms peak_mem=20.4GiB
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+NCCL version 2.28.9+cuda12.9
+--- rc=0 ---
+--- llama stage=3 rep=2 transport=direct port=26937 09:58:35 ---
+[bench] world=4 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=8.9s
+/scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[bench] warmup...
+[bench] measuring...
+[bench] iter 1/40 last=7890ms
+[bench] iter 11/40 last=13292ms
+[bench] iter 21/40 last=18702ms
+[bench] iter 31/40 last=24113ms
+[bench] WROTE h100_n1_direct_s3_r2.json step_p50=18180.9ms peak_mem=20.4GiB
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+NCCL version 2.28.9+cuda12.9
+--- rc=0 ---
+--- llama stage=3 rep=3 transport=direct port=26938 10:12:21 ---
+[bench] world=4 device_kind=cuda backend=nccl host=c561-003.stampede3.tacc.utexas.edu
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[bench] params=2.547B build=8.9s
+/scratch/08447/abd2000/nnopp-h100/venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+[bench] warmup...
+[bench] measuring...
+[bench] iter 1/40 last=7928ms
+[bench] iter 11/40 last=13386ms
+[bench] iter 21/40 last=18843ms
+[bench] iter 31/40 last=24261ms
+[bench] WROTE h100_n1_direct_s3_r3.json step_p50=18332.1ms peak_mem=20.4GiB
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+Warning: The cache directory for DeepSpeed Triton autotune, /home1/08447/abd2000/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+NCCL version 2.28.9+cuda12.9
+--- rc=0 ---
+=== JOB DONE 10:26:11 ===

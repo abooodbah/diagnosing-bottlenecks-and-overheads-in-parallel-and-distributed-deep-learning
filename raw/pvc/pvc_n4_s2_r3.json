@@ -1,0 +1,575 @@
+{
+ "tag": "pvc_n4",
+ "mode": "zero2",
+ "stage": 2,
+ "rep": 3,
+ "world": 32,
+ "nodes": 4,
+ "device_kind": "xpu",
+ "backend": "xccl",
+ "params_b": 2.54688512,
+ "model": {
+  "layers": 30,
+  "hidden": 2560,
+  "heads": 20,
+  "ffn": 6912,
+  "vocab": 32768,
+  "seq": 2048,
+  "micro": 1
+ },
+ "iters": 30,
+ "warmup": 8,
+ "measure_wall_s": 236.7308039071504,
+ "step_max_ms": {
+  "p50": 7877.0988578908145,
+  "p95": 8178.175434004515,
+  "mean": 7889.404472328412
+ },
+ "peak_mem_bytes_max": 15215412736,
+ "peak_mem_bytes_per_rank": [
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736
+ ],
+ "rank0_phases_ms": {
+  "fwd_p50": 114.68312004581094,
+  "bwd_p50": 2848.865838954225,
+  "step_p50": 4902.636440005153,
+  "barrier_p50": 2.08298210054636
+ },
+ "barrier_ms_mean_per_rank": [
+  2.275875754033526,
+  2.5375812547281384,
+  2.3544639348983765,
+  2.396251323322455,
+  2.729854336939752,
+  2.7365010154123106,
+  2.6372760146235428,
+  1.4622811460867524,
+  3.0307204307367406,
+  3.251283107480655,
+  2.892678564724823,
+  3.2221440613890686,
+  2.9064669351403913,
+  3.0598947041047118,
+  2.9494847753085196,
+  2.9745404880183437,
+  3.0365108201901116,
+  2.754081094947954,
+  2.781867616189023,
+  2.1962512439737716,
+  2.4608755794664225,
+  3.0189348307127752,
+  2.7589186327531934,
+  2.991138491779566,
+  2.621562786710759,
+  2.949549607001245,
+  3.175322385504842,
+  3.1037459848448634,
+  3.0404009856283665,
+  2.7378938471277556,
+  2.973916482490798,
+  2.7165598003193736
+ ],
+ "comms_per_rank0": {
+  "barrier": {
+   "count": 30,
+   "time_ms": 66.41395529732108
+  },
+  "all_reduce": {
+   "count": 390,
+   "time_ms": 82742.08205728792
+  },
+  "all_gather_into_tensor": {
+   "count": 30,
+   "time_ms": 146854.8377500847
+  }
+ },
+ "comms_all_ranks": [
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 66.41395529732108
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82742.08205728792
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146854.8377500847
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 74.28807415999472
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82531.12305910327
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146857.39288432524
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 68.78330535255373
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82685.66606612876
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146857.3562176898
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 70.0232214294374
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82544.72132073715
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146861.61684524268
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 80.04194917157292
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82710.54908121005
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146851.48076456971
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 80.25147882290184
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82619.61938207969
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146853.0709319748
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 77.27559027262032
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82685.16204203479
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146850.66590015776
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 42.00461530126631
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82413.32554561086
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146869.07139793038
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 89.05455213971436
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82707.87919079885
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146836.30642096978
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 95.67694505676627
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82585.93456598464
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146838.5060587898
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 84.90073203574866
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82729.1868586326
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146844.8838450713
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 94.81218364089727
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82649.40500969533
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146838.360980968
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 85.32814821228385
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82617.47489473782
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146845.70471174084
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 89.94574216194451
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82665.28348322026
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146843.2623919798
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 86.62687358446419
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82663.98196259979
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146843.77291088458
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 87.37067610491067
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82613.61368000507
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146836.2633800134
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 89.26111063919961
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82732.79039934278
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146845.24548100308
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 80.75333060696721
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82483.53527882136
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146849.97385460883
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 81.59448066726327
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82639.31838795543
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146847.3288740497
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 64.01019846089184
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82534.39557482488
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146862.9678436555
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 71.9177694991231
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82703.22632975876
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146841.96506766602
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 88.70976977050304
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82504.38950560056
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146844.295457704
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 80.88884758763015
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82780.10697569698
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146837.50682277605
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 87.86628814414144
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82626.6045931261
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146847.65657153912
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 76.77778787910938
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82697.33238080516
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146849.28146470338
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 86.63209131918848
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82602.71780542098
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146845.72058054619
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 93.39965111576021
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82781.49236412719
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146841.12936933525
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 91.25961177051067
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82580.53650101647
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146842.92337531224
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 89.36504716984928
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82799.76912564598
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146846.35703917593
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 80.28450282290578
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82541.74100421369
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146848.9976678975
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 87.34471909701824
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82650.28171031736
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146844.06475396827
+   }
+  },
+  {
+   "barrier": {
+    "count": 30,
+    "time_ms": 79.64403205551207
+   },
+   "all_reduce": {
+    "count": 390,
+    "time_ms": 82646.63513749838
+   },
+   "all_gather_into_tensor": {
+    "count": 30,
+    "time_ms": 146850.34677712247
+   }
+  }
+ ],
+ "env": {
+  "transport_note": "pvc-tcp-hoststaged",
+  "NCCL_NET_GDR_LEVEL": "",
+  "job": "3472924",
+  "nodelist": "c551-010,c552-[001-003]",
+  "torch": "2.13.0+xpu"
+ },
+ "ts": "2026-09-06 09:31:12"
+}

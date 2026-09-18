@@ -1,0 +1,49 @@
+
+Currently Loaded Modules:
+  1) python/3.12.11
+
+torch 2.13.0+xpu True 8
+== limits ==
+stack=unlimited nproc-lim=16384 threads-max=8247932 cpus=4
+== stack/affinity matrix ==
+###PROBE n1-stack8m nodes=1 env: ZMIG_NOLOCAL=1 ZMIG_STACK=8192
+2026:09:06-04:41:23:1878957:[0] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:41:23:1878957:[0] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:41:23:1878961:[4] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:41:23:1878961:[4] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:41:23:1878963:[6] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:41:23:1878963:[6] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+###END n1-stack8m
+###PROBE n1-stack64m nodes=1 env: ZMIG_NOLOCAL=1 ZMIG_STACK=65536
+2026:09:06-04:41:32:1879258:[0] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:41:32:1879258:[0] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:41:32:1879260:[2] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:41:32:1879260:[2] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:41:32:1879262:[4] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:41:32:1879262:[4] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+###END n1-stack64m
+###PROBE n1-affspread nodes=1 env: ZMIG_NOLOCAL=1 CCL_WORKER_AFFINITY=0,12,24,36,48,60,72,84
+2026:09:06-04:41:41:1879626:[3] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:41:41:1879626:[3] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:41:41:1879630:[7] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:41:41:1879630:[7] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:41:41:1879627:[4] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:41:41:1879627:[4] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+###END n1-affspread
+###PROBE n1-affspread-stack nodes=1 env: ZMIG_NOLOCAL=1 ZMIG_STACK=16384 CCL_WORKER_AFFINITY=0,12,24,36,48,60,72,84
+2026:09:06-04:45:42:1881968:[5] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:45:42:1881968:[5] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:45:42:1881966:[3] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:45:42:1881966:[3] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:45:42:1881967:[4] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:45:42:1881967:[4] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+###END n1-affspread-stack
+###PROBE n2-best nodes=2 env: ZMIG_NOLOCAL=1 ZMIG_STACK=16384 CCL_WORKER_AFFINITY=0,12,24,36,48,60,72,84 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=/scratch/08447/abd2000/nnopp-pvc/venv/lib CCL_ATL_HMEM=0
+2026:09:06-04:49:49:1884269:[4] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:49:49:1884269:[4] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:49:49:1884271:[6] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:49:49:1884271:[6] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+2026:09:06-04:49:49:1884272:[7] |CCL_ERROR| base_thread.cpp:25 start: error while creating worker thread #0 pthread_create returns 22
+2026:09:06-04:49:49:1884272:[7] |CCL_ERROR| exec.cpp:122 start_workers: condition workers.back()->start(cpu_affinity, mem_affinity) == ccl::status::success failed
+###END n2-best
+== DIAG4 DONE ==

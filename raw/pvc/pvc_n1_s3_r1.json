@@ -1,0 +1,227 @@
+{
+ "tag": "pvc_n1",
+ "mode": "zero3",
+ "stage": 3,
+ "rep": 1,
+ "world": 8,
+ "nodes": 1,
+ "device_kind": "xpu",
+ "backend": "xccl",
+ "params_b": 2.54688512,
+ "model": {
+  "layers": 30,
+  "hidden": 2560,
+  "heads": 20,
+  "ffn": 6912,
+  "vocab": 32768,
+  "seq": 2048,
+  "micro": 1
+ },
+ "iters": 40,
+ "warmup": 10,
+ "measure_wall_s": 418.295554630924,
+ "step_max_ms": {
+  "p50": 10289.054204942659,
+  "p95": 15687.679984141141,
+  "mean": 10453.887094755191
+ },
+ "peak_mem_bytes_max": 16768861696,
+ "peak_mem_bytes_per_rank": [
+  16768861696,
+  16768861696,
+  16768861696,
+  16768861696,
+  16768861696,
+  16768861696,
+  16768861696,
+  16768861696
+ ],
+ "rank0_phases_ms": {
+  "fwd_p50": 3823.2569249812514,
+  "bwd_p50": 3893.839115044102,
+  "step_p50": 2811.177951982245,
+  "barrier_p50": 2.350789960473776
+ },
+ "barrier_ms_mean_per_rank": [
+  2.357714343816042,
+  2.1127745043486357,
+  1.644049392780289,
+  2.3196348978672177,
+  1.803959795506671,
+  1.7962970538064837,
+  1.8136099155526608,
+  1.9520408939570189
+ ],
+ "comms_per_rank0": {
+  "barrier": {
+   "count": 40,
+   "time_ms": 91.79265797138214
+  },
+  "all_gather_into_tensor": {
+   "count": 8240,
+   "time_ms": 33968.56633992866
+  },
+  "reduce_scatter_tensor": {
+   "count": 440,
+   "time_ms": 4242.940413532779
+  },
+  "all_reduce": {
+   "count": 40,
+   "time_ms": 122.70599696785212
+  }
+ },
+ "comms_all_ranks": [
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 91.79265797138214
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 33968.56633992866
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 4242.940413532779
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 122.70599696785212
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 82.02209463343024
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 30437.157573876902
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 4113.28169843182
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 121.98193883523345
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 63.26711969450116
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 32826.97714539245
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 4069.8551370296627
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 92.45869470760226
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 90.2798983734101
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 33010.24390547536
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 4142.2668162267655
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 122.52928107045591
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 69.66606597416103
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 34169.49297464453
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 4251.534927636385
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 118.11399459838867
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 69.34839021414518
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 28179.57409331575
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 3941.179668297991
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 106.29672557115555
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 70.0423987582326
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 31069.84160747379
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 4149.163919268176
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 111.45278695039451
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 75.55612921714783
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 30555.847524665296
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 4090.440233470872
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 125.93922694213688
+   }
+  }
+ ],
+ "env": {
+  "transport_note": "pvc-tcp-hoststaged",
+  "NCCL_NET_GDR_LEVEL": "",
+  "job": "3472919",
+  "nodelist": "c551-003",
+  "torch": "2.13.0+xpu"
+ },
+ "ts": "2026-09-06 09:46:16"
+}

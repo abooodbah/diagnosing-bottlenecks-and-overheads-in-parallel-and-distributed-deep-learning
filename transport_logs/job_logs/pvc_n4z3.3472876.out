@@ -1,0 +1,82 @@
+
+Currently Loaded Modules:
+  1) python/3.12.11
+
+=== zmig pvc nodes=4 job=3472876 nodelist=c551-010,c552-[001-003] ===
+c551-010.stampede3.tacc.utexas.edu: 2.13.0+xpu True 8
+c552-001.stampede3.tacc.utexas.edu: 2.13.0+xpu True 8
+c552-002.stampede3.tacc.utexas.edu: 2.13.0+xpu True 8
+c552-003.stampede3.tacc.utexas.edu: 2.13.0+xpu True 8
+--- llama stage=3 rep=1 extra='' port=25877 07:52:40 ---
+[bench] world=32 device_kind=xpu backend=xccl host=c551-010.stampede3.tacc.utexas.edu
+[bench] params=2.547B build=9.4s
+2026:09:06-07:53:04:2870291 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:04:2870292 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:04:2870291 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:04:2870292 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:05:1440135 |CCL_WARN| value of CCL_ATL_TRANSPORT changed to be ofi (default:mpi)
+2026:09:06-07:53:05:1440135 |CCL_WARN| value of CCL_PROCESS_LAUNCHER changed to be none (default:hydra)
+2026:09:06-07:53:05:1440135 |CCL_WARN| value of CCL_ZE_IPC_EXCHANGE changed to be sockets (default:pidfd)
+2026:09:06-07:53:05:1440135 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:05:1440138 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:05:1440140 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:05:1440135 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:05:1440138 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:05:1440140 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:05:2870293 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:05:2870293 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:05:2870297 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:05:2870297 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:05:2870290 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:05:2870290 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:05:2870295 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:05:2870295 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:05:1440142 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:05:1440142 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:05:1440136 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:05:1440136 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:05:2870294 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:05:2870294 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:05:1440141 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:05:1440141 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:05:1440137 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:05:1440137 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:05:2870296 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:05:2870296 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:05:1440139 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:05:1440139 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:06:3805579 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:06:3805583 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:06:3805579 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:06:3805583 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:06:3805582 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:06:3805582 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:06:3805580 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:06:3805580 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:06:3805584 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:06:3805584 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:06:3805585 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:06:3805585 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:06:3805586 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:06:3805586 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:06:3805581 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:06:3805581 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:07:993505 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:07:993505 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:07:993507 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:07:993507 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:07:993503 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:07:993503 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:07:993500 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:07:993500 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:07:993501 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:07:993501 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:07:993506 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:07:993506 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:07:993504 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:07:993504 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+2026:09:06-07:53:07:993502 |CCL_WARN| could not get local_idx/count from environment variables, trying to get them from ATL
+2026:09:06-07:53:07:993502 |CCL_WARN| Could not initialize Sysman API using `zesInit`. Sysman API was probably initialized externally using legacy ZES_ENABLE_SYSMAN flag. oneCCL will falback to legacy behavior
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** JOB 3472876 ON c551-010 CANCELLED AT 2026-09-06T07:57:14 ***
+slurmstepd: error: *** STEP 3472876.1 ON c551-010 CANCELLED AT 2026-09-06T07:57:14 ***

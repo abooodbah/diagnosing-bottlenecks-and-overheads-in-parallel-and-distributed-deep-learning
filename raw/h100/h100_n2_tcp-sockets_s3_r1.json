@@ -1,0 +1,228 @@
+{
+ "bench_version": 2,
+ "tag": "h100_n2_tcp-sockets",
+ "mode": "zero3",
+ "stage": 3,
+ "rep": 1,
+ "world": 8,
+ "nodes": 2,
+ "device_kind": "cuda",
+ "backend": "nccl",
+ "params_b": 2.54688512,
+ "model": {
+  "layers": 30,
+  "hidden": 2560,
+  "heads": 20,
+  "ffn": 6912,
+  "vocab": 32768,
+  "seq": 2048,
+  "micro": 1
+ },
+ "iters": 40,
+ "warmup": 10,
+ "measure_wall_s": 853.9464280442335,
+ "step_max_ms": {
+  "p50": 21131.98542385362,
+  "p95": 30970.62177909538,
+  "mean": 21346.152485132916
+ },
+ "peak_mem_bytes_max": 16863758336,
+ "peak_mem_bytes_per_rank": [
+  16863758336,
+  16863758336,
+  16863758336,
+  16863758336,
+  16863758336,
+  16863758336,
+  16863758336,
+  16863758336
+ ],
+ "rank0_phases_ms": {
+  "fwd_p50": 7757.437203079462,
+  "bwd_p50": 8285.670491866767,
+  "step_p50": 5595.0264488346875,
+  "barrier_p50": 0.9349710308015347
+ },
+ "barrier_ms_mean_per_rank": [
+  1.2508903979323804,
+  1.5069376793690026,
+  2.7233218657784164,
+  3.2379586482420564,
+  3.140118013834581,
+  1.0346926574129611,
+  0.9183996764477342,
+  3.665203135460615
+ ],
+ "comms_per_rank0": {
+  "barrier": {
+   "count": 40,
+   "time_ms": 49.587950110435486
+  },
+  "all_gather_into_tensor": {
+   "count": 8240,
+   "time_ms": 75795.19607778639
+  },
+  "reduce_scatter_tensor": {
+   "count": 440,
+   "time_ms": 42459.03578074649
+  },
+  "all_reduce": {
+   "count": 40,
+   "time_ms": 158.4559977054596
+  }
+ },
+ "comms_all_ranks": [
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 49.587950110435486
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 75795.19607778639
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 42459.03578074649
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 158.4559977054596
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 59.82700129970908
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 73282.4556841515
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 42342.811266426
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 71.81983953341842
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 108.48442278802395
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 81845.32105457038
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 42905.95791069791
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 64.82626963406801
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 129.06393827870488
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 90377.56448797882
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 42919.11268234253
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 126.34446704760194
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 125.168074388057
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 89112.9809988197
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 43253.45169939101
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 24.167521623894572
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 40.94080766662955
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 73080.43643599376
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 42724.05647626147
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 45.46316573396325
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 36.28617734648287
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 64826.600439613685
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 42031.77856118418
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 26.86841180548072
+   }
+  },
+  {
+   "barrier": {
+    "count": 40,
+    "time_ms": 146.15847100503743
+   },
+   "all_gather_into_tensor": {
+    "count": 8240,
+    "time_ms": 91705.1363454666
+   },
+   "reduce_scatter_tensor": {
+    "count": 440,
+    "time_ms": 43084.18091852218
+   },
+   "all_reduce": {
+    "count": 40,
+    "time_ms": 46.03121825493872
+   }
+  }
+ ],
+ "env": {
+  "transport_note": "tcp-sockets",
+  "NCCL_NET_GDR_LEVEL": "LOC",
+  "job": "3481504",
+  "nodelist": "c561-[003,007]",
+  "torch": "2.11.0+cu128"
+ },
+ "ts": "2026-09-09 08:57:49"
+}
