@@ -25,6 +25,8 @@ import torch.nn.functional as F
 def pick_device(local_rank):
     if torch.cuda.is_available():
         torch.cuda.set_device(local_rank)
+        os.environ.pop("NCCL_IB_HCA", None)
+        os.environ["NCCL_NET_GDR_LEVEL"] = "LOC"
         return torch.device(f"cuda:{local_rank}"), "nccl", "cuda"
     if hasattr(torch, "xpu") and torch.xpu.is_available():
         torch.xpu.set_device(local_rank)
@@ -73,9 +75,11 @@ def main():
     local_rank = int(os.environ["LOCAL_RANK"])
     device, backend, kind = pick_device(local_rank)
 
+    import datetime
     import torch.distributed as dist
     dist.init_process_group(backend=backend, init_method="env://",
-                            rank=rank, world_size=world)
+                            rank=rank, world_size=world,
+                            timeout=datetime.timedelta(minutes=3))
 
     torch.manual_seed(77 + args.rep)
     T, H = args.tokens, args.hidden

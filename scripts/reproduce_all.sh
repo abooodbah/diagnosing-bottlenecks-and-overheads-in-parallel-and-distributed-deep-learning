@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
-# Regenerate the processed table and all figures from raw/, then verify
-# raw-file checksums.
+# Regenerate every processed table and figure from raw/ and the job logs,
+# rerun the provenance replay and the time_ms check, then verify
+# checksums.txt. Needs Python 3.10 or newer with matplotlib; set PYTHON to
+# choose the interpreter.
 set -euo pipefail
-cd "$(dirname "$0")/.."
-python scripts/analyze.py
-python - <<'PY'
-import hashlib, sys
-bad = 0
-for line in open("checksums.txt", encoding="utf-8"):
-    digest, path = line.strip().split("  ", 1)
-    if not path.startswith(("raw/", "transport_logs/")):
-        continue
-    h = hashlib.sha256(open(path, "rb").read()).hexdigest()
-    if h != digest:
-        print("MISMATCH", path)
-        bad += 1
-print("checksum verification:", "FAILED" if bad else "OK")
-sys.exit(1 if bad else 0)
-PY
+cd "$(dirname "$0")"
+export PYTHONDONTWRITEBYTECODE=1
+PY="${PYTHON:-python}"
+
+for s in launch_windows drift analyze table3 logger_model companion_figures paper_numbers; do
+  echo "== $s.py"
+  "$PY" "$s.py" > /dev/null
+done
+echo "== replay_versions.py"
+"$PY" replay_versions.py | tail -n 1
+echo "== check_time_ms.py"
+"$PY" check_time_ms.py | tail -n 1
+echo "== checksums"
+"$PY" checksums.py --verify

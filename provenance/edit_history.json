@@ -1,0 +1,898 @@
+{
+ "description": "Edit and upload history of the campaign files, recorded on the development machine from 6 to 9 September 2026. 'write' gives a file's full content, 'replace' exact string replacements (count 1 means the old text occurred exactly once), and 'upload' the files copied to /scratch/08447/abd2000/zmig on Stampede3 when the upload command started. scripts/replay_versions.py replays it and checks every uploaded version against the recovered originals and version_timeline.csv.",
+ "events": [
+  {
+   "seq": 1,
+   "time_utc": "2026-09-06T08:51:40Z",
+   "action": "write",
+   "file": "llama_bench.py",
+   "content": "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\"\"\"ZeRO bottleneck-migration benchmark: ~2.7B Llama-style decoder, BF16,\nDeepSpeed ZeRO stage 0 (replicated DDP baseline), 2, or 3, on CUDA (H100)\nor XPU (Intel Max 1550). Synthetic tokens, fixed local batch, phase and\ncommunication-op attribution, per-rank stats, JSON output.\n\nEnv contract (set by the job script / rank launcher):\n  RANK, WORLD_SIZE, LOCAL_RANK, MASTER_ADDR, MASTER_PORT\nArgs: --stage {0,2,3} --rep N --out DIR --tag STR\n      [--layers 32 --hidden 2560 --heads 20 --ffn 6912 --vocab 32768\n       --seq 2048 --micro 1 --warmup 10 --iters 60 --tiny]\n\"\"\"\nimport argparse\nimport json\nimport math\nimport os\nimport socket\nimport time\n\nimport torch\nimport torch.nn as nn\nimport torch.nn.functional as F\n\n\ndef log0(msg):\n    if int(os.environ.get(\"RANK\", \"0\")) == 0:\n        print(f\"[bench] {msg}\", flush=True)\n\n\n# ----------------------------- model ---------------------------------\nclass RMSNorm(nn.Module):\n    def __init__(self, dim, eps=1e-5):\n        super().__init__()\n        self.weight = nn.Parameter(torch.ones(dim))\n        self.eps = eps\n\n    def forward(self, x):\n        dt = x.dtype\n        x = x.float()\n        x = x * torch.rsqrt(x.pow(2).mean(-1, keepdim=True) + self.eps)\n        return (x * self.weight.float()).to(dt)\n\n\ndef rope_cache(seq, dim, device, dtype, base=10000.0):\n    inv = 1.0 / (base ** (torch.arange(0, dim, 2, device=device).float() / dim))\n    t = torch.arange(seq, device=device).float()\n    freqs = torch.outer(t, inv)\n    return torch.cos(freqs).to(dtype), torch.sin(freqs).to(dtype)\n\n\ndef apply_rope(x, cos, sin):\n    # x: (b, h, s, d)\n    x1, x2 = x[..., ::2], x[..., 1::2]\n    c = cos[None, None, :, :]\n    s = sin[None, None, :, :]\n    o1 = x1 * c - x2 * s\n    o2 = x2 * c + x1 * s\n    out = torch.stack((o1, o2), dim=-1)\n    return out.flatten(-2)\n\n\nclass Attention(nn.Module):\n    def __init__(self, hidden, heads):\n        super().__init__()\n        self.heads = heads\n        self.hd = hidden // heads\n        self.wq = nn.Linear(hidden, hidden, bias=False)\n        self.wk = nn.Linear(hidden, hidden, bias=False)\n        self.wv = nn.Linear(hidden, hidden, bias=False)\n        self.wo = nn.Linear(hidden, hidden, bias=False)\n\n    def forward(self, x, cos, sin):\n        b, s, h = x.shape\n        q = self.wq(x).view(b, s, self.heads, self.hd).transpose(1, 2)\n        k = self.wk(x).view(b, s, self.heads, self.hd).transpose(1, 2)\n        v = self.wv(x).view(b, s, self.heads, self.hd).transpose(1, 2)\n        q = apply_rope(q, cos, sin)\n        k = apply_rope(k, cos, sin)\n        o = F.scaled_dot_product_attention(q, k, v, is_causal=True)\n        o = o.transpose(1, 2).reshape(b, s, h)\n        return self.wo(o)\n\n\nclass MLP(nn.Module):\n    def __init__(self, hidden, ffn):\n        super().__init__()\n        self.gate = nn.Linear(hidden, ffn, bias=False)\n        self.up = nn.Linear(hidden, ffn, bias=False)\n        self.down = nn.Linear(ffn, hidden, bias=False)\n\n    def forward(self, x):\n        return self.down(F.silu(self.gate(x)) * self.up(x))\n\n\nclass Block(nn.Module):\n    def __init__(self, hidden, heads, ffn):\n        super().__init__()\n        self.ln1 = RMSNorm(hidden)\n        self.attn = Attention(hidden, heads)\n        self.ln2 = RMSNorm(hidden)\n        self.mlp = MLP(hidden, ffn)\n\n    def forward(self, x, cos, sin):\n        x = x + self.attn(self.ln1(x), cos, sin)\n        x = x + self.mlp(self.ln2(x))\n        return x\n\n\nclass LlamaLike(nn.Module):\n    def __init__(self, vocab, hidden, layers, heads, ffn, seq):\n        super().__init__()\n        self.embed = nn.Embedding(vocab, hidden)\n        self.blocks = nn.ModuleList(Block(hidden, heads, ffn) for _ in range(layers))\n        self.norm = RMSNorm(hidden)\n        self.head = nn.Linear(hidden, vocab, bias=False)\n        self.hd = hidden // heads\n        self.seq = seq\n\n    def forward(self, tokens):\n        x = self.embed(tokens)\n        cos, sin = rope_cache(tokens.shape[1], self.hd, tokens.device, x.dtype)\n        for blk in self.blocks:\n            x = blk(x, cos, sin)\n        x = self.norm(x)\n        return self.head(x)\n\n\n# --------------------------- device glue ------------------------------\ndef pick_device(local_rank):\n    if torch.cuda.is_available():\n        torch.cuda.set_device(local_rank)\n        return torch.device(f\"cuda:{local_rank}\"), \"nccl\", \"cuda\"\n    if hasattr(torch, \"xpu\") and torch.xpu.is_available():\n        torch.xpu.set_device(local_rank)\n        return torch.device(f\"xpu:{local_rank}\"), \"xccl\", \"xpu\"\n    raise RuntimeError(\"no accelerator found\")\n\n\ndef dev_sync(kind):\n    if kind == \"cuda\":\n        torch.cuda.synchronize()\n    else:\n        torch.xpu.synchronize()\n\n\ndef peak_mem(kind):\n    try:\n        if kind == \"cuda\":\n            return int(torch.cuda.max_memory_allocated())\n        return int(torch.xpu.max_memory_allocated())\n    except Exception:\n        return -1\n\n\ndef reset_peak(kind):\n    try:\n        if kind == \"cuda\":\n            torch.cuda.reset_peak_memory_stats()\n        else:\n            torch.xpu.reset_peak_memory_stats()\n    except Exception:\n        pass\n\n\n# --------------------------- comms logging ----------------------------\ndef comms_snapshot():\n    \"\"\"Best-effort copy of DeepSpeed's comms logger dict {op: {msg: [cnt, sz, [lat...]]}}.\"\"\"\n    try:\n        from deepspeed.comm import comm as dscomm\n        cl = getattr(dscomm, \"comms_logger\", None)\n        if cl is None or not getattr(cl, \"enabled\", False):\n            return None\n        out = {}\n        for op, entry in cl.comms_dict.items():\n            n = 0\n            t = 0.0\n            for _msize, rec in entry.items():\n                n += rec[0]\n                lats = rec[2] if len(rec) > 2 else []\n                t += float(sum(lats))\n            out[op] = {\"count\": n, \"time_ms\": t}\n        return out\n    except Exception as exc:\n        log0(f\"comms snapshot unavailable: {exc}\")\n        return None\n\n\ndef comms_delta(after, before):\n    if after is None:\n        return None\n    out = {}\n    for op, rec in after.items():\n        b = (before or {}).get(op, {\"count\": 0, \"time_ms\": 0.0})\n        out[op] = {\"count\": rec[\"count\"] - b[\"count\"],\n                   \"time_ms\": rec[\"time_ms\"] - b[\"time_ms\"]}\n    return out\n\n\n# ------------------------------- main ---------------------------------\ndef main():\n    ap = argparse.ArgumentParser()\n    ap.add_argument(\"--stage\", type=int, required=True, choices=[0, 2, 3])\n    ap.add_argument(\"--rep\", type=int, default=1)\n    ap.add_argument(\"--out\", required=True)\n    ap.add_argument(\"--tag\", default=\"\")\n    ap.add_argument(\"--layers\", type=int, default=32)\n    ap.add_argument(\"--hidden\", type=int, default=2560)\n    ap.add_argument(\"--heads\", type=int, default=20)\n    ap.add_argument(\"--ffn\", type=int, default=6912)\n    ap.add_argument(\"--vocab\", type=int, default=32768)\n    ap.add_argument(\"--seq\", type=int, default=2048)\n    ap.add_argument(\"--micro\", type=int, default=1)\n    ap.add_argument(\"--warmup\", type=int, default=10)\n    ap.add_argument(\"--iters\", type=int, default=60)\n    ap.add_argument(\"--tiny\", action=\"store_true\", help=\"smoke-size model\")\n    args = ap.parse_args()\n\n    if args.tiny:\n        args.layers, args.hidden, args.heads, args.ffn = 4, 512, 8, 1408\n        args.warmup, args.iters = 3, 8\n\n    rank = int(os.environ[\"RANK\"])\n    world = int(os.environ[\"WORLD_SIZE\"])\n    local_rank = int(os.environ[\"LOCAL_RANK\"])\n\n    device, backend, kind = pick_device(local_rank)\n    log0(f\"world={world} device_kind={kind} backend={backend} host={socket.gethostname()}\")\n\n    import torch.distributed as dist\n    dist.init_process_group(backend=backend, init_method=\"env://\",\n                            rank=rank, world_size=world)\n\n    import deepspeed\n\n    seed = 1234 + args.rep\n    torch.manual_seed(seed)\n\n    t_build = time.time()\n    model = LlamaLike(args.vocab, args.hidden, args.layers, args.heads,\n                      args.ffn, args.seq)\n    n_params = sum(p.numel() for p in model.parameters())\n    log0(f\"params={n_params/1e9:.3f}B build={time.time()-t_build:.1f}s\")\n\n    opt = torch.optim.AdamW(model.parameters(), lr=1e-4, betas=(0.9, 0.95),\n                            weight_decay=0.0)\n\n    ds_config = {\n        \"train_micro_batch_size_per_gpu\": args.micro,\n        \"gradient_accumulation_steps\": 1,\n        \"gradient_clipping\": 1.0,\n        \"bf16\": {\"enabled\": True},\n        \"zero_optimization\": {\n            \"stage\": args.stage,\n            \"overlap_comm\": True,\n            \"contiguous_gradients\": True,\n            \"reduce_bucket_size\": 5.0e8,\n        },\n        \"comms_logger\": {\"enabled\": True, \"verbose\": False,\n                         \"prof_all\": True, \"debug\": False},\n        \"wall_clock_breakdown\": False,\n        \"steps_per_print\": 1000000,\n    }\n    if args.stage == 3:\n        ds_config[\"zero_optimization\"].update({\n            \"stage3_prefetch_bucket_size\": 5.0e8,\n            \"stage3_param_persistence_threshold\": 1.0e5,\n            \"stage3_max_live_parameters\": 1.0e9,\n            \"stage3_max_reuse_distance\": 1.0e9,\n        })\n\n    engine, _opt, _, _ = deepspeed.initialize(\n        model=model, optimizer=opt, config=ds_config,\n        dist_init_required=False)\n\n    tokens = torch.randint(0, args.vocab, (args.micro, args.seq),\n                           device=device, generator=None)\n    labels = torch.randint(0, args.vocab, (args.micro, args.seq), device=device)\n\n    def one_step(measure):\n        rec = {}\n        t0 = time.perf_counter()\n        dist.barrier()\n        dev_sync(kind)\n        t1 = time.perf_counter()\n        out = engine(tokens)\n        loss = F.cross_entropy(out.float().view(-1, args.vocab), labels.view(-1))\n        dev_sync(kind)\n        t2 = time.perf_counter()\n        engine.backward(loss)\n        dev_sync(kind)\n        t3 = time.perf_counter()\n        engine.step()\n        dev_sync(kind)\n        t4 = time.perf_counter()\n        if measure:\n            rec = {\"barrier_ms\": (t1 - t0) * 1e3,\n                   \"fwd_ms\": (t2 - t1) * 1e3,\n                   \"bwd_ms\": (t3 - t2) * 1e3,\n                   \"step_ms\": (t4 - t3) * 1e3,\n                   \"iter_ms\": (t4 - t1) * 1e3,\n                   \"loss\": float(loss.detach())}\n        return rec\n\n    log0(\"warmup...\")\n    for _ in range(args.warmup):\n        one_step(False)\n    dev_sync(kind)\n    dist.barrier()\n    reset_peak(kind)\n    base_comms = comms_snapshot()\n\n    log0(\"measuring...\")\n    recs = []\n    t_meas0 = time.perf_counter()\n    for _ in range(args.iters):\n        recs.append(one_step(True))\n    t_meas = time.perf_counter() - t_meas0\n    end_comms = comms_snapshot()\n\n    my = {k: [r[k] for r in recs] for k in recs[0] if k != \"loss\"}\n    mem = peak_mem(kind)\n\n    # gather per-rank summaries on rank 0\n    summary = {\n        \"rank\": rank, \"host\": socket.gethostname(),\n        \"iter_ms\": my[\"iter_ms\"], \"barrier_ms\": my[\"barrier_ms\"],\n        \"fwd_ms\": my[\"fwd_ms\"], \"bwd_ms\": my[\"bwd_ms\"], \"step_ms\": my[\"step_ms\"],\n        \"peak_mem_bytes\": mem,\n        \"comms\": comms_delta(end_comms, base_comms),\n    }\n    gathered = [None] * world\n    dist.all_gather_object(gathered, summary)\n\n    if rank == 0:\n        iters_mat = [g[\"iter_ms\"] for g in gathered]\n        # max across ranks per iteration = critical-path step time\n        step_max = [max(col) for col in zip(*iters_mat)]\n        step_max.sort()\n\n        def pct(v, p):\n            return v[min(len(v) - 1, int(math.ceil(p / 100.0 * len(v))) - 1)]\n\n        result = {\n            \"tag\": args.tag, \"mode\": {0: \"ddp\", 2: \"zero2\", 3: \"zero3\"}[args.stage],\n            \"stage\": args.stage, \"rep\": args.rep,\n            \"world\": world, \"nodes\": world // int(os.environ.get(\"LOCAL_WORLD_SIZE\", \"1\") or 1),\n            \"device_kind\": kind, \"backend\": backend,\n            \"params_b\": n_params / 1e9,\n            \"model\": {\"layers\": args.layers, \"hidden\": args.hidden,\n                      \"heads\": args.heads, \"ffn\": args.ffn,\n                      \"vocab\": args.vocab, \"seq\": args.seq, \"micro\": args.micro},\n            \"iters\": args.iters, \"warmup\": args.warmup,\n            \"measure_wall_s\": t_meas,\n            \"step_max_ms\": {\"p50\": pct(step_max, 50), \"p95\": pct(step_max, 95),\n                            \"mean\": sum(step_max) / len(step_max)},\n            \"peak_mem_bytes_max\": max(g[\"peak_mem_bytes\"] for g in gathered),\n            \"peak_mem_bytes_per_rank\": [g[\"peak_mem_bytes\"] for g in gathered],\n            \"rank0_phases_ms\": {\n                \"fwd_p50\": sorted(my[\"fwd_ms\"])[len(my[\"fwd_ms\"]) // 2],\n                \"bwd_p50\": sorted(my[\"bwd_ms\"])[len(my[\"bwd_ms\"]) // 2],\n                \"step_p50\": sorted(my[\"step_ms\"])[len(my[\"step_ms\"]) // 2],\n                \"barrier_p50\": sorted(my[\"barrier_ms\"])[len(my[\"barrier_ms\"]) // 2],\n            },\n            \"barrier_ms_mean_per_rank\": [sum(g[\"barrier_ms\"]) / len(g[\"barrier_ms\"])\n                                         for g in gathered],\n            \"comms_per_rank0\": gathered[0][\"comms\"],\n            \"comms_all_ranks\": [g[\"comms\"] for g in gathered],\n            \"env\": {\n                \"transport_note\": os.environ.get(\"ZMIG_TRANSPORT\", \"default\"),\n                \"NCCL_NET_GDR_LEVEL\": os.environ.get(\"NCCL_NET_GDR_LEVEL\", \"\"),\n                \"job\": os.environ.get(\"SLURM_JOB_ID\", \"\"),\n                \"nodelist\": os.environ.get(\"SLURM_JOB_NODELIST\", \"\"),\n                \"torch\": torch.__version__,\n            },\n            \"ts\": time.strftime(\"%Y-%m-%d %H:%M:%S\"),\n        }\n        os.makedirs(args.out, exist_ok=True)\n        name = f\"{args.tag}_s{args.stage}_r{args.rep}.json\"\n        with open(os.path.join(args.out, name), \"w\") as f:\n            json.dump(result, f, indent=1)\n        print(f\"[bench] WROTE {name} step_p50={result['step_max_ms']['p50']:.1f}ms \"\n              f\"peak_mem={result['peak_mem_bytes_max']/2**30:.1f}GiB\", flush=True)\n\n    dist.barrier()\n    dist.destroy_process_group()\n\n\nif __name__ == \"__main__\":\n    main()\n"
+  },
+  {
+   "seq": 2,
+   "time_utc": "2026-09-06T08:52:22Z",
+   "action": "write",
+   "file": "moe_bench.py",
+   "content": "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\"\"\"MoE all-to-all imbalance microbenchmark. One expert (SwiGLU FFN) per\nrank; fixed total tokens; balanced routing vs skewed routing (a fixed\nfraction of every rank's tokens goes to expert 0). Measures dispatch\nall-to-all, expert fwd+bwd, return all-to-all, and end-of-step barrier\nwait per rank. Pure torch.distributed; no DeepSpeed.\n\nArgs: --mode {balanced,skewed} --rep N --out DIR --tag STR\n      [--tokens 4096 --hidden 2560 --ffn 6912 --alpha 0.5\n       --warmup 5 --iters 50 --tiny]\n\"\"\"\nimport argparse\nimport json\nimport math\nimport os\nimport socket\nimport time\n\nimport torch\nimport torch.nn as nn\nimport torch.nn.functional as F\n\n\ndef pick_device(local_rank):\n    if torch.cuda.is_available():\n        torch.cuda.set_device(local_rank)\n        return torch.device(f\"cuda:{local_rank}\"), \"nccl\", \"cuda\"\n    if hasattr(torch, \"xpu\") and torch.xpu.is_available():\n        torch.xpu.set_device(local_rank)\n        return torch.device(f\"xpu:{local_rank}\"), \"xccl\", \"xpu\"\n    raise RuntimeError(\"no accelerator found\")\n\n\ndef dev_sync(kind):\n    if kind == \"cuda\":\n        torch.cuda.synchronize()\n    else:\n        torch.xpu.synchronize()\n\n\nclass Expert(nn.Module):\n    def __init__(self, hidden, ffn):\n        super().__init__()\n        self.gate = nn.Linear(hidden, ffn, bias=False)\n        self.up = nn.Linear(hidden, ffn, bias=False)\n        self.down = nn.Linear(ffn, hidden, bias=False)\n\n    def forward(self, x):\n        return self.down(F.silu(self.gate(x)) * self.up(x))\n\n\ndef main():\n    ap = argparse.ArgumentParser()\n    ap.add_argument(\"--mode\", required=True, choices=[\"balanced\", \"skewed\"])\n    ap.add_argument(\"--rep\", type=int, default=1)\n    ap.add_argument(\"--out\", required=True)\n    ap.add_argument(\"--tag\", default=\"\")\n    ap.add_argument(\"--tokens\", type=int, default=4096)\n    ap.add_argument(\"--hidden\", type=int, default=2560)\n    ap.add_argument(\"--ffn\", type=int, default=6912)\n    ap.add_argument(\"--alpha\", type=float, default=0.5)\n    ap.add_argument(\"--warmup\", type=int, default=5)\n    ap.add_argument(\"--iters\", type=int, default=50)\n    ap.add_argument(\"--tiny\", action=\"store_true\")\n    args = ap.parse_args()\n    if args.tiny:\n        args.tokens, args.hidden, args.ffn = 512, 512, 1408\n        args.warmup, args.iters = 2, 6\n\n    rank = int(os.environ[\"RANK\"])\n    world = int(os.environ[\"WORLD_SIZE\"])\n    local_rank = int(os.environ[\"LOCAL_RANK\"])\n    device, backend, kind = pick_device(local_rank)\n\n    import torch.distributed as dist\n    dist.init_process_group(backend=backend, init_method=\"env://\",\n                            rank=rank, world_size=world)\n\n    torch.manual_seed(77 + args.rep)\n    T, H = args.tokens, args.hidden\n\n    # send_counts[d] = tokens this rank sends to expert d; identical on all ranks\n    if args.mode == \"balanced\":\n        base = T // world\n        send_counts = [base] * world\n        send_counts[0] += T - base * world\n    else:\n        to0 = int(round(args.alpha * T))\n        rest = T - to0\n        per = rest // (world - 1)\n        send_counts = [to0] + [per] * (world - 1)\n        send_counts[-1] += rest - per * (world - 1)\n    # recv_counts[s] = tokens received from source s = what s sends to me\n    recv_counts = [send_counts[rank]] * world  # same vector on every source\n    recv_total = sum(recv_counts)\n\n    expert = Expert(H, args.ffn).to(device).to(torch.bfloat16)\n    x = torch.randn(T, H, device=device, dtype=torch.bfloat16)\n    recv_buf = torch.empty(recv_total, H, device=device, dtype=torch.bfloat16)\n    back_buf = torch.empty(T, H, device=device, dtype=torch.bfloat16)\n\n    def one_iter(measure):\n        rec = {}\n        t0 = time.perf_counter()\n        dist.barrier()\n        dev_sync(kind)\n        t1 = time.perf_counter()\n        dist.all_to_all_single(recv_buf, x, recv_counts, send_counts)\n        dev_sync(kind)\n        t2 = time.perf_counter()\n        inp = recv_buf.detach().requires_grad_(True)\n        out = expert(inp)\n        out.float().pow(2).mean().backward()\n        dev_sync(kind)\n        t3 = time.perf_counter()\n        dist.all_to_all_single(back_buf, out.detach(), send_counts, recv_counts)\n        dev_sync(kind)\n        t4 = time.perf_counter()\n        dist.barrier()\n        t5 = time.perf_counter()\n        if measure:\n            rec = {\"start_barrier_ms\": (t1 - t0) * 1e3,\n                   \"dispatch_ms\": (t2 - t1) * 1e3,\n                   \"expert_ms\": (t3 - t2) * 1e3,\n                   \"return_ms\": (t4 - t3) * 1e3,\n                   \"end_wait_ms\": (t5 - t4) * 1e3,\n                   \"iter_ms\": (t5 - t1) * 1e3}\n        expert.zero_grad(set_to_none=True)\n        return rec\n\n    for _ in range(args.warmup):\n        one_iter(False)\n    dist.barrier()\n\n    recs = [one_iter(True) for _ in range(args.iters)]\n    my = {k: [r[k] for r in recs] for k in recs[0]}\n    summary = {\"rank\": rank, \"host\": socket.gethostname(),\n               \"recv_tokens\": recv_total, **my}\n    gathered = [None] * world\n    dist.all_gather_object(gathered, summary)\n\n    if rank == 0:\n        def p50(v):\n            return sorted(v)[len(v) // 2]\n\n        def pct(v, p):\n            v = sorted(v)\n            return v[min(len(v) - 1, int(math.ceil(p / 100.0 * len(v))) - 1)]\n\n        iters_mat = [g[\"iter_ms\"] for g in gathered]\n        step_max = [max(col) for col in zip(*iters_mat)]\n        result = {\n            \"tag\": args.tag, \"mode\": args.mode, \"alpha\": args.alpha,\n            \"rep\": args.rep, \"world\": world, \"device_kind\": kind,\n            \"tokens_per_rank\": T, \"hidden\": H, \"ffn\": args.ffn,\n            \"iters\": args.iters,\n            \"recv_tokens_per_rank\": [g[\"recv_tokens\"] for g in gathered],\n            \"step_max_ms\": {\"p50\": pct(step_max, 50), \"p95\": pct(step_max, 95)},\n            \"per_rank_p50\": {\n                \"dispatch_ms\": [p50(g[\"dispatch_ms\"]) for g in gathered],\n                \"expert_ms\": [p50(g[\"expert_ms\"]) for g in gathered],\n                \"return_ms\": [p50(g[\"return_ms\"]) for g in gathered],\n                \"end_wait_ms\": [p50(g[\"end_wait_ms\"]) for g in gathered],\n            },\n            \"a2a_total_p50_ms\": p50([g[\"dispatch_ms\"][i] + g[\"return_ms\"][i]\n                                     for g in gathered for i in range(args.iters)]),\n            \"expert_spread_p50_ms\": (max(p50(g[\"expert_ms\"]) for g in gathered)\n                                     - min(p50(g[\"expert_ms\"]) for g in gathered)),\n            \"env\": {\"job\": os.environ.get(\"SLURM_JOB_ID\", \"\"),\n                    \"torch\": torch.__version__},\n            \"ts\": time.strftime(\"%Y-%m-%d %H:%M:%S\"),\n        }\n        os.makedirs(args.out, exist_ok=True)\n        name = f\"{args.tag}_moe_{args.mode}_r{args.rep}.json\"\n        with open(os.path.join(args.out, name), \"w\") as f:\n            json.dump(result, f, indent=1)\n        print(f\"[moe] WROTE {name} step_p50={result['step_max_ms']['p50']:.1f}ms\",\n              flush=True)\n    dist.barrier()\n    dist.destroy_process_group()\n\n\nif __name__ == \"__main__\":\n    main()\n"
+  },
+  {
+   "seq": 3,
+   "time_utc": "2026-09-06T08:53:14Z",
+   "action": "write",
+   "file": "rank_env.sh",
+   "content": "#!/usr/bin/env bash\n# Convert one Slurm task into torch.distributed env:// variables, with the\n# oneCCL worker-affinity fix from the qualified PVC campaign (harmless on CUDA).\nset -Eeuo pipefail\n: \"${SLURM_PROCID:?}\"; : \"${SLURM_NTASKS:?}\"; : \"${SLURM_LOCALID:?}\"\n: \"${MASTER_ADDR:?}\"; : \"${MASTER_PORT:?}\"\nexport RANK=\"$SLURM_PROCID\"\nexport WORLD_SIZE=\"$SLURM_NTASKS\"\nexport LOCAL_RANK=\"$SLURM_LOCALID\"\nexport LOCAL_WORLD_SIZE=\"${SLURM_NTASKS_PER_NODE:-1}\"\nallowed_cpus=\"$(awk '/^Cpus_allowed_list:/ {print $2; exit}' /proc/self/status)\"\nfirst_cpu=\"${allowed_cpus%%,*}\"; first_cpu=\"${first_cpu%%-*}\"\nif [[ \"$first_cpu\" =~ ^[0-9]+$ ]]; then\n  export CCL_WORKER_COUNT=\"${CCL_WORKER_COUNT:-1}\"\n  export CCL_WORKER_AFFINITY=\"${CCL_WORKER_AFFINITY:-$first_cpu}\"\nfi\nexport CCL_LOCAL_RANK=\"${CCL_LOCAL_RANK:-$LOCAL_RANK}\"\nexport CCL_LOCAL_SIZE=\"${CCL_LOCAL_SIZE:-$LOCAL_WORLD_SIZE}\"\nexec \"$@\"\n"
+  },
+  {
+   "seq": 4,
+   "time_utc": "2026-09-06T08:53:33Z",
+   "action": "write",
+   "file": "zmig_pvc.slurm",
+   "content": "#!/usr/bin/env bash\n#SBATCH --job-name=zmig-pvc\n#SBATCH --account=REDACTED\n#SBATCH --partition=pvc\n#SBATCH --ntasks-per-node=8\n#SBATCH --cpus-per-task=4\n#SBATCH --export=ALL\n# nodes and time come from sbatch -N / -t at submit time\n\nset -uo pipefail\nZMIG=/scratch/08447/abd2000/zmig\nVENV=/scratch/08447/abd2000/nnopp-pvc/venv\nNODES=${SLURM_JOB_NUM_NODES}\nOUT=$ZMIG/results/pvc\nmkdir -p \"$OUT\" \"$ZMIG/logs\"\n\nmodule purge >/dev/null 2>&1\nmodule load intel/24.0 impi/21.11 python/3.12.11 >/dev/null 2>&1\nmodule list 2>&1 | head -6\n\nexport LD_LIBRARY_PATH=\"$VENV/lib:$VENV/lib/python3.12/site-packages/torch/lib:${LD_LIBRARY_PATH:-}\"\nexport ZE_FLAT_DEVICE_HIERARCHY=FLAT\nexport CCL_PROCESS_LAUNCHER=none\nexport CCL_ATL_TRANSPORT=ofi\nexport CCL_ZE_IPC_EXCHANGE=sockets\nexport FI_PROVIDER=tcp\nexport MASTER_ADDR=$(scontrol show hostnames \"$SLURM_JOB_NODELIST\" | head -1)\nPORT_BASE=$(( 25000 + SLURM_JOB_ID % 2000 ))\nPY=$VENV/bin/python\n\necho \"=== zmig pvc nodes=$NODES job=$SLURM_JOB_ID nodelist=$SLURM_JOB_NODELIST ===\"\nsrun --ntasks-per-node=1 bash -c 'echo \"$(hostname): $('\"$PY\"' -c \"import torch;print(torch.__version__, torch.xpu.is_available(), torch.xpu.device_count())\" 2>&1 | tail -1)\"'\n\nrunidx=0\nrun_llama () {\n  local stage=$1 rep=$2 extra=$3\n  runidx=$((runidx+1))\n  export MASTER_PORT=$((PORT_BASE + runidx))\n  echo \"--- llama stage=$stage rep=$rep extra='$extra' port=$MASTER_PORT $(date +%T) ---\"\n  timeout 1500 srun bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/llama_bench.py\" \\\n    --stage \"$stage\" --rep \"$rep\" --out \"$OUT\" --tag \"pvc_n${NODES}\" \\\n    --iters \"${ZMIG_ITERS:-40}\" $extra\n  echo \"--- rc=$? ---\"\n}\n\nrun_moe () {\n  local mode=$1 rep=$2 extra=$3\n  runidx=$((runidx+1))\n  export MASTER_PORT=$((PORT_BASE + runidx))\n  echo \"--- moe mode=$mode rep=$rep $(date +%T) ---\"\n  timeout 600 srun bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/moe_bench.py\" \\\n    --mode \"$mode\" --rep \"$rep\" --out \"$OUT\" --tag \"pvc_n${NODES}\" $extra\n  echo \"--- rc=$? ---\"\n}\n\nif [[ \"${ZMIG_SMOKE:-0}\" == \"1\" ]]; then\n  echo \"=== SMOKE ===\"\n  for st in 0 2 3; do run_llama \"$st\" 1 \"--tiny\"; done\n  run_moe balanced 1 \"--tiny\"\n  run_moe skewed 1 \"--tiny\"\n  echo \"=== SMOKE DONE ===\"\n  exit 0\nfi\n\nfor st in 0 2 3; do\n  for rep in 1 2 3; do\n    run_llama \"$st\" \"$rep\" \"\"\n  done\ndone\n\nif [[ \"$NODES\" == \"2\" ]]; then\n  for mode in balanced skewed; do\n    for rep in 1 2 3; do run_moe \"$mode\" \"$rep\" \"\"; done\n  done\nfi\necho \"=== JOB DONE $(date +%T) ===\"\n"
+  },
+  {
+   "seq": 5,
+   "time_utc": "2026-09-06T08:53:52Z",
+   "action": "write",
+   "file": "zmig_h100.slurm",
+   "content": "#!/usr/bin/env bash\n#SBATCH --job-name=zmig-h100\n#SBATCH --account=REDACTED\n#SBATCH --partition=h100\n#SBATCH --ntasks-per-node=4\n#SBATCH --cpus-per-task=16\n#SBATCH --export=ALL\n# nodes and time come from sbatch -N / -t at submit time\n\nset -uo pipefail\nZMIG=/scratch/08447/abd2000/zmig\nVENV=/scratch/08447/abd2000/nnopp-h100/venv\nNODES=${SLURM_JOB_NUM_NODES}\nOUT=$ZMIG/results/h100\nmkdir -p \"$OUT\" \"$ZMIG/logs\"\n\nmodule purge >/dev/null 2>&1\nmodule load gcc >/dev/null 2>&1 || true\nexport MASTER_ADDR=$(scontrol show hostnames \"$SLURM_JOB_NODELIST\" | head -1)\nPORT_BASE=$(( 25000 + SLURM_JOB_ID % 2000 ))\nPY=$VENV/bin/python\nexport NCCL_IB_HCA=mlx5_0\n\necho \"=== zmig h100 nodes=$NODES job=$SLURM_JOB_ID nodelist=$SLURM_JOB_NODELIST ===\"\nsrun --ntasks-per-node=1 bash -c 'echo \"$(hostname): $(nvidia-smi -L 2>/dev/null | head -1); $('\"$PY\"' -c \"import torch;print(torch.__version__, torch.cuda.is_available(), torch.cuda.device_count())\" 2>&1 | tail -1)\"'\n\nrunidx=0\nrun_llama () {\n  local stage=$1 rep=$2 transport=$3 extra=$4\n  runidx=$((runidx+1))\n  export MASTER_PORT=$((PORT_BASE + runidx))\n  if [[ \"$transport\" == \"host\" ]]; then\n    export NCCL_NET_GDR_LEVEL=LOC\n    export ZMIG_TRANSPORT=host-staged\n  else\n    unset NCCL_NET_GDR_LEVEL\n    export ZMIG_TRANSPORT=direct\n  fi\n  echo \"--- llama stage=$stage rep=$rep transport=$transport port=$MASTER_PORT $(date +%T) ---\"\n  timeout 1200 srun bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/llama_bench.py\" \\\n    --stage \"$stage\" --rep \"$rep\" --out \"$OUT\" \\\n    --tag \"h100_n${NODES}_${ZMIG_TRANSPORT}\" --iters \"${ZMIG_ITERS:-60}\" $extra\n  echo \"--- rc=$? ---\"\n}\n\nrun_moe () {\n  local mode=$1 rep=$2 extra=$3\n  runidx=$((runidx+1))\n  export MASTER_PORT=$((PORT_BASE + runidx))\n  unset NCCL_NET_GDR_LEVEL\n  echo \"--- moe mode=$mode rep=$rep $(date +%T) ---\"\n  timeout 600 srun bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/moe_bench.py\" \\\n    --mode \"$mode\" --rep \"$rep\" --out \"$OUT\" --tag \"h100_n${NODES}\" $extra\n  echo \"--- rc=$? ---\"\n}\n\nif [[ \"${ZMIG_SMOKE:-0}\" == \"1\" ]]; then\n  echo \"=== SMOKE (with NCCL transport probe) ===\"\n  export NCCL_DEBUG=INFO\n  export NCCL_DEBUG_SUBSYS=NET,INIT\n  run_llama 0 1 direct \"--tiny\" 2>&1 | tee \"$ZMIG/logs/nccl_probe_n${NODES}.log\" | grep -v -E \"^c6[0-9]+\" | head -60\n  grep -i -E \"GDRDMA|NET/IB|via NET\" \"$ZMIG/logs/nccl_probe_n${NODES}.log\" | sort -u | head -10 || true\n  unset NCCL_DEBUG NCCL_DEBUG_SUBSYS\n  for st in 2 3; do run_llama \"$st\" 1 direct \"--tiny\"; done\n  run_moe balanced 1 \"--tiny\"\n  echo \"=== SMOKE DONE ===\"\n  exit 0\nfi\n\nfor st in 0 2 3; do\n  for rep in 1 2 3; do\n    run_llama \"$st\" \"$rep\" direct \"\"\n  done\ndone\n\nif [[ \"$NODES\" == \"2\" ]]; then\n  for rep in 1 2 3; do run_llama 3 \"$rep\" host \"\"; done\n  for mode in balanced skewed; do\n    for rep in 1 2 3; do run_moe \"$mode\" \"$rep\" \"\"; done\n  done\nfi\necho \"=== JOB DONE $(date +%T) ===\"\n"
+  },
+  {
+   "seq": 6,
+   "time_utc": "2026-09-06T08:54:06Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "srun --ntasks-per-node=1 bash -c 'echo \"$(hostname): $('\"$PY\"' -c \"import torch;print(torch.__version__, torch.xpu.is_available(), torch.xpu.device_count())\" 2>&1 | tail -1)\"'",
+     "new": "srun -N \"$NODES\" -n \"$NODES\" --ntasks-per-node=1 bash -c 'echo \"$(hostname): $('\"$PY\"' -c \"import torch;print(torch.__version__, torch.xpu.is_available(), torch.xpu.device_count())\" 2>&1 | tail -1)\"'",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 7,
+   "time_utc": "2026-09-06T08:54:09Z",
+   "action": "replace",
+   "file": "zmig_h100.slurm",
+   "replacements": [
+    {
+     "old": "srun --ntasks-per-node=1 bash -c 'echo \"$(hostname): $(nvidia-smi -L 2>/dev/null | head -1); $('\"$PY\"' -c \"import torch;print(torch.__version__, torch.cuda.is_available(), torch.cuda.device_count())\" 2>&1 | tail -1)\"'",
+     "new": "srun -N \"$NODES\" -n \"$NODES\" --ntasks-per-node=1 bash -c 'echo \"$(hostname): $(nvidia-smi -L 2>/dev/null | head -1); $('\"$PY\"' -c \"import torch;print(torch.__version__, torch.cuda.is_available(), torch.cuda.device_count())\" 2>&1 | tail -1)\"'",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 8,
+   "time_utc": "2026-09-06T08:54:37Z",
+   "action": "upload",
+   "files": [
+    "llama_bench.py",
+    "moe_bench.py",
+    "rank_env.sh",
+    "zmig_h100.slurm",
+    "zmig_pvc.slurm"
+   ],
+   "note": "bundle zmig.tgz unpacked in /scratch/08447/abd2000"
+  },
+  {
+   "seq": 9,
+   "time_utc": "2026-09-06T08:56:08Z",
+   "action": "upload",
+   "files": [
+    "zmon.sh"
+   ]
+  },
+  {
+   "seq": 10,
+   "time_utc": "2026-09-06T09:00:38Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "export CCL_PROCESS_LAUNCHER=none\nexport CCL_ATL_TRANSPORT=ofi\nexport CCL_ZE_IPC_EXCHANGE=sockets\nexport FI_PROVIDER=tcp",
+     "new": "export CCL_PROCESS_LAUNCHER=none\nexport CCL_ATL_TRANSPORT=ofi\nexport CCL_ZE_IPC_EXCHANGE=sockets\nexport FI_PROVIDER=tcp\nexport FI_PROVIDER_PATH=$VENV/lib\nexport FI_TCP_IFACE=${ZMIG_FI_TCP_IFACE:-ibp56s0}\nexport FI_LOG_LEVEL=warn",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 11,
+   "time_utc": "2026-09-06T09:00:41Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "if [[ \"${ZMIG_SMOKE:-0}\" == \"1\" ]]; then\n  echo \"=== SMOKE ===\"",
+     "new": "if [[ \"${ZMIG_SMOKE:-0}\" == \"1\" ]]; then\n  echo \"=== SMOKE ===\"\n  export CCL_LOG_LEVEL=warn\n  srun -N \"$NODES\" -n \"$NODES\" --ntasks-per-node=1 bash -c 'echo \"== $(hostname) ifaces:\"; ip -o -4 addr show | awk \"{print \\$2, \\$4}\" | head -6'\n  \"$VENV/bin/fi_info\" -p tcp 2>&1 | head -5 || true",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 12,
+   "time_utc": "2026-09-06T09:04:53Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "export CCL_PROCESS_LAUNCHER=none\nexport CCL_ATL_TRANSPORT=ofi\nexport CCL_ZE_IPC_EXCHANGE=sockets\nexport FI_PROVIDER=tcp\nexport FI_PROVIDER_PATH=$VENV/lib\nexport FI_TCP_IFACE=${ZMIG_FI_TCP_IFACE:-ibp56s0}\nexport FI_LOG_LEVEL=warn",
+     "new": "export CCL_PROCESS_LAUNCHER=none\nexport CCL_ATL_TRANSPORT=ofi\nexport CCL_ZE_IPC_EXCHANGE=sockets\nexport FI_PROVIDER_PATH=$VENV/lib\nexport FI_LOG_LEVEL=warn\n\napply_preset () {\n  case \"$1\" in\n    tcp-hmem0)\n      export FI_PROVIDER=tcp\n      export FI_TCP_IFACE=ibp56s0\n      export CCL_ATL_HMEM=0\n      ;;\n    tcp-plain)\n      export FI_PROVIDER=tcp\n      export FI_TCP_IFACE=ibp56s0\n      unset CCL_ATL_HMEM\n      ;;\n    psm3)\n      export FI_PROVIDER=psm3\n      unset FI_TCP_IFACE\n      export CCL_ATL_HMEM=0\n      export PSM3_NIC=ibp56s0\n      ;;\n    verbs)\n      export FI_PROVIDER=\"verbs;ofi_rxm\"\n      unset FI_TCP_IFACE\n      export CCL_ATL_HMEM=0\n      ;;\n  esac\n  export ZMIG_TRANSPORT=\"pvc-$1\"\n}\napply_preset \"${ZMIG_CCL_PRESET:-tcp-hmem0}\"",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 13,
+   "time_utc": "2026-09-06T09:04:57Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "  timeout 1500 srun bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/llama_bench.py\" \\\n    --stage \"$stage\" --rep \"$rep\" --out \"$OUT\" --tag \"pvc_n${NODES}\" \\\n    --iters \"${ZMIG_ITERS:-40}\" $extra\n  echo \"--- rc=$? ---\"\n}",
+     "new": "  timeout 1500 srun bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/llama_bench.py\" \\\n    --stage \"$stage\" --rep \"$rep\" --out \"$OUT\" --tag \"pvc_n${NODES}\" \\\n    --iters \"${ZMIG_ITERS:-40}\" $extra\n  local rc=$?\n  echo \"--- rc=$rc ---\"\n  return $rc\n}",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 14,
+   "time_utc": "2026-09-06T09:05:03Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "if [[ \"${ZMIG_SMOKE:-0}\" == \"1\" ]]; then\n  echo \"=== SMOKE ===\"\n  export CCL_LOG_LEVEL=warn\n  srun -N \"$NODES\" -n \"$NODES\" --ntasks-per-node=1 bash -c 'echo \"== $(hostname) ifaces:\"; ip -o -4 addr show | awk \"{print \\$2, \\$4}\" | head -6'\n  \"$VENV/bin/fi_info\" -p tcp 2>&1 | head -5 || true\n  for st in 0 2 3; do run_llama \"$st\" 1 \"--tiny\"; done\n  run_moe balanced 1 \"--tiny\"\n  run_moe skewed 1 \"--tiny\"\n  echo \"=== SMOKE DONE ===\"\n  exit 0\nfi",
+     "new": "if [[ \"${ZMIG_SMOKE:-0}\" == \"1\" ]]; then\n  echo \"=== SMOKE ===\"\n  export CCL_LOG_LEVEL=warn\n  WINNER=\"\"\n  for preset in tcp-hmem0 psm3 verbs tcp-plain; do\n    apply_preset \"$preset\"\n    echo \"=== trying preset $preset ===\"\n    if run_llama 0 1 \"--tiny\"; then WINNER=\"$preset\"; break; fi\n  done\n  if [[ -z \"$WINNER\" ]]; then\n    echo \"=== NO WORKING PRESET ===\"\n    exit 1\n  fi\n  echo \"=== WINNER=$WINNER ===\"\n  apply_preset \"$WINNER\"\n  for st in 2 3; do run_llama \"$st\" 1 \"--tiny\"; done\n  run_moe balanced 1 \"--tiny\"\n  run_moe skewed 1 \"--tiny\"\n  echo \"=== SMOKE DONE WINNER=$WINNER ===\"\n  exit 0\nfi",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 15,
+   "time_utc": "2026-09-06T09:05:16Z",
+   "action": "upload",
+   "files": [
+    "zmig_pvc.slurm"
+   ]
+  },
+  {
+   "seq": 16,
+   "time_utc": "2026-09-06T09:05:56Z",
+   "action": "replace",
+   "file": "llama_bench.py",
+   "replacements": [
+    {
+     "old": "        \"zero_optimization\": {\n            \"stage\": args.stage,\n            \"overlap_comm\": True,\n            \"contiguous_gradients\": True,\n            \"reduce_bucket_size\": 5.0e8,\n        },",
+     "new": "        \"zero_optimization\": {\n            \"stage\": args.stage,\n            \"overlap_comm\": False,\n            \"contiguous_gradients\": True,\n            \"reduce_bucket_size\": 5.0e8,\n        },",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 17,
+   "time_utc": "2026-09-06T09:05:58Z",
+   "action": "upload",
+   "files": [
+    "llama_bench.py"
+   ]
+  },
+  {
+   "seq": 18,
+   "time_utc": "2026-09-06T09:10:56Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "apply_preset () {\n  case \"$1\" in\n    tcp-hmem0)\n      export FI_PROVIDER=tcp\n      export FI_TCP_IFACE=ibp56s0\n      export CCL_ATL_HMEM=0\n      ;;\n    tcp-plain)\n      export FI_PROVIDER=tcp\n      export FI_TCP_IFACE=ibp56s0\n      unset CCL_ATL_HMEM\n      ;;\n    psm3)\n      export FI_PROVIDER=psm3\n      unset FI_TCP_IFACE\n      export CCL_ATL_HMEM=0\n      export PSM3_NIC=ibp56s0\n      ;;\n    verbs)\n      export FI_PROVIDER=\"verbs;ofi_rxm\"\n      unset FI_TCP_IFACE\n      export CCL_ATL_HMEM=0\n      ;;\n  esac\n  export ZMIG_TRANSPORT=\"pvc-$1\"\n}\napply_preset \"${ZMIG_CCL_PRESET:-tcp-hmem0}\"",
+     "new": "BASE_LD=\"$LD_LIBRARY_PATH\"\nIMPI_FAB=\"\"\nfor d in \"$I_MPI_ROOT/opt/mpi/libfabric/lib\" \"$I_MPI_ROOT/libfabric/lib\"; do\n  [[ -n \"$I_MPI_ROOT\" && -d \"$d\" ]] && { IMPI_FAB=\"$d\"; break; }\ndone\necho \"I_MPI_ROOT=$I_MPI_ROOT IMPI_FAB=$IMPI_FAB\"\n\napply_preset () {\n  export LD_LIBRARY_PATH=\"$BASE_LD\"\n  export SRUN_MPI=\"\"\n  unset FI_LOG_LEVEL FI_LOG_PROV\n  export FI_LOG_LEVEL=warn\n  case \"$1\" in\n    tcp-hmem0)\n      export CCL_ATL_TRANSPORT=ofi\n      export FI_PROVIDER=tcp\n      export FI_PROVIDER_PATH=$VENV/lib\n      export FI_TCP_IFACE=ibp56s0\n      export CCL_ATL_HMEM=0\n      ;;\n    impi-fab)\n      export CCL_ATL_TRANSPORT=ofi\n      export FI_PROVIDER=tcp\n      export FI_TCP_IFACE=ibp56s0\n      export CCL_ATL_HMEM=0\n      export FI_PROVIDER_PATH=\"$IMPI_FAB/prov\"\n      export LD_LIBRARY_PATH=\"$IMPI_FAB:$BASE_LD\"\n      ;;\n    atl-mpi)\n      export CCL_ATL_TRANSPORT=mpi\n      unset FI_PROVIDER FI_PROVIDER_PATH FI_TCP_IFACE\n      export CCL_ATL_HMEM=0\n      export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi2.so\n      export SRUN_MPI=\"--mpi=pmi2\"\n      ;;\n    tcp-diag)\n      export CCL_ATL_TRANSPORT=ofi\n      export FI_PROVIDER=tcp\n      export FI_PROVIDER_PATH=$VENV/lib\n      export FI_TCP_IFACE=ibp56s0\n      export CCL_ATL_HMEM=0\n      export FI_LOG_LEVEL=info\n      export FI_LOG_PROV=tcp\n      ;;\n  esac\n  export ZMIG_TRANSPORT=\"pvc-$1\"\n}\napply_preset \"${ZMIG_CCL_PRESET:-tcp-hmem0}\"",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 19,
+   "time_utc": "2026-09-06T09:10:58Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "  timeout 1500 srun bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/llama_bench.py\" \\",
+     "new": "  timeout 1500 srun $SRUN_MPI bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/llama_bench.py\" \\",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 20,
+   "time_utc": "2026-09-06T09:11:00Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "  WINNER=\"\"\n  for preset in tcp-hmem0 psm3 verbs tcp-plain; do",
+     "new": "  WINNER=\"\"\n  for preset in impi-fab atl-mpi tcp-diag; do",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 21,
+   "time_utc": "2026-09-06T09:11:12Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "BASE_LD=\"$LD_LIBRARY_PATH\"\nIMPI_FAB=\"\"\nfor d in \"$I_MPI_ROOT/opt/mpi/libfabric/lib\" \"$I_MPI_ROOT/libfabric/lib\"; do\n  [[ -n \"$I_MPI_ROOT\" && -d \"$d\" ]] && { IMPI_FAB=\"$d\"; break; }\ndone\necho \"I_MPI_ROOT=$I_MPI_ROOT IMPI_FAB=$IMPI_FAB\"",
+     "new": "BASE_LD=\"$LD_LIBRARY_PATH\"\nIMPI_FAB=\"\"\nfor d in \"${I_MPI_ROOT:-}/opt/mpi/libfabric/lib\" \"${I_MPI_ROOT:-}/libfabric/lib\"; do\n  [[ -n \"${I_MPI_ROOT:-}\" && -d \"$d\" ]] && { IMPI_FAB=\"$d\"; break; }\ndone\necho \"I_MPI_ROOT=${I_MPI_ROOT:-} IMPI_FAB=$IMPI_FAB\"",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 22,
+   "time_utc": "2026-09-06T09:11:14Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "  timeout 600 srun bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/moe_bench.py\" \\",
+     "new": "  timeout 600 srun $SRUN_MPI bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/moe_bench.py\" \\",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 23,
+   "time_utc": "2026-09-06T09:11:18Z",
+   "action": "upload",
+   "files": [
+    "zmig_pvc.slurm"
+   ]
+  },
+  {
+   "seq": 24,
+   "time_utc": "2026-09-06T09:16:47Z",
+   "action": "replace",
+   "file": "rank_env.sh",
+   "replacements": [
+    {
+     "old": "allowed_cpus=\"$(awk '/^Cpus_allowed_list:/ {print $2; exit}' /proc/self/status)\"\nfirst_cpu=\"${allowed_cpus%%,*}\"; first_cpu=\"${first_cpu%%-*}\"\nif [[ \"$first_cpu\" =~ ^[0-9]+$ ]]; then\n  export CCL_WORKER_COUNT=\"${CCL_WORKER_COUNT:-1}\"\n  export CCL_WORKER_AFFINITY=\"${CCL_WORKER_AFFINITY:-$first_cpu}\"\nfi\nexport CCL_LOCAL_RANK=\"${CCL_LOCAL_RANK:-$LOCAL_RANK}\"\nexport CCL_LOCAL_SIZE=\"${CCL_LOCAL_SIZE:-$LOCAL_WORLD_SIZE}\"",
+     "new": "# oneCCL 2022.x parses CCL_WORKER_AFFINITY differently from 1.13; leave it\n# unset (auto) unless explicitly requested via ZMIG_SET_AFFINITY=1.\nif [[ \"${ZMIG_SET_AFFINITY:-0}\" == \"1\" ]]; then\n  allowed_cpus=\"$(awk '/^Cpus_allowed_list:/ {print $2; exit}' /proc/self/status)\"\n  first_cpu=\"${allowed_cpus%%,*}\"; first_cpu=\"${first_cpu%%-*}\"\n  if [[ \"$first_cpu\" =~ ^[0-9]+$ ]]; then\n    export CCL_WORKER_COUNT=\"${CCL_WORKER_COUNT:-1}\"\n    export CCL_WORKER_AFFINITY=\"${CCL_WORKER_AFFINITY:-$first_cpu}\"\n  fi\nfi\nexport CCL_LOCAL_RANK=\"${CCL_LOCAL_RANK:-$LOCAL_RANK}\"\nexport CCL_LOCAL_SIZE=\"${CCL_LOCAL_SIZE:-$LOCAL_WORLD_SIZE}\"",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 25,
+   "time_utc": "2026-09-06T09:16:51Z",
+   "action": "upload",
+   "files": [
+    "rank_env.sh"
+   ]
+  },
+  {
+   "seq": 26,
+   "time_utc": "2026-09-06T09:20:44Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "export MASTER_ADDR=$(scontrol show hostnames \"$SLURM_JOB_NODELIST\" | head -1)\nPORT_BASE=$(( 25000 + SLURM_JOB_ID % 2000 ))\nPY=$VENV/bin/python",
+     "new": "export MASTER_ADDR=$(scontrol show hostnames \"$SLURM_JOB_NODELIST\" | head -1)\nPORT_BASE=$(( 25000 + SLURM_JOB_ID % 2000 ))\nPY=$VENV/bin/python\nexport OMP_NUM_THREADS=4\nSRUN_BIND=\"--cpu-bind=none\"",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 27,
+   "time_utc": "2026-09-06T09:20:48Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "    atl-mpi)\n      export CCL_ATL_TRANSPORT=mpi\n      unset FI_PROVIDER FI_PROVIDER_PATH FI_TCP_IFACE\n      export CCL_ATL_HMEM=0\n      export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi2.so\n      export SRUN_MPI=\"--mpi=pmi2\"\n      ;;",
+     "new": "    atl-mpi)\n      export CCL_ATL_TRANSPORT=mpi\n      unset FI_PROVIDER FI_PROVIDER_PATH\n      export FI_TCP_IFACE=ibp56s0\n      export I_MPI_OFI_PROVIDER=tcp\n      export CCL_ATL_HMEM=0\n      export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi2.so\n      export SRUN_MPI=\"--mpi=pmi2\"\n      ;;",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 28,
+   "time_utc": "2026-09-06T09:20:51Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "  timeout 1500 srun $SRUN_MPI bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/llama_bench.py\" \\",
+     "new": "  timeout 1500 srun $SRUN_MPI $SRUN_BIND bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/llama_bench.py\" \\",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 29,
+   "time_utc": "2026-09-06T09:20:53Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "  timeout 600 srun $SRUN_MPI bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/moe_bench.py\" \\",
+     "new": "  timeout 600 srun $SRUN_MPI $SRUN_BIND bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/moe_bench.py\" \\",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 30,
+   "time_utc": "2026-09-06T09:21:04Z",
+   "action": "upload",
+   "files": [
+    "zmig_pvc.slurm"
+   ]
+  },
+  {
+   "seq": 31,
+   "time_utc": "2026-09-06T09:25:22Z",
+   "action": "write",
+   "file": "diag_pvc.slurm",
+   "content": "#!/usr/bin/env bash\n#SBATCH --job-name=zmig-diag\n#SBATCH --account=REDACTED\n#SBATCH --partition=pvc\n#SBATCH --nodes=2\n#SBATCH --ntasks-per-node=8\n#SBATCH --cpus-per-task=4\n#SBATCH --export=ALL\n\nset -uo pipefail\nZMIG=/scratch/08447/abd2000/zmig\nVENV=/scratch/08447/abd2000/nnopp-pvc/venv\nmodule purge >/dev/null 2>&1\nmodule load intel/24.0 impi/21.11 python/3.12.11 >/dev/null 2>&1\n\nexport LD_LIBRARY_PATH=\"$VENV/lib:$VENV/lib/python3.12/site-packages/torch/lib:${LD_LIBRARY_PATH:-}\"\nexport ZE_FLAT_DEVICE_HIERARCHY=FLAT\nexport CCL_PROCESS_LAUNCHER=none\nexport CCL_ATL_TRANSPORT=ofi\nexport CCL_ZE_IPC_EXCHANGE=sockets\nexport OMP_NUM_THREADS=4\nIMPI_FAB=\"${I_MPI_ROOT:-}/opt/mpi/libfabric/lib\"\nexport MASTER_ADDR=$(scontrol show hostnames \"$SLURM_JOB_NODELIST\" | head -1)\nPY=$VENV/bin/python\nBASE_LD=\"$LD_LIBRARY_PATH\"\n\nprobe () {\n  # probe <label> <nodes> <extra-env assignments...>\n  local label=$1 nn=$2; shift 2\n  export MASTER_PORT=$(( 26000 + RANDOM % 2000 ))\n  echo \"###PROBE $label nodes=$nn env: $*\"\n  ( for kv in \"$@\"; do export \"$kv\"; done\n    timeout 240 srun -N \"$nn\" -n $(( nn * 8 )) --ntasks-per-node=8 --cpu-bind=none \\\n      bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/one_allreduce.py\" 2>&1 \\\n      | grep -E \"ALLREDUCE-OK|RuntimeError|EXCEPTION|worker|affinity\" | awk \"!s[\\$0]++\" | head -6 )\n  echo \"###END $label rc=$?\"\n}\n\necho \"== phase 1: single node ==\"\nprobe n1-base            1 ZMIG_NOLOCAL=1\nprobe n1-locals          1 ZMIG_NOLOCAL=0\nprobe n1-affauto         1 ZMIG_NOLOCAL=1 CCL_WORKER_AFFINITY=auto\nprobe n1-afflist         1 ZMIG_NOLOCAL=1 CCL_WORKER_AFFINITY=88,89,90,91,92,93,94,95\n\necho \"== phase 2: two nodes (winner candidates + fabric variants) ==\"\nprobe n2-base            2 ZMIG_NOLOCAL=1\nprobe n2-impifab         2 ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 CCL_ATL_HMEM=0 FI_PROVIDER_PATH=$IMPI_FAB/prov LD_LIBRARY_PATH=$IMPI_FAB:$BASE_LD\nprobe n2-impifab-aff     2 ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 CCL_ATL_HMEM=0 FI_PROVIDER_PATH=$IMPI_FAB/prov LD_LIBRARY_PATH=$IMPI_FAB:$BASE_LD CCL_WORKER_AFFINITY=88,89,90,91,92,93,94,95\nprobe n2-venvfab-aff     2 ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 CCL_ATL_HMEM=0 FI_PROVIDER_PATH=$VENV/lib CCL_WORKER_AFFINITY=88,89,90,91,92,93,94,95\nprobe n2-debug           2 ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 CCL_ATL_HMEM=0 FI_PROVIDER_PATH=$IMPI_FAB/prov LD_LIBRARY_PATH=$IMPI_FAB:$BASE_LD CCL_LOG_LEVEL=debug\necho \"== DIAG DONE ==\"\n"
+  },
+  {
+   "seq": 32,
+   "time_utc": "2026-09-06T09:25:30Z",
+   "action": "replace",
+   "file": "rank_env.sh",
+   "replacements": [
+    {
+     "old": "export CCL_LOCAL_RANK=\"${CCL_LOCAL_RANK:-$LOCAL_RANK}\"\nexport CCL_LOCAL_SIZE=\"${CCL_LOCAL_SIZE:-$LOCAL_WORLD_SIZE}\"",
+     "new": "if [[ \"${ZMIG_NOLOCAL:-0}\" != \"1\" ]]; then\n  export CCL_LOCAL_RANK=\"${CCL_LOCAL_RANK:-$LOCAL_RANK}\"\n  export CCL_LOCAL_SIZE=\"${CCL_LOCAL_SIZE:-$LOCAL_WORLD_SIZE}\"\nfi",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 33,
+   "time_utc": "2026-09-06T09:25:35Z",
+   "action": "upload",
+   "files": [
+    "diag_pvc.slurm",
+    "one_allreduce.py",
+    "rank_env.sh"
+   ]
+  },
+  {
+   "seq": 34,
+   "time_utc": "2026-09-06T09:29:26Z",
+   "action": "write",
+   "file": "diag_pvc.slurm",
+   "content": "#!/usr/bin/env bash\n#SBATCH --job-name=zmig-diag\n#SBATCH --account=REDACTED\n#SBATCH --partition=pvc\n#SBATCH --nodes=2\n#SBATCH --ntasks-per-node=8\n#SBATCH --cpus-per-task=4\n#SBATCH --export=ALL\n\nset -uo pipefail\nZMIG=/scratch/08447/abd2000/zmig\nVENV=/scratch/08447/abd2000/nnopp-pvc/venv\nmodule purge >/dev/null 2>&1\nmodule load python/3.12.11 >/dev/null 2>&1\nmodule list 2>&1 | head -4\n\nexport LD_LIBRARY_PATH=\"$VENV/lib:$VENV/lib/python3.12/site-packages/torch/lib:/opt/apps/python/3.12.11/lib\"\nexport ZE_FLAT_DEVICE_HIERARCHY=FLAT\nexport CCL_PROCESS_LAUNCHER=none\nexport CCL_ATL_TRANSPORT=ofi\nexport CCL_ZE_IPC_EXCHANGE=sockets\nexport OMP_NUM_THREADS=4\nexport MASTER_ADDR=$(scontrol show hostnames \"$SLURM_JOB_NODELIST\" | head -1)\nPY=$VENV/bin/python\n\nsrun -N 1 -n 1 bash -c \"$PY -c 'import torch;print(\\\"torch\\\", torch.__version__, torch.xpu.is_available(), torch.xpu.device_count())' 2>&1 | tail -1\"\n\nprobe () {\n  local label=$1 nn=$2; shift 2\n  export MASTER_PORT=$(( 26000 + RANDOM % 2000 ))\n  echo \"###PROBE $label nodes=$nn env: $*\"\n  ( for kv in \"$@\"; do export \"$kv\"; done\n    timeout 240 srun -N \"$nn\" -n $(( nn * 8 )) --ntasks-per-node=8 --cpu-bind=none \\\n      bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/one_allreduce.py\" 2>&1 \\\n      | grep -E \"ALLREDUCE-OK|RuntimeError|CCL_ERROR|<warn>\" | awk \"!s[\\$0]++\" | head -6 )\n  echo \"###END $label\"\n}\n\necho \"== clean-env matrix ==\"\nprobe n1-clean 1 ZMIG_NOLOCAL=1\nprobe n2-clean 2 ZMIG_NOLOCAL=1\nprobe n2-tcp 2 ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV/lib CCL_ATL_HMEM=0\nprobe n2-tcp-hmem 2 ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV/lib\nprobe n2-dbg 2 ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV/lib CCL_ATL_HMEM=0 CCL_LOG_LEVEL=debug\necho \"== DIAG2 DONE ==\"\n"
+  },
+  {
+   "seq": 35,
+   "time_utc": "2026-09-06T09:29:34Z",
+   "action": "upload",
+   "files": [
+    "diag_pvc.slurm"
+   ]
+  },
+  {
+   "seq": 36,
+   "time_utc": "2026-09-06T09:36:46Z",
+   "action": "replace",
+   "file": "rank_env.sh",
+   "replacements": [
+    {
+     "old": "if [[ \"${ZMIG_NOLOCAL:-0}\" != \"1\" ]]; then\n  export CCL_LOCAL_RANK=\"${CCL_LOCAL_RANK:-$LOCAL_RANK}\"\n  export CCL_LOCAL_SIZE=\"${CCL_LOCAL_SIZE:-$LOCAL_WORLD_SIZE}\"\nfi\nexec \"$@\"",
+     "new": "if [[ \"${ZMIG_NOLOCAL:-0}\" != \"1\" ]]; then\n  export CCL_LOCAL_RANK=\"${CCL_LOCAL_RANK:-$LOCAL_RANK}\"\n  export CCL_LOCAL_SIZE=\"${CCL_LOCAL_SIZE:-$LOCAL_WORLD_SIZE}\"\nfi\n# srun leaks PMI/PMIX vars that send oneCCL's launcher detection down a\n# broken path (worker pthread_create EINVAL); the qualified NNoPP recipe\n# scrubbed them. Default on; disable with ZMIG_SCRUB_PMI=0.\nif [[ \"${ZMIG_SCRUB_PMI:-1}\" == \"1\" ]]; then\n  for v in $(compgen -e | grep -E \"^(PMI|PMIX)_\" || true); do unset \"$v\"; done\nfi\nexec \"$@\"",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 37,
+   "time_utc": "2026-09-06T09:36:54Z",
+   "action": "replace",
+   "file": "diag_pvc.slurm",
+   "replacements": [
+    {
+     "old": "echo \"== clean-env matrix ==\"\nprobe n1-clean 1 ZMIG_NOLOCAL=1\nprobe n2-clean 2 ZMIG_NOLOCAL=1\nprobe n2-tcp 2 ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV/lib CCL_ATL_HMEM=0\nprobe n2-tcp-hmem 2 ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV/lib\nprobe n2-dbg 2 ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV/lib CCL_ATL_HMEM=0 CCL_LOG_LEVEL=debug\necho \"== DIAG2 DONE ==\"",
+     "new": "echo \"== scrub matrix ==\"\nprobe n1-scrub 1 ZMIG_NOLOCAL=1 ZMIG_SCRUB_PMI=1\nprobe n2-scrub 2 ZMIG_NOLOCAL=1 ZMIG_SCRUB_PMI=1\nprobe n2-scrub-tcp 2 ZMIG_NOLOCAL=1 ZMIG_SCRUB_PMI=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV/lib CCL_ATL_HMEM=0\nprobe n2-scrub-locals 2 ZMIG_NOLOCAL=0 ZMIG_SCRUB_PMI=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV/lib CCL_ATL_HMEM=0\necho \"== torchrun cross-check (single node) ==\"\nexport MASTER_PORT=$(( 27000 + RANDOM % 1000 ))\ntimeout 240 srun -N 1 -n 1 --cpu-bind=none bash -c \"cd $ZMIG && $VENV/bin/torchrun --standalone --nproc_per_node=8 one_allreduce.py\" 2>&1 | grep -E \"ALLREDUCE-OK|RuntimeError|CCL_ERROR\" | awk \"!s[\\$0]++\" | head -5\necho \"== DIAG3 DONE ==\"",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 38,
+   "time_utc": "2026-09-06T09:37:07Z",
+   "action": "upload",
+   "files": [
+    "diag_pvc.slurm",
+    "rank_env.sh"
+   ]
+  },
+  {
+   "seq": 39,
+   "time_utc": "2026-09-06T09:40:42Z",
+   "action": "replace",
+   "file": "rank_env.sh",
+   "replacements": [
+    {
+     "old": "if [[ \"${ZMIG_SCRUB_PMI:-1}\" == \"1\" ]]; then\n  for v in $(compgen -e | grep -E \"^(PMI|PMIX)_\" || true); do unset \"$v\"; done\nfi\nexec \"$@\"",
+     "new": "if [[ \"${ZMIG_SCRUB_PMI:-1}\" == \"1\" ]]; then\n  for v in $(compgen -e | grep -E \"^(PMI|PMIX)_\" || true); do unset \"$v\"; done\nfi\nif [[ -n \"${ZMIG_STACK:-}\" ]]; then\n  ulimit -s \"$ZMIG_STACK\" 2>/dev/null || true\nfi\nexec \"$@\"",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 40,
+   "time_utc": "2026-09-06T09:40:52Z",
+   "action": "replace",
+   "file": "diag_pvc.slurm",
+   "replacements": [
+    {
+     "old": "echo \"== scrub matrix ==\"\nprobe n1-scrub 1 ZMIG_NOLOCAL=1 ZMIG_SCRUB_PMI=1\nprobe n2-scrub 2 ZMIG_NOLOCAL=1 ZMIG_SCRUB_PMI=1\nprobe n2-scrub-tcp 2 ZMIG_NOLOCAL=1 ZMIG_SCRUB_PMI=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV/lib CCL_ATL_HMEM=0\nprobe n2-scrub-locals 2 ZMIG_NOLOCAL=0 ZMIG_SCRUB_PMI=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV/lib CCL_ATL_HMEM=0\necho \"== torchrun cross-check (single node) ==\"\nexport MASTER_PORT=$(( 27000 + RANDOM % 1000 ))\ntimeout 240 srun -N 1 -n 1 --cpu-bind=none bash -c \"cd $ZMIG && $VENV/bin/torchrun --standalone --nproc_per_node=8 one_allreduce.py\" 2>&1 | grep -E \"ALLREDUCE-OK|RuntimeError|CCL_ERROR\" | awk \"!s[\\$0]++\" | head -5\necho \"== DIAG3 DONE ==\"",
+     "new": "echo \"== limits ==\"\nsrun -N 1 -n 1 bash -c 'echo \"stack=$(ulimit -s) nproc-lim=$(ulimit -u) threads-max=$(cat /proc/sys/kernel/threads-max) cpus=$(nproc)\"'\necho \"== stack/affinity matrix ==\"\nprobe n1-stack8m 1 ZMIG_NOLOCAL=1 ZMIG_STACK=8192\nprobe n1-stack64m 1 ZMIG_NOLOCAL=1 ZMIG_STACK=65536\nprobe n1-affspread 1 ZMIG_NOLOCAL=1 CCL_WORKER_AFFINITY=0,12,24,36,48,60,72,84\nprobe n1-affspread-stack 1 ZMIG_NOLOCAL=1 ZMIG_STACK=16384 CCL_WORKER_AFFINITY=0,12,24,36,48,60,72,84\nprobe n2-best 2 ZMIG_NOLOCAL=1 ZMIG_STACK=16384 CCL_WORKER_AFFINITY=0,12,24,36,48,60,72,84 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV/lib CCL_ATL_HMEM=0\necho \"== DIAG4 DONE ==\"",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 41,
+   "time_utc": "2026-09-06T09:41:01Z",
+   "action": "upload",
+   "files": [
+    "diag_pvc.slurm",
+    "rank_env.sh"
+   ]
+  },
+  {
+   "seq": 42,
+   "time_utc": "2026-09-06T09:51:38Z",
+   "action": "write",
+   "file": "diag_pvc.slurm",
+   "content": "#!/usr/bin/env bash\n#SBATCH --job-name=zmig-diag\n#SBATCH --account=REDACTED\n#SBATCH --partition=pvc\n#SBATCH --nodes=2\n#SBATCH --ntasks-per-node=8\n#SBATCH --cpus-per-task=4\n#SBATCH --export=ALL\n\nset -uo pipefail\nZMIG=/scratch/08447/abd2000/zmig\nVENV=/scratch/08447/abd2000/nnopp-pvc/venv\nVENV2=/scratch/08447/abd2000/zmig-venv\nmodule purge >/dev/null 2>&1\nmodule load python/3.12.11 >/dev/null 2>&1\n\nLD1=\"$VENV/lib:$VENV/lib/python3.12/site-packages/torch/lib:/opt/apps/python/3.12.11/lib\"\nLD2=\"$VENV2/lib:$VENV2/lib/python3.12/site-packages/torch/lib:/opt/apps/python/3.12.11/lib\"\nexport ZE_FLAT_DEVICE_HIERARCHY=FLAT\nexport CCL_PROCESS_LAUNCHER=none\nexport CCL_ATL_TRANSPORT=ofi\nexport CCL_ZE_IPC_EXCHANGE=sockets\nexport OMP_NUM_THREADS=4\nexport MASTER_ADDR=$(scontrol show hostnames \"$SLURM_JOB_NODELIST\" | head -1)\n\nprobe () {\n  # probe <label> <nodes> <venvpath> <ldpath> <extra-env...>\n  local label=$1 nn=$2 pv=$3 ld=$4; shift 4\n  export MASTER_PORT=$(( 26000 + RANDOM % 2000 ))\n  echo \"###PROBE $label nodes=$nn venv=$pv env: $*\"\n  ( export LD_LIBRARY_PATH=\"$ld\"\n    for kv in \"$@\"; do export \"$kv\"; done\n    timeout 240 srun -N \"$nn\" -n $(( nn * 8 )) --ntasks-per-node=8 --cpu-bind=none \\\n      bash \"$ZMIG/rank_env.sh\" \"$pv/bin/python\" \"$ZMIG/one_allreduce.py\" 2>&1 \\\n      | grep -E \"ALLREDUCE-OK|RuntimeError|CCL_ERROR|<warn>\" | awk \"!s[\\$0]++\" | head -5 )\n  echo \"###END $label\"\n}\n\nprobe n1-memaff   1 \"$VENV\"  \"$LD1\" ZMIG_NOLOCAL=1 CCL_WORKER_AFFINITY=0,12,24,36,48,60,72,84 CCL_WORKER_MEM_AFFINITY=0,0,0,0,0,0,0,0\nprobe n1-sysman   1 \"$VENV\"  \"$LD1\" ZMIG_NOLOCAL=1 ZES_ENABLE_SYSMAN=1\nprobe n1-newvenv  1 \"$VENV2\" \"$LD2\" ZMIG_NOLOCAL=1\nprobe n2-newvenv  2 \"$VENV2\" \"$LD2\" ZMIG_NOLOCAL=1\nprobe n2-newvenv-tcp 2 \"$VENV2\" \"$LD2\" ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV2/lib CCL_ATL_HMEM=0\necho \"== DIAG5 DONE ==\"\n"
+  },
+  {
+   "seq": 43,
+   "time_utc": "2026-09-06T09:51:48Z",
+   "action": "upload",
+   "files": [
+    "diag_pvc.slurm"
+   ]
+  },
+  {
+   "seq": 44,
+   "time_utc": "2026-09-06T09:58:39Z",
+   "action": "replace",
+   "file": "rank_env.sh",
+   "replacements": [
+    {
+     "old": "if [[ -n \"${ZMIG_STACK:-}\" ]]; then\n  ulimit -s \"$ZMIG_STACK\" 2>/dev/null || true\nfi\nexec \"$@\"",
+     "new": "if [[ -n \"${ZMIG_STACK:-}\" ]]; then\n  ulimit -s \"$ZMIG_STACK\" 2>/dev/null || true\nfi\n# oneCCL auto worker affinity picks end-of-node cores that can sit outside\n# the job cgroup -> pthread_create EINVAL. Pin every worker slot to this\n# task's own first allowed CPU (8 identical entries satisfy the 2022 parser).\nif [[ \"${ZMIG_AFF8:-0}\" == \"1\" ]]; then\n  ac=\"$(awk '/^Cpus_allowed_list:/ {print $2; exit}' /proc/self/status)\"\n  fc=\"${ac%%,*}\"; fc=\"${fc%%-*}\"\n  if [[ \"$fc\" =~ ^[0-9]+$ ]]; then\n    export CCL_WORKER_AFFINITY=\"$fc,$fc,$fc,$fc,$fc,$fc,$fc,$fc\"\n  fi\nfi\nexec \"$@\"",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 45,
+   "time_utc": "2026-09-06T09:58:39Z",
+   "action": "replace",
+   "file": "diag_pvc.slurm",
+   "replacements": [
+    {
+     "old": "#SBATCH --ntasks-per-node=8\n#SBATCH --cpus-per-task=4\n#SBATCH --export=ALL",
+     "new": "#SBATCH --ntasks-per-node=8\n#SBATCH --cpus-per-task=12\n#SBATCH --export=ALL",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 46,
+   "time_utc": "2026-09-06T09:58:41Z",
+   "action": "replace",
+   "file": "diag_pvc.slurm",
+   "replacements": [
+    {
+     "old": "probe n1-memaff   1 \"$VENV\"  \"$LD1\" ZMIG_NOLOCAL=1 CCL_WORKER_AFFINITY=0,12,24,36,48,60,72,84 CCL_WORKER_MEM_AFFINITY=0,0,0,0,0,0,0,0\nprobe n1-sysman   1 \"$VENV\"  \"$LD1\" ZMIG_NOLOCAL=1 ZES_ENABLE_SYSMAN=1\nprobe n1-newvenv  1 \"$VENV2\" \"$LD2\" ZMIG_NOLOCAL=1\nprobe n2-newvenv  2 \"$VENV2\" \"$LD2\" ZMIG_NOLOCAL=1\nprobe n2-newvenv-tcp 2 \"$VENV2\" \"$LD2\" ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV2/lib CCL_ATL_HMEM=0\necho \"== DIAG5 DONE ==\"",
+     "new": "srun -N 1 -n 1 --cpu-bind=none bash -c 'echo \"allowed=$(awk \"/^Cpus_allowed_list:/ {print \\$2}\" /proc/self/status) nproc=$(nproc)\"'\nprobe n1-full     1 \"$VENV\"  \"$LD1\" ZMIG_NOLOCAL=1\nprobe n1-aff8     1 \"$VENV\"  \"$LD1\" ZMIG_NOLOCAL=1 ZMIG_AFF8=1\nprobe n2-full-tcp 2 \"$VENV\"  \"$LD1\" ZMIG_NOLOCAL=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV/lib CCL_ATL_HMEM=0\nprobe n2-aff8-tcp 2 \"$VENV\"  \"$LD1\" ZMIG_NOLOCAL=1 ZMIG_AFF8=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV/lib CCL_ATL_HMEM=0\nprobe n2-new-tcp  2 \"$VENV2\" \"$LD2\" ZMIG_NOLOCAL=1 ZMIG_AFF8=1 FI_PROVIDER=tcp FI_TCP_IFACE=ibp56s0 FI_PROVIDER_PATH=$VENV2/lib CCL_ATL_HMEM=0\necho \"== DIAG6 DONE ==\"",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 47,
+   "time_utc": "2026-09-06T09:58:54Z",
+   "action": "upload",
+   "files": [
+    "diag_pvc.slurm",
+    "rank_env.sh"
+   ]
+  },
+  {
+   "seq": 48,
+   "time_utc": "2026-09-06T10:02:14Z",
+   "action": "write",
+   "file": "zmig_pvc.slurm",
+   "content": "#!/usr/bin/env bash\n#SBATCH --job-name=zmig-pvc\n#SBATCH --account=REDACTED\n#SBATCH --partition=pvc\n#SBATCH --ntasks-per-node=8\n#SBATCH --cpus-per-task=12\n#SBATCH --export=ALL\n# nodes and time come from sbatch -N / -t at submit time\n# QUALIFIED RECIPE (diag6 3472829): python module only (intel/impi modules\n# inject a second oneCCL and break worker threads), full-node cgroup\n# (cpus-per-task=12; partial cgroups leave oneCCL worker CPUs outside the\n# allowed set -> pthread_create EINVAL), venv libfabric tcp over ibp56s0,\n# ATL HMEM off (host-staged), PMI scrub, per-rank 8-entry affinity pin.\n\nset -uo pipefail\nZMIG=/scratch/08447/abd2000/zmig\nVENV=/scratch/08447/abd2000/nnopp-pvc/venv\nNODES=${SLURM_JOB_NUM_NODES}\nOUT=$ZMIG/results/pvc\nmkdir -p \"$OUT\" \"$ZMIG/logs\"\n\nmodule purge >/dev/null 2>&1\nmodule load python/3.12.11 >/dev/null 2>&1\nmodule list 2>&1 | head -4\n\nexport LD_LIBRARY_PATH=\"$VENV/lib:$VENV/lib/python3.12/site-packages/torch/lib:/opt/apps/python/3.12.11/lib\"\nexport ZE_FLAT_DEVICE_HIERARCHY=FLAT\nexport CCL_PROCESS_LAUNCHER=none\nexport CCL_ATL_TRANSPORT=ofi\nexport CCL_ZE_IPC_EXCHANGE=sockets\nexport CCL_ATL_HMEM=0\nexport FI_PROVIDER=tcp\nexport FI_TCP_IFACE=ibp56s0\nexport FI_PROVIDER_PATH=$VENV/lib\nexport FI_LOG_LEVEL=warn\nexport OMP_NUM_THREADS=4\nexport ZMIG_NOLOCAL=1\nexport ZMIG_AFF8=1\nexport ZMIG_TRANSPORT=pvc-tcp-hoststaged\nexport TRITON_CACHE_DIR=/tmp/triton-$SLURM_JOB_ID\nexport MASTER_ADDR=$(scontrol show hostnames \"$SLURM_JOB_NODELIST\" | head -1)\nPORT_BASE=$(( 25000 + SLURM_JOB_ID % 2000 ))\nPY=$VENV/bin/python\n\necho \"=== zmig pvc nodes=$NODES job=$SLURM_JOB_ID nodelist=$SLURM_JOB_NODELIST ===\"\nsrun -N \"$NODES\" -n \"$NODES\" --ntasks-per-node=1 bash -c 'echo \"$(hostname): $('\"$PY\"' -c \"import torch;print(torch.__version__, torch.xpu.is_available(), torch.xpu.device_count())\" 2>&1 | tail -1)\"'\n\nrunidx=0\nrun_llama () {\n  local stage=$1 rep=$2 extra=$3\n  runidx=$((runidx+1))\n  export MASTER_PORT=$((PORT_BASE + runidx))\n  echo \"--- llama stage=$stage rep=$rep extra='$extra' port=$MASTER_PORT $(date +%T) ---\"\n  timeout 1800 srun --cpu-bind=none bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/llama_bench.py\" \\\n    --stage \"$stage\" --rep \"$rep\" --out \"$OUT\" --tag \"pvc_n${NODES}\" \\\n    --iters \"${ZMIG_ITERS:-40}\" $extra\n  local rc=$?\n  echo \"--- rc=$rc ---\"\n  return $rc\n}\n\nrun_moe () {\n  local mode=$1 rep=$2 extra=$3\n  runidx=$((runidx+1))\n  export MASTER_PORT=$((PORT_BASE + runidx))\n  echo \"--- moe mode=$mode rep=$rep $(date +%T) ---\"\n  timeout 600 srun --cpu-bind=none bash \"$ZMIG/rank_env.sh\" \"$PY\" \"$ZMIG/moe_bench.py\" \\\n    --mode \"$mode\" --rep \"$rep\" --out \"$OUT\" --tag \"pvc_n${NODES}\" $extra\n  local rc=$?\n  echo \"--- rc=$rc ---\"\n  return $rc\n}\n\nif [[ \"${ZMIG_SMOKE:-0}\" == \"1\" ]]; then\n  echo \"=== SMOKE ===\"\n  for st in 0 2 3; do run_llama \"$st\" 1 \"--tiny\"; done\n  run_moe balanced 1 \"--tiny\"\n  run_moe skewed 1 \"--tiny\"\n  echo \"=== SMOKE DONE ===\"\n  exit 0\nfi\n\nfor st in 0 2 3; do\n  for rep in 1 2 3; do\n    run_llama \"$st\" \"$rep\" \"\"\n  done\ndone\n\nif [[ \"$NODES\" == \"2\" ]]; then\n  for mode in balanced skewed; do\n    for rep in 1 2 3; do run_moe \"$mode\" \"$rep\" \"\"; done\n  done\nfi\necho \"=== JOB DONE $(date +%T) ===\"\n"
+  },
+  {
+   "seq": 49,
+   "time_utc": "2026-09-06T10:02:23Z",
+   "action": "upload",
+   "files": [
+    "zmig_pvc.slurm"
+   ]
+  },
+  {
+   "seq": 50,
+   "time_utc": "2026-09-06T10:19:08Z",
+   "action": "replace",
+   "file": "llama_bench.py",
+   "replacements": [
+    {
+     "old": "    ap.add_argument(\"--layers\", type=int, default=32)",
+     "new": "    ap.add_argument(\"--layers\", type=int, default=30)",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 51,
+   "time_utc": "2026-09-06T10:19:10Z",
+   "action": "replace",
+   "file": "llama_bench.py",
+   "replacements": [
+    {
+     "old": "            \"reduce_bucket_size\": 5.0e8,",
+     "new": "            \"reduce_bucket_size\": 2.5e8,",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 52,
+   "time_utc": "2026-09-06T10:19:14Z",
+   "action": "upload",
+   "files": [
+    "llama_bench.py"
+   ]
+  },
+  {
+   "seq": 53,
+   "time_utc": "2026-09-06T11:25:18Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "for st in 0 2 3; do\n  for rep in 1 2 3; do\n    run_llama \"$st\" \"$rep\" \"\"\n  done\ndone",
+     "new": "if [[ -n \"${ZMIG_ONLY:-}\" ]]; then\n  for pair in $ZMIG_ONLY; do\n    run_llama \"${pair%%:*}\" \"${pair##*:}\" \"\"\n  done\n  echo \"=== TOPUP DONE $(date +%T) ===\"\n  exit 0\nfi\n\nfor st in 0 2 3; do\n  for rep in 1 2 3; do\n    run_llama \"$st\" \"$rep\" \"\"\n  done\ndone",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 54,
+   "time_utc": "2026-09-06T11:25:20Z",
+   "action": "upload",
+   "files": [
+    "zmig_pvc.slurm"
+   ]
+  },
+  {
+   "seq": 55,
+   "time_utc": "2026-09-06T11:38:57Z",
+   "action": "replace",
+   "file": "llama_bench.py",
+   "replacements": [
+    {
+     "old": "    log0(\"measuring...\")\n    recs = []\n    t_meas0 = time.perf_counter()\n    for _ in range(args.iters):\n        recs.append(one_step(True))",
+     "new": "    log0(\"measuring...\")\n    recs = []\n    t_meas0 = time.perf_counter()\n    for i in range(args.iters):\n        recs.append(one_step(True))\n        if i % 10 == 0:\n            log0(f\"iter {i + 1}/{args.iters} \"\n                 f\"last={recs[-1]['iter_ms']:.0f}ms\")",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 56,
+   "time_utc": "2026-09-06T11:38:59Z",
+   "action": "replace",
+   "file": "zmig_pvc.slurm",
+   "replacements": [
+    {
+     "old": "    --stage \"$stage\" --rep \"$rep\" --out \"$OUT\" --tag \"pvc_n${NODES}\" \\\n    --iters \"${ZMIG_ITERS:-40}\" $extra",
+     "new": "    --stage \"$stage\" --rep \"$rep\" --out \"$OUT\" --tag \"pvc_n${NODES}\" \\\n    --iters \"${ZMIG_ITERS:-40}\" --warmup \"${ZMIG_WARMUP:-10}\" $extra",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 57,
+   "time_utc": "2026-09-06T11:39:03Z",
+   "action": "upload",
+   "files": [
+    "llama_bench.py",
+    "zmig_pvc.slurm"
+   ]
+  },
+  {
+   "seq": 58,
+   "time_utc": "2026-09-06T12:56:32Z",
+   "action": "replace",
+   "file": "llama_bench.py",
+   "replacements": [
+    {
+     "old": "# --------------------------- comms logging ----------------------------",
+     "new": "# ---------------- synchronized comm timing (exposed time) -------------\nCOMM_ACC = {}\nCOMM_ENABLED = {\"on\": False}\n\n\ndef install_comm_timers(kind):\n    import torch.distributed as dist\n\n    def wrap(name):\n        orig = getattr(dist, name)\n\n        def timed(*a, **kw):\n            if not COMM_ENABLED[\"on\"]:\n                return orig(*a, **kw)\n            t0 = time.perf_counter()\n            ret = orig(*a, **kw)\n            if kw.get(\"async_op\"):\n                ret.wait()\n            dev_sync(kind)\n            dt = (time.perf_counter() - t0) * 1e3\n            slot = COMM_ACC.setdefault(name, [0, 0.0])\n            slot[0] += 1\n            slot[1] += dt\n            return ret\n\n        setattr(dist, name, timed)\n\n    for name in (\"all_reduce\", \"reduce_scatter_tensor\", \"all_gather_into_tensor\",\n                 \"broadcast\", \"all_gather\", \"reduce_scatter\", \"barrier\",\n                 \"_reduce_scatter_base\", \"_all_gather_base\"):\n        if hasattr(dist, name):\n            wrap(name)\n\n\n# --------------------------- comms logging ----------------------------",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 59,
+   "time_utc": "2026-09-06T12:56:34Z",
+   "action": "replace",
+   "file": "llama_bench.py",
+   "replacements": [
+    {
+     "old": "    import torch.distributed as dist\n    dist.init_process_group(backend=backend, init_method=\"env://\",\n                            rank=rank, world_size=world)\n\n    import deepspeed",
+     "new": "    import torch.distributed as dist\n    dist.init_process_group(backend=backend, init_method=\"env://\",\n                            rank=rank, world_size=world)\n    install_comm_timers(kind)\n\n    import deepspeed",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 60,
+   "time_utc": "2026-09-06T12:56:37Z",
+   "action": "replace",
+   "file": "llama_bench.py",
+   "replacements": [
+    {
+     "old": "    dev_sync(kind)\n    dist.barrier()\n    reset_peak(kind)\n    base_comms = comms_snapshot()",
+     "new": "    dev_sync(kind)\n    dist.barrier()\n    reset_peak(kind)\n    base_comms = comms_snapshot()\n    COMM_ACC.clear()\n    COMM_ENABLED[\"on\"] = True",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 61,
+   "time_utc": "2026-09-06T12:56:40Z",
+   "action": "replace",
+   "file": "llama_bench.py",
+   "replacements": [
+    {
+     "old": "    t_meas = time.perf_counter() - t_meas0\n    end_comms = comms_snapshot()",
+     "new": "    t_meas = time.perf_counter() - t_meas0\n    COMM_ENABLED[\"on\"] = False\n    end_comms = comms_snapshot()\n    timed_comms = {name: {\"count\": v[0], \"time_ms\": v[1]}\n                   for name, v in COMM_ACC.items()}",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 62,
+   "time_utc": "2026-09-06T12:56:41Z",
+   "action": "replace",
+   "file": "llama_bench.py",
+   "replacements": [
+    {
+     "old": "        \"peak_mem_bytes\": mem,\n        \"comms\": comms_delta(end_comms, base_comms),\n    }",
+     "new": "        \"peak_mem_bytes\": mem,\n        \"comms\": timed_comms,\n        \"ds_comms\": comms_delta(end_comms, base_comms),\n    }",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 63,
+   "time_utc": "2026-09-06T12:57:11Z",
+   "action": "upload",
+   "files": [
+    "llama_bench.py"
+   ]
+  },
+  {
+   "seq": 64,
+   "time_utc": "2026-09-06T15:05:35Z",
+   "action": "replace",
+   "file": "zmig_h100.slurm",
+   "replacements": [
+    {
+     "old": "if [[ \"${ZMIG_SMOKE:-0}\" == \"1\" ]]; then",
+     "new": "if [[ \"${ZMIG_COMPACT:-0}\" == \"1\" ]]; then\n  echo \"=== COMPACT (budget-fit) ===\"\n  for rep in 1 2; do\n    run_llama 0 \"$rep\" direct \"\"\n    run_llama 2 \"$rep\" direct \"\"\n    run_llama 3 \"$rep\" direct \"\"\n    run_llama 3 \"$rep\" host \"\"\n  done\n  for rep in 1 2; do\n    run_moe balanced \"$rep\" \"\"\n    run_moe skewed \"$rep\" \"\"\n  done\n  echo \"=== COMPACT DONE $(date +%T) ===\"\n  exit 0\nfi\n\nif [[ \"${ZMIG_SMOKE:-0}\" == \"1\" ]]; then",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 65,
+   "time_utc": "2026-09-06T15:05:40Z",
+   "action": "upload",
+   "files": [
+    "zmig_h100.slurm"
+   ]
+  },
+  {
+   "seq": 66,
+   "time_utc": "2026-09-06T15:26:28Z",
+   "action": "replace",
+   "file": "llama_bench.py",
+   "replacements": [
+    {
+     "old": "        result = {\n            \"tag\": args.tag, \"mode\": {0: \"ddp\", 2: \"zero2\", 3: \"zero3\"}[args.stage],",
+     "new": "        result = {\n            \"bench_version\": 2,\n            \"tag\": args.tag, \"mode\": {0: \"ddp\", 2: \"zero2\", 3: \"zero3\"}[args.stage],",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 67,
+   "time_utc": "2026-09-06T15:26:31Z",
+   "action": "upload",
+   "files": [
+    "llama_bench.py"
+   ]
+  },
+  {
+   "seq": 68,
+   "time_utc": "2026-09-06T17:23:02Z",
+   "action": "replace",
+   "file": "zmig_h100.slurm",
+   "replacements": [
+    {
+     "old": "if [[ \"${ZMIG_COMPACT:-0}\" == \"1\" ]]; then",
+     "new": "if [[ \"${ZMIG_DELTA:-0}\" == \"1\" ]]; then\n  echo \"=== DELTA (third reps) ===\"\n  run_llama 0 3 direct \"\"\n  run_llama 2 3 direct \"\"\n  run_llama 3 3 direct \"\"\n  run_llama 3 3 host \"\"\n  run_moe balanced 3 \"\"\n  run_moe skewed 3 \"\"\n  echo \"=== DELTA DONE $(date +%T) ===\"\n  exit 0\nfi\n\nif [[ \"${ZMIG_COMPACT:-0}\" == \"1\" ]]; then",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 69,
+   "time_utc": "2026-09-06T17:23:06Z",
+   "action": "upload",
+   "files": [
+    "zmig_h100.slurm"
+   ]
+  },
+  {
+   "seq": 70,
+   "time_utc": "2026-09-08T01:14:54Z",
+   "action": "replace",
+   "file": "zmig_h100.slurm",
+   "replacements": [
+    {
+     "old": "module purge >/dev/null 2>&1\nmodule load gcc >/dev/null 2>&1 || true\nexport MASTER_ADDR=$(scontrol show hostnames \"$SLURM_JOB_NODELIST\" | head -1)",
+     "new": "module purge >/dev/null 2>&1\nmodule load python/3.12.11 >/dev/null 2>&1\nmodule list 2>&1 | head -3\nexport LD_LIBRARY_PATH=\"/opt/apps/python/3.12.11/lib:${LD_LIBRARY_PATH:-}\"\nexport MASTER_ADDR=$(scontrol show hostnames \"$SLURM_JOB_NODELIST\" | head -1)",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 71,
+   "time_utc": "2026-09-08T01:14:59Z",
+   "action": "upload",
+   "files": [
+    "zmig_h100.slurm"
+   ]
+  },
+  {
+   "seq": 72,
+   "time_utc": "2026-09-09T11:43:18Z",
+   "action": "replace",
+   "file": "llama_bench.py",
+   "replacements": [
+    {
+     "old": "def pick_device(local_rank):\n    if torch.cuda.is_available():\n        torch.cuda.set_device(local_rank)\n        return torch.device(f\"cuda:{local_rank}\"), \"nccl\", \"cuda\"",
+     "new": "def pick_device(local_rank):\n    if torch.cuda.is_available():\n        torch.cuda.set_device(local_rank)\n        # 2026-09 node image: the mlx5_0 pin from the July campaign hangs\n        # NCCL bootstrap; let NCCL autodetect and log its choices.\n        os.environ.pop(\"NCCL_IB_HCA\", None)\n        os.environ.setdefault(\"NCCL_DEBUG\", \"WARN\")\n        os.environ.setdefault(\"NCCL_DEBUG_SUBSYS\", \"INIT,NET\")\n        return torch.device(f\"cuda:{local_rank}\"), \"nccl\", \"cuda\"",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 73,
+   "time_utc": "2026-09-09T11:43:18Z",
+   "action": "upload",
+   "files": [
+    "llama_bench.py"
+   ]
+  },
+  {
+   "seq": 74,
+   "time_utc": "2026-09-09T12:10:28Z",
+   "action": "replace",
+   "file": "llama_bench.py",
+   "replacements": [
+    {
+     "old": "        # 2026-09 node image: the mlx5_0 pin from the July campaign hangs\n        # NCCL bootstrap; let NCCL autodetect and log its choices.\n        os.environ.pop(\"NCCL_IB_HCA\", None)\n        os.environ.setdefault(\"NCCL_DEBUG\", \"WARN\")\n        os.environ.setdefault(\"NCCL_DEBUG_SUBSYS\", \"INIT,NET\")",
+     "new": "        # 2026-09 node image: the mlx5_0 pin hangs NCCL bootstrap, and\n        # GPUDirect RDMA is broken at driver level (IBV_WC_LOC_PROT_ERR on\n        # GPU-memory sends). Autodetect the HCA and force host-staged IB.\n        os.environ.pop(\"NCCL_IB_HCA\", None)\n        os.environ[\"NCCL_NET_GDR_LEVEL\"] = \"LOC\"\n        os.environ.setdefault(\"NCCL_DEBUG\", \"WARN\")\n        if os.environ.get(\"ZMIG_TRANSPORT\") == \"direct\":\n            os.environ[\"ZMIG_TRANSPORT\"] = \"ib-gdr-disabled\"",
+     "count": 1
+    },
+    {
+     "old": "    import torch.distributed as dist\n    dist.init_process_group(backend=backend, init_method=\"env://\",\n                            rank=rank, world_size=world)\n    install_comm_timers(kind)",
+     "new": "    import datetime\n    import torch.distributed as dist\n    dist.init_process_group(backend=backend, init_method=\"env://\",\n                            rank=rank, world_size=world,\n                            timeout=datetime.timedelta(minutes=3))\n    install_comm_timers(kind)",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 75,
+   "time_utc": "2026-09-09T12:10:46Z",
+   "action": "replace",
+   "file": "zmig_h100.slurm",
+   "replacements": [
+    {
+     "old": "  if [[ \"$transport\" == \"host\" ]]; then\n    export NCCL_NET_GDR_LEVEL=LOC\n    export ZMIG_TRANSPORT=host-staged\n  else\n    unset NCCL_NET_GDR_LEVEL\n    export ZMIG_TRANSPORT=direct\n  fi",
+     "new": "  if [[ \"$transport\" == \"sock\" ]]; then\n    export NCCL_IB_DISABLE=1\n    export NCCL_NET_GDR_LEVEL=LOC\n    export ZMIG_TRANSPORT=tcp-sockets\n  elif [[ \"$transport\" == \"host\" ]]; then\n    unset NCCL_IB_DISABLE\n    export NCCL_NET_GDR_LEVEL=LOC\n    export ZMIG_TRANSPORT=host-staged\n  else\n    unset NCCL_IB_DISABLE\n    export NCCL_NET_GDR_LEVEL=LOC\n    export ZMIG_TRANSPORT=direct\n  fi",
+     "count": 1
+    },
+    {
+     "old": "  echo \"=== COMPACT (budget-fit) ===\"\n  for rep in 1 2; do\n    run_llama 0 \"$rep\" direct \"\"\n    run_llama 2 \"$rep\" direct \"\"\n    run_llama 3 \"$rep\" direct \"\"\n    run_llama 3 \"$rep\" host \"\"\n  done",
+     "new": "  echo \"=== COMPACT (budget-fit) ===\"\n  for rep in 1 2; do\n    run_llama 0 \"$rep\" direct \"\"\n    run_llama 2 \"$rep\" direct \"\"\n    run_llama 3 \"$rep\" direct \"\"\n    run_llama 3 \"$rep\" sock \"\"\n  done",
+     "count": 1
+    },
+    {
+     "old": "  run_llama 0 3 direct \"\"\n  run_llama 2 3 direct \"\"\n  run_llama 3 3 direct \"\"\n  run_llama 3 3 host \"\"",
+     "new": "  run_llama 0 3 direct \"\"\n  run_llama 2 3 direct \"\"\n  run_llama 3 3 direct \"\"\n  run_llama 3 3 sock \"\"",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 76,
+   "time_utc": "2026-09-09T12:10:46Z",
+   "action": "upload",
+   "files": [
+    "llama_bench.py",
+    "zmig_h100.slurm"
+   ]
+  },
+  {
+   "seq": 77,
+   "time_utc": "2026-09-09T12:11:14Z",
+   "action": "replace",
+   "file": "moe_bench.py",
+   "replacements": [
+    {
+     "old": "def pick_device(local_rank):\n    if torch.cuda.is_available():\n        torch.cuda.set_device(local_rank)\n        return torch.device(f\"cuda:{local_rank}\"), \"nccl\", \"cuda\"",
+     "new": "def pick_device(local_rank):\n    if torch.cuda.is_available():\n        torch.cuda.set_device(local_rank)\n        os.environ.pop(\"NCCL_IB_HCA\", None)\n        os.environ[\"NCCL_NET_GDR_LEVEL\"] = \"LOC\"\n        return torch.device(f\"cuda:{local_rank}\"), \"nccl\", \"cuda\"",
+     "count": 1
+    },
+    {
+     "old": "    import torch.distributed as dist\n    dist.init_process_group(backend=backend, init_method=\"env://\",\n                            rank=rank, world_size=world)",
+     "new": "    import datetime\n    import torch.distributed as dist\n    dist.init_process_group(backend=backend, init_method=\"env://\",\n                            rank=rank, world_size=world,\n                            timeout=datetime.timedelta(minutes=3))",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 78,
+   "time_utc": "2026-09-09T12:11:14Z",
+   "action": "upload",
+   "files": [
+    "moe_bench.py"
+   ]
+  },
+  {
+   "seq": 79,
+   "time_utc": "2026-09-09T14:36:45Z",
+   "action": "replace",
+   "file": "llama_bench.py",
+   "replacements": [
+    {
+     "old": "COMM_ACC = {}\nCOMM_ENABLED = {\"on\": False}\n\n\ndef install_comm_timers(kind):\n    import torch.distributed as dist\n\n    def wrap(name):\n        orig = getattr(dist, name)\n\n        def timed(*a, **kw):\n            if not COMM_ENABLED[\"on\"]:\n                return orig(*a, **kw)\n            t0 = time.perf_counter()\n            ret = orig(*a, **kw)\n            if kw.get(\"async_op\"):\n                ret.wait()\n            dev_sync(kind)\n            dt = (time.perf_counter() - t0) * 1e3\n            slot = COMM_ACC.setdefault(name, [0, 0.0])\n            slot[0] += 1\n            slot[1] += dt\n            return ret\n\n        setattr(dist, name, timed)\n\n    for name in (\"all_reduce\", \"reduce_scatter_tensor\", \"all_gather_into_tensor\",\n                 \"broadcast\", \"all_gather\", \"reduce_scatter\", \"barrier\",\n                 \"_reduce_scatter_base\", \"_all_gather_base\"):\n        if hasattr(dist, name):\n            wrap(name)",
+     "new": "COMM_ACC = {}\nCOMM_ENABLED = {\"on\": False, \"depth\": 0}\n\n\ndef _timed_call(name, orig, kind, a, kw):\n    if not COMM_ENABLED[\"on\"] or COMM_ENABLED[\"depth\"] > 0:\n        COMM_ENABLED[\"depth\"] += 1\n        try:\n            return orig(*a, **kw)\n        finally:\n            COMM_ENABLED[\"depth\"] -= 1\n    COMM_ENABLED[\"depth\"] += 1\n    t0 = time.perf_counter()\n    try:\n        ret = orig(*a, **kw)\n        if kw.get(\"async_op\") and ret is not None:\n            ret.wait()\n    finally:\n        COMM_ENABLED[\"depth\"] -= 1\n    dev_sync(kind)\n    dt = (time.perf_counter() - t0) * 1e3\n    slot = COMM_ACC.setdefault(name, [0, 0.0])\n    slot[0] += 1\n    slot[1] += dt\n    return ret\n\n\nOP_NAMES = (\"all_reduce\", \"reduce_scatter_tensor\", \"all_gather_into_tensor\",\n            \"broadcast\", \"all_gather\", \"reduce_scatter\", \"barrier\",\n            \"_reduce_scatter_base\", \"_all_gather_base\")\n\n\ndef install_comm_timers(kind):\n    import torch.distributed as dist\n\n    def wrap(name):\n        orig = getattr(dist, name)\n\n        def timed(*a, **kw):\n            return _timed_call(name, orig, kind, a, kw)\n\n        setattr(dist, name, timed)\n\n    for name in OP_NAMES:\n        if hasattr(dist, name):\n            wrap(name)\n\n\ndef install_ds_comm_timers(kind):\n    \"\"\"DeepSpeed's ZeRO-3 param fetch goes through deepspeed.comm, which can\n    bypass the module-level torch.distributed wrappers; wrap it too. The\n    depth guard prevents double counting when one layer calls the other.\"\"\"\n    try:\n        import deepspeed.comm as dscomm\n    except Exception:\n        return\n\n    def wrap(mod, name):\n        orig = getattr(mod, name)\n\n        def timed(*a, **kw):\n            return _timed_call(name.lstrip(\"_\"), orig, kind, a, kw)\n\n        setattr(mod, name, timed)\n\n    for name in OP_NAMES + (\"allgather_fn\", \"reduce_scatter_fn\", \"inference_all_reduce\"):\n        if hasattr(dscomm, name):\n            wrap(dscomm, name)",
+     "count": 1
+    },
+    {
+     "old": "    import deepspeed\n\n    seed = 1234 + args.rep",
+     "new": "    import deepspeed\n    install_ds_comm_timers(kind)\n\n    seed = 1234 + args.rep",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "seq": 80,
+   "time_utc": "2026-09-09T14:36:45Z",
+   "action": "upload",
+   "files": [
+    "llama_bench.py"
+   ]
+  }
+ ]
+}

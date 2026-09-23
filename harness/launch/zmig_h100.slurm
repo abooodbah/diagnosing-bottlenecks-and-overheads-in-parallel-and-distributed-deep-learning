@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=zmig-h100
-#SBATCH --account=OTH21057
+# allocation: pass it at submit time with sbatch -A <account>
 #SBATCH --partition=h100
 #SBATCH --ntasks-per-node=4
 #SBATCH --cpus-per-task=16
@@ -15,7 +15,9 @@ OUT=$ZMIG/results/h100
 mkdir -p "$OUT" "$ZMIG/logs"
 
 module purge >/dev/null 2>&1
-module load gcc >/dev/null 2>&1 || true
+module load python/3.12.11 >/dev/null 2>&1
+module list 2>&1 | head -3
+export LD_LIBRARY_PATH="/opt/apps/python/3.12.11/lib:${LD_LIBRARY_PATH:-}"
 export MASTER_ADDR=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -1)
 PORT_BASE=$(( 25000 + SLURM_JOB_ID % 2000 ))
 PY=$VENV/bin/python
@@ -29,11 +31,17 @@ run_llama () {
   local stage=$1 rep=$2 transport=$3 extra=$4
   runidx=$((runidx+1))
   export MASTER_PORT=$((PORT_BASE + runidx))
-  if [[ "$transport" == "host" ]]; then
+  if [[ "$transport" == "sock" ]]; then
+    export NCCL_IB_DISABLE=1
+    export NCCL_NET_GDR_LEVEL=LOC
+    export ZMIG_TRANSPORT=tcp-sockets
+  elif [[ "$transport" == "host" ]]; then
+    unset NCCL_IB_DISABLE
     export NCCL_NET_GDR_LEVEL=LOC
     export ZMIG_TRANSPORT=host-staged
   else
-    unset NCCL_NET_GDR_LEVEL
+    unset NCCL_IB_DISABLE
+    export NCCL_NET_GDR_LEVEL=LOC
     export ZMIG_TRANSPORT=direct
   fi
   echo "--- llama stage=$stage rep=$rep transport=$transport port=$MASTER_PORT $(date +%T) ---"
@@ -54,13 +62,25 @@ run_moe () {
   echo "--- rc=$? ---"
 }
 
+if [[ "${ZMIG_DELTA:-0}" == "1" ]]; then
+  echo "=== DELTA (third reps) ==="
+  run_llama 0 3 direct ""
+  run_llama 2 3 direct ""
+  run_llama 3 3 direct ""
+  run_llama 3 3 sock ""
+  run_moe balanced 3 ""
+  run_moe skewed 3 ""
+  echo "=== DELTA DONE $(date +%T) ==="
+  exit 0
+fi
+
 if [[ "${ZMIG_COMPACT:-0}" == "1" ]]; then
   echo "=== COMPACT (budget-fit) ==="
   for rep in 1 2; do
     run_llama 0 "$rep" direct ""
     run_llama 2 "$rep" direct ""
     run_llama 3 "$rep" direct ""
-    run_llama 3 "$rep" host ""
+    run_llama 3 "$rep" sock ""
   done
   for rep in 1 2; do
     run_moe balanced "$rep" ""

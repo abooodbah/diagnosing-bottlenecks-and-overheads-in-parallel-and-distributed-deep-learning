@@ -1,0 +1,443 @@
+{
+ "tag": "pvc_n4",
+ "mode": "ddp",
+ "stage": 0,
+ "rep": 2,
+ "world": 32,
+ "nodes": 4,
+ "device_kind": "xpu",
+ "backend": "xccl",
+ "params_b": 2.54688512,
+ "model": {
+  "layers": 30,
+  "hidden": 2560,
+  "heads": 20,
+  "ffn": 6912,
+  "vocab": 32768,
+  "seq": 2048,
+  "micro": 1
+ },
+ "iters": 40,
+ "warmup": 10,
+ "measure_wall_s": 129.0371155431494,
+ "step_max_ms": {
+  "p50": 3212.7622859552503,
+  "p95": 3309.6191310323775,
+  "mean": 3224.7238596261013
+ },
+ "peak_mem_bytes_max": 62110734336,
+ "peak_mem_bytes_per_rank": [
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336,
+  62110734336
+ ],
+ "rank0_phases_ms": {
+  "fwd_p50": 113.83827915415168,
+  "bwd_p50": 2793.676147935912,
+  "step_p50": 312.9657539539039,
+  "barrier_p50": 3.2610581256449223
+ },
+ "barrier_ms_mean_per_rank": [
+  3.3073028025683016,
+  2.3397216165903956,
+  3.9254688599612564,
+  1.117191364755854,
+  2.327896561473608,
+  1.5311418159399182,
+  2.9602627793792635,
+  2.139422344043851,
+  2.9712372575886548,
+  1.764040149282664,
+  2.406641573179513,
+  2.2330016014166176,
+  3.7614602188114077,
+  0.9684986958745867,
+  3.5988431656733155,
+  2.6423269766382873,
+  74.55621483386494,
+  76.34267504909076,
+  77.64018191373907,
+  76.83574961847626,
+  75.13718568370678,
+  77.3522921546828,
+  79.10737443016842,
+  76.09124659211375,
+  76.70463190297596,
+  75.93698521377519,
+  76.1267124384176,
+  75.5194173194468,
+  77.49218595563434,
+  75.00341031118296,
+  73.73091654153541,
+  75.94292114954442
+ ],
+ "comms_per_rank0": {
+  "broadcast": {
+   "count": 0,
+   "time_ms": 0.0
+  },
+  "all_reduce": {
+   "count": 200,
+   "time_ms": 27.633599481964694
+  }
+ },
+ "comms_all_ranks": [
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 27.633599481964694
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 27.87677393822713
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 27.545416627944434
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 27.989548618073314
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 27.702603622844777
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 27.880353059987343
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 27.60748212186273
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 27.92577691449118
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 51.28179716267557
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 51.53725405765648
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 51.427262494670885
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 51.60262770825247
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 51.31399131419303
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 51.85230192589347
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 51.31811313126492
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 51.42271336878585
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 53.117506763175015
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 53.32543132018735
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 53.03256577952018
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 53.22291672407097
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 53.004163735123825
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 53.31655471612342
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 52.99418670060621
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 53.290086023196736
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 53.1620508400826
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 53.76683921526407
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 53.660309536431754
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 53.673045011139266
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 53.21251930932016
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 54.138705999942886
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 53.51181082682635
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 200,
+    "time_ms": 53.66949719174684
+   }
+  }
+ ],
+ "env": {
+  "transport_note": "pvc-tcp-hoststaged",
+  "NCCL_NET_GDR_LEVEL": "",
+  "job": "3472847",
+  "nodelist": "c552-[004-007]",
+  "torch": "2.13.0+xpu"
+ },
+ "ts": "2026-09-06 05:35:26"
+}

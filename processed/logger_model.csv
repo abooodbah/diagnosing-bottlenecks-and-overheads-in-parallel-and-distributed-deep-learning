@@ -1,0 +1,7 @@
+platform,mode,logged_calls_per_step,record_variants,sum_k_squared,c_fit_us_median,c_fit_us_range,predicted_growth_ms_per_step,measured_growth_statistic,measured_growth_ms_median,measured_growth_ms_min,measured_growth_ms_max,measured_one_node_min,measured_one_node_max,runs
+h100,ddp,all_reduce=5,1,25.0,12.94,12.71-13.18,0.32,least squares without the first measured iteration,0.35,0.3,0.45,0.3,0.45,9
+h100,zero2,all_gather_into_tensor=1;all_reduce=13,1,170.0,12.94,12.71-13.18,2.2,least squares over all heartbeats,2.18,2.08,2.28,2.14,2.22,9
+h100,zero3,all_gather_into_tensor=206;all_reduce=1;reduce_scatter_tensor=11,1,42558.0,12.94,12.71-13.18,550.84,least squares over all heartbeats,550.84,540.79,560.82,540.79,544.67,13
+pvc,ddp,all_reduce=5,1,25.0,6.68,6.41-6.88,0.17,least squares without the first measured iteration,0.0,-3.85,27.6,-1.15,1.2,9
+pvc,zero2,all_gather_into_tensor=1;all_reduce=13,1,170.0,6.68,6.41-6.88,1.14,least squares over all heartbeats,1.2,-6.25,7.85,0.96,1.2,9
+pvc,zero3,all_gather_into_tensor=206;all_reduce=1;reduce_scatter_tensor=11,1,42558.0,6.68,6.41-6.88,284.37,least squares over all heartbeats,284.37,272.65,292.89,288.84,292.89,9

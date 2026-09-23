@@ -1,0 +1,71 @@
+platform,result_file,writers,kept_from_job,location
+h100,h100_n1_direct_s0_r1.json,3481929@09-09 09:40,3481929,raw/h100/h100_n1_direct_s0_r1.json
+h100,h100_n1_direct_s0_r2.json,3481929@09-09 09:41,3481929,raw/h100/h100_n1_direct_s0_r2.json
+h100,h100_n1_direct_s0_r3.json,3481929@09-09 09:41,3481929,raw/h100/h100_n1_direct_s0_r3.json
+h100,h100_n1_direct_s2_r1.json,3481929@09-09 09:42,3481929,raw/h100/h100_n1_direct_s2_r1.json
+h100,h100_n1_direct_s2_r2.json,3481929@09-09 09:43,3481929,raw/h100/h100_n1_direct_s2_r2.json
+h100,h100_n1_direct_s2_r3.json,3481929@09-09 09:43,3481929,raw/h100/h100_n1_direct_s2_r3.json
+h100,h100_n1_direct_s3_r1.json,3481929@09-09 09:44,3481929,raw/h100/h100_n1_direct_s3_r1.json
+h100,h100_n1_direct_s3_r2.json,3481929@09-09 09:58,3481929,raw/h100/h100_n1_direct_s3_r2.json
+h100,h100_n1_direct_s3_r3.json,3481929@09-09 10:12,3481929,raw/h100/h100_n1_direct_s3_r3.json
+h100,h100_n2_direct_s0_r1.json,3481504@09-09 08:24,3481504,raw/h100/h100_n2_direct_s0_r1.json
+h100,h100_n2_direct_s0_r2.json,3481504@09-09 08:57,3481504,raw/h100/h100_n2_direct_s0_r2.json
+h100,h100_n2_direct_s0_r3.json,3482989@09-11 01:53 3482991@09-11 02:29,3482991,raw/h100/h100_n2_direct_s0_r3.json
+h100,h100_n2_direct_s2_r1.json,3481504@09-09 08:25,3481504,raw/h100/h100_n2_direct_s2_r1.json
+h100,h100_n2_direct_s2_r2.json,3481504@09-09 08:58,3481504,raw/h100/h100_n2_direct_s2_r2.json
+h100,h100_n2_direct_s2_r3.json,3482989@09-11 01:54 3482991@09-11 02:30,3482991,raw/h100/h100_n2_direct_s2_r3.json
+h100,h100_n2_direct_s3_r1.json,3481504@09-09 08:27,3481504,raw/h100/h100_n2_direct_s3_r1.json
+h100,h100_n2_direct_s3_r2.json,3481504@09-09 08:59,3481504,raw/h100/h100_n2_direct_s3_r2.json
+h100,h100_n2_direct_s3_r3.json,3482989@09-11 01:55 3482991@09-11 02:31,3482991,raw/h100/h100_n2_direct_s3_r3.json
+h100,h100_n2_host-staged_s3_r1.json,3476714@09-09 06:45,3476714,raw/h100/h100_n2_host-staged_s3_r1.json
+h100,h100_n2_moe_balanced_r1.json,3481504@09-09 09:30,3481504,raw/h100/h100_n2_moe_balanced_r1.json
+h100,h100_n2_moe_balanced_r2.json,3481504@09-09 09:31,3481504,raw/h100/h100_n2_moe_balanced_r2.json
+h100,h100_n2_moe_balanced_r3.json,3482989@09-11 02:26 3482991@09-11 03:02,3482991,raw/h100/h100_n2_moe_balanced_r3.json
+h100,h100_n2_moe_skewed_r1.json,3481504@09-09 09:31,3481504,raw/h100/h100_n2_moe_skewed_r1.json
+h100,h100_n2_moe_skewed_r2.json,3481504@09-09 09:31,3481504,raw/h100/h100_n2_moe_skewed_r2.json
+h100,h100_n2_moe_skewed_r3.json,3482989@09-11 02:26 3482991@09-11 03:02,3482991,raw/h100/h100_n2_moe_skewed_r3.json
+h100,h100_n2_tcp-sockets_s3_r1.json,3481504@09-09 08:41,3481504,raw/h100/h100_n2_tcp-sockets_s3_r1.json
+h100,h100_n2_tcp-sockets_s3_r2.json,3481504@09-09 09:14,3481504,raw/h100/h100_n2_tcp-sockets_s3_r2.json
+h100,h100_n2_tcp-sockets_s3_r3.json,3482989@09-11 02:10 3482991@09-11 02:46,3482991,raw/h100/h100_n2_tcp-sockets_s3_r3.json
+h100,h100_n4_direct_s0_r1.json,3476715@09-09 14:48,3476715,raw/h100/h100_n4_direct_s0_r1.json
+h100,h100_n4_direct_s0_r2.json,3476715@09-09 14:49,3476715,raw/h100/h100_n4_direct_s0_r2.json
+h100,h100_n4_direct_s0_r3.json,3476715@09-09 14:50,3476715,raw/h100/h100_n4_direct_s0_r3.json
+h100,h100_n4_direct_s2_r1.json,3476715@09-09 14:51,3476715,raw/h100/h100_n4_direct_s2_r1.json
+h100,h100_n4_direct_s2_r2.json,3476715@09-09 14:52,3476715,raw/h100/h100_n4_direct_s2_r2.json
+h100,h100_n4_direct_s2_r3.json,3476715@09-09 14:53,3476715,raw/h100/h100_n4_direct_s2_r3.json
+h100,h100_n4_direct_s3_r1.json,3476715@09-09 14:55,3476715,raw/h100/h100_n4_direct_s3_r1.json
+h100,h100_n4_direct_s3_r2.json,3476715@09-09 15:09,3476715,raw/h100/h100_n4_direct_s3_r2.json
+h100,h100_n4_direct_s3_r3.json,3476715@09-09 15:24,3476715,raw/h100/h100_n4_direct_s3_r3.json
+pvc,pvc_n1_s0_r1.json,3472919@09-06 09:31,3472919,raw/pvc/pvc_n1_s0_r1.json
+pvc,pvc_n1_s0_r2.json,3472919@09-06 09:32,3472919,raw/pvc/pvc_n1_s0_r2.json
+pvc,pvc_n1_s0_r3.json,3472919@09-06 09:34,3472919,raw/pvc/pvc_n1_s0_r3.json
+pvc,pvc_n1_s2_r1.json,3472919@09-06 09:35,3472919,raw/pvc/pvc_n1_s2_r1.json
+pvc,pvc_n1_s2_r2.json,3472919@09-06 09:36,3472919,raw/pvc/pvc_n1_s2_r2.json
+pvc,pvc_n1_s2_r3.json,3472919@09-06 09:37,3472919,raw/pvc/pvc_n1_s2_r3.json
+pvc,pvc_n1_s3_r1.json,3472919@09-06 09:38,3472919,raw/pvc/pvc_n1_s3_r1.json
+pvc,pvc_n1_s3_r2.json,3472919@09-06 09:46,3472919,raw/pvc/pvc_n1_s3_r2.json
+pvc,pvc_n1_s3_r3.json,3472919@09-06 09:54,3472919,raw/pvc/pvc_n1_s3_r3.json
+pvc,pvc_n2_moe_balanced_r1.json,3472833@09-06 05:04 3472848@09-06 07:49,3472848,raw/pvc/pvc_n2_moe_balanced_r1.json
+pvc,pvc_n2_moe_balanced_r2.json,3472848@09-06 07:50,3472848,raw/pvc/pvc_n2_moe_balanced_r2.json
+pvc,pvc_n2_moe_balanced_r3.json,3472848@09-06 07:50,3472848,raw/pvc/pvc_n2_moe_balanced_r3.json
+pvc,pvc_n2_moe_skewed_r1.json,3472833@09-06 05:04 3472848@09-06 07:51,3472848,raw/pvc/pvc_n2_moe_skewed_r1.json
+pvc,pvc_n2_moe_skewed_r2.json,3472848@09-06 07:51,3472848,raw/pvc/pvc_n2_moe_skewed_r2.json
+pvc,pvc_n2_moe_skewed_r3.json,3472848@09-06 07:52,3472848,raw/pvc/pvc_n2_moe_skewed_r3.json
+pvc,pvc_n2_s0_r1.json,3472833@09-06 05:02 3472848@09-06 06:35 3473072@09-06 10:05,3473072,raw/pvc/pvc_n2_s0_r1.json
+pvc,pvc_n2_s0_r2.json,3472848@09-06 06:41,3472848,raw/pvc/pvc_n2_s0_r2.json
+pvc,pvc_n2_s0_r3.json,3472848@09-06 06:48,3472848,raw/pvc/pvc_n2_s0_r3.json
+pvc,pvc_n2_s2_r1.json,3472833@09-06 05:03 3472848@09-06 06:52 3473072@09-06 10:10,3473072,raw/pvc/pvc_n2_s2_r1.json
+pvc,pvc_n2_s2_r2.json,3472848@09-06 06:58,3472848,raw/pvc/pvc_n2_s2_r2.json
+pvc,pvc_n2_s2_r3.json,3472848@09-06 07:05,3472848,raw/pvc/pvc_n2_s2_r3.json
+pvc,pvc_n2_s3_r1.json,3472833@09-06 05:03 3472848@09-06 07:09 3473072@09-06 10:14,3473072,raw/pvc/pvc_n2_s3_r1.json
+pvc,pvc_n2_s3_r2.json,3472848@09-06 07:25,3472848,raw/pvc/pvc_n2_s3_r2.json
+pvc,pvc_n2_s3_r3.json,3472848@09-06 07:39,3472848,raw/pvc/pvc_n2_s3_r3.json
+pvc,pvc_n4_s0_r1.json,3472847@09-06 05:19 3472924@09-06 08:35,3472924,raw/pvc/pvc_n4_s0_r1.json
+pvc,pvc_n4_s0_r2.json,3472847@09-06 05:26 3472924@09-06 08:45,3472924,raw/pvc/pvc_n4_s0_r2.json
+pvc,pvc_n4_s0_r3.json,3472847@09-06 05:35 3472924@09-06 08:51,3472924,raw/pvc/pvc_n4_s0_r3.json
+pvc,pvc_n4_s2_r1.json,3472847@09-06 05:42 3472924@09-06 08:58,3472924,raw/pvc/pvc_n4_s2_r1.json
+pvc,pvc_n4_s2_r2.json,3472847@09-06 05:51 3472924@09-06 09:09,3472924,raw/pvc/pvc_n4_s2_r2.json
+pvc,pvc_n4_s2_r3.json,3472847@09-06 06:06 3472924@09-06 09:19,3472924,raw/pvc/pvc_n4_s2_r3.json
+pvc,pvc_n4_s3_r1.json,3472923@09-06 07:57,3472923,raw/pvc/pvc_n4_s3_r1.json
+pvc,pvc_n4_s3_r2.json,3472923@09-06 08:08,3472923,raw/pvc/pvc_n4_s3_r2.json
+pvc,pvc_n4_s3_r3.json,3472923@09-06 08:21,3472923,raw/pvc/pvc_n4_s3_r3.json

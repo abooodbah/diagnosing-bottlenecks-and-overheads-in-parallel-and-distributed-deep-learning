@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=zmig-pvc
-#SBATCH --account=OTH21057
+# allocation: pass it at submit time with sbatch -A <account>
 #SBATCH --partition=pvc
 #SBATCH --ntasks-per-node=8
 #SBATCH --cpus-per-task=12

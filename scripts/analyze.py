@@ -2,13 +2,31 @@
 """Analysis and figures for the sharding and expert-routing measurements.
 
 Reads raw/{pvc,h100}/*.json (llama runs + moe runs), aggregates reps
-(median of per-rep step p50s), decomposes step time into exposed
-categories from the DeepSpeed comm-op logger, and renders:
+(median of per-rep step p50s), decomposes step time into exposed categories
+from the harness's synchronized timers, and renders:
 
-  figures/zero_migration.png    step composition, scaling, transport contrast
+  figures/zero_migration.png    (a) four-node step composition, (b) DDP and
+                                ZeRO-2 weak scaling, (c) ZeRO-3 step time at
+                                each logged iteration against the training step
+  figures/transport_contrast.png  two-node H100 ZeRO-3, InfiniBand against TCP,
+                                at each logged iteration
   figures/moe_imbalance.png     balanced vs skewed all-to-all composition
   processed/summary.csv         per-cell medians and decomposition
+  processed/figure_data.json    every value the figures plot
+
+ZeRO-3 step time grows by about 0.55 s (H100) and 0.28 s (Intel) per step
+during every run because of DeepSpeed's communication logger, and the Intel
+ZeRO-3 cells were measured over windows of different length, so ZeRO-3 is
+shown per iteration rather than as window medians or scaling ratios. The
+per-iteration values come from processed/drift_launches.csv (scripts/drift.py).
+
+Records whose communication fields hold DeepSpeed logger records (the 6 Sep
+harness) have no valid times; they are never used for the decomposition.
+Options --raw and --out point the script at another copy of the records and
+another output folder (used by scripts/check_time_ms.py).
 """
+import argparse
+import csv
 import glob
 import json
 import os
@@ -19,11 +37,16 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from common import comm_layout  # noqa: E402
+
 plt.rcParams["font.family"] = "serif"
 plt.rcParams["font.serif"] = ["Times New Roman", "Times", "DejaVu Serif"]
+plt.rcParams["svg.hashsalt"] = "where-the-cost-lands"
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-RES = os.path.join(os.path.dirname(HERE), "raw")
+ROOT = os.path.dirname(HERE)
+RES = os.path.join(ROOT, "raw")
 
 GRAD_OPS = ("all_reduce", "reduce_scatter_tensor", "reduce_scatter",
             "reduce_scatter_fn", "reduce", "inference_all_reduce")
@@ -40,11 +63,14 @@ C_GRAD = "#7fcdbb"
 C_GATHER = "#f5d76e"
 C_SYNC = "#f2b27e"
 C_OTHER = "#c8c8c8"
+# ZeRO-3 trajectories: one colour per platform and node count
+TRAJ = {("h100", 1): "#fdae61", ("h100", 2): "#f46d43", ("h100", 4): "#a50026",
+        ("pvc", 1): "#91bfdb", ("pvc", 2): "#4575b4", ("pvc", 4): "#313695"}
 
 
-def load(platform):
+def load(platform, raw=None):
     runs = []
-    for p in glob.glob(os.path.join(RES, platform, "*.json")):
+    for p in sorted(glob.glob(os.path.join(raw or RES, platform, "*.json"))):
         with open(p) as f:
             d = json.load(f)
         d["_file"] = os.path.basename(p)
@@ -61,23 +87,16 @@ def moe_runs(runs):
 
 
 def _is_v2(run):
-    """v2 runs carry synchronized comm timers. Explicit tag when present;
-    otherwise the v2 reruns used non-default iteration counts, and their
-    per-rank comm totals are a macroscopic share of the step."""
-    if run.get("bench_version") == 2:
-        return True
-    if run.get("iters") != 40:
-        return True
-    ranks = [c for c in (run.get("comms_all_ranks") or []) if c]
-    if not ranks:
-        return False
-    per_rank = (sum(sum(v["time_ms"] for v in c.values()) for c in ranks)
-                / len(ranks) / run["iters"])
-    return per_rank / run["step_max_ms"]["p50"] > 0.10
+    """Runs whose communication fields are the harness's synchronized timers.
+    Decided by the record layout (common.comm_layout), never by the size of
+    the time values: in the 6 Sep records 'time_ms' is not a time."""
+    return comm_layout(run) == "harness-timers"
 
 
 def comm_ms_per_iter(run, ops):
     """Mean over ranks of summed op wall time, per measured iteration."""
+    if not _is_v2(run):
+        raise ValueError("%s: communication fields hold no valid times" % run.get("_file"))
     total = []
     for c in run.get("comms_all_ranks") or []:
         if not c:
@@ -125,11 +144,12 @@ def agg(platform_runs, nodes, mode, transport=None):
     if not sel:
         return None
     steps = [r["step_max_ms"]["p50"] for r in sel]
-    # prefer v2 runs (synchronized comm timers) for the decomposition,
-    # and among those prefer runs that also carry deepspeed.comm-level
-    # buckets (full ZeRO-3 param-fetch attribution)
+    # the decomposition uses runs with valid synchronized comm timers, and
+    # among those prefers runs that also carry deepspeed.comm-level buckets
     v2 = [r for r in sel if _is_v2(r)]
-    pool = v2 or sel
+    if not v2:
+        raise ValueError("no run with valid comm times for %s n%d %s" % (mode, nodes, transport))
+    pool = v2
     ds = [r for r in pool
           if any("allgather_fn" in (c or {})
                  for c in (r.get("comms_all_ranks") or []))]
@@ -141,14 +161,38 @@ def agg(platform_runs, nodes, mode, transport=None):
     d["reps"] = len(sel)
     d["peak_gib"] = max(r["peak_mem_bytes_max"] for r in sel) / 2**30
     d["world"] = med["world"]
+    d["decomposed_file"] = med["_file"]
     return d
 
 
-def main():
+def zero3_trajectories(processed):
+    """Kept ZeRO-3 launches with their logged step times, from drift.py."""
+    path = os.path.join(processed, "drift_launches.csv")
+    if not os.path.exists(path):
+        path = os.path.join(ROOT, "processed", "drift_launches.csv")
+    out = []
+    for r in csv.DictReader(open(path, encoding="utf-8")):
+        if r["mode"] != "zero3" or not r["result_status"].startswith("kept in raw/"):
+            continue
+        out.append(r)
+    return out
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--raw", default=RES)
+    ap.add_argument("--out", default=ROOT, help="folder that receives processed/ and figures/")
+    ap.add_argument("--no-figures", action="store_true")
+    args = ap.parse_args(argv)
+    processed = os.path.join(args.out, "processed")
+    figures = os.path.join(args.out, "figures")
+    os.makedirs(processed, exist_ok=True)
+    os.makedirs(figures, exist_ok=True)
+
     out_rows = []
     data = {}
     for plat in ("pvc", "h100"):
-        rr = llama_runs(load(plat))
+        rr = llama_runs(load(plat, args.raw))
         data[plat] = rr
         for n in (1, 2, 4):
             for m in MODES:
@@ -156,7 +200,7 @@ def main():
                 if a:
                     out_rows.append((plat, n, m, a))
 
-    with open(os.path.join(os.path.dirname(HERE), "processed", "summary.csv"), "w") as f:
+    with open(os.path.join(processed, "summary.csv"), "w", newline="\n") as f:
         f.write("platform,nodes,mode,reps,step_p50_ms,spread_ms,peak_gib,"
                 "compute_ms,grad_reduce_ms,param_gather_ms,sync_ms,other_comm_ms\n")
         for plat, n, m, a in out_rows:
@@ -164,204 +208,165 @@ def main():
                     f"{a['step_spread']:.1f},{a['peak_gib']:.1f},"
                     f"{a['compute']:.1f},{a['grad']:.1f},{a['gather']:.1f},"
                     f"{a['sync']:.1f},{a['othercomm']:.1f}\n")
-    print("wrote zmig_summary.csv")
-    for row in out_rows:
-        plat, n, m, a = row
-        print(f"{plat} n{n} {m:6s} reps={a['reps']} step={a['step_med']:8.1f}ms "
-              f"mem={a['peak_gib']:5.1f}GiB comp={a['compute']:7.1f} "
-              f"grad={a['grad']:7.1f} gath={a['gather']:7.1f} sync={a['sync']:6.1f}")
+    print("wrote processed/summary.csv")
+    fig_data = {"summary": [{"platform": plat, "nodes": n, "mode": m,
+                             **{k: (round(v, 4) if isinstance(v, float) else v) for k, v in a.items()}}
+                            for plat, n, m, a in out_rows]}
+    if args.no_figures:
+        with open(os.path.join(processed, "figure_data.json"), "w", encoding="utf-8", newline="\n") as f:
+            json.dump(fig_data, f, indent=1, sort_keys=True)
+        return 0
 
-    # ---------------- figure: panel (a) + (b) + (c) --------------------
-    # canvas widened for panel (c); FS scaled so text renders at the same
-    # size once LaTeX scales the figure to text width
     FS = 14.5
     fig, (axa, axb, axc) = plt.subplots(
         1, 3, figsize=(9.7, 3.3),
-        gridspec_kw={"width_ratios": [1.60, 1.05, 0.62]})
+        gridspec_kw={"width_ratios": [1.45, 0.95, 1.25]})
 
-    target_n = 4
-    bars, labels, plats = [], [], []
-    for plat in ("pvc", "h100"):
-        for m in MODES:
-            a = agg(data[plat], target_n, m)
-            bars.append(a)
-            labels.append(MODE_LABEL[m])
-            plats.append(plat)
-    have = [i for i, b in enumerate(bars) if b]
-    xs = range(len(have))
+    # (a) four-node composition, as shares of each configuration's own step
     cats = [("compute", C_COMPUTE, "Compute + unattributed"),
             ("grad", C_GRAD, "Gradient reduction"),
             ("gather", C_GATHER, "Parameter all-gather"),
             ("sync", C_SYNC, "Synchronization"),
             ("othercomm", C_OTHER, "Other comm")]
-    # normalize within platform to its DDP step
-    base = {}
-    for plat in ("pvc", "h100"):
-        d = agg(data[plat], target_n, "ddp")
-        base[plat] = d["step"] if d else None
-    tops = []
-    for i in have:
-        b = bars[i]
-        bn = base[plats[i]] or b["step"]
-        tops.append(sum(b[k] for k, _, _ in cats) / bn)
-    # If one bar dwarfs the rest (H100 ZeRO-3), cap the axis and let that
-    # bar run off the top with break marks and its true multiple annotated,
-    # so the other bars' compositions stay readable.
-    ycap = 4.8 if tops and max(tops) > 6 else None
-    for xi, i in enumerate(xs):
-        b = bars[have[i]]
-        plat = plats[have[i]]
-        bn = base[plat] or b["step"]
+    cells = [(p, m) for p in ("pvc", "h100") for m in MODES]
+    comp = []
+    for xi, (plat, m) in enumerate(cells):
+        b = agg(data[plat], 4, m)
+        tot = sum(b[k] for k, _, _ in cats)
         bottom = 0.0
+        shares = {}
         for key, color, lab in cats:
-            v = b[key] / bn
-            axa.bar(xi, v, 0.62, bottom=bottom, color=color,
-                    edgecolor="#333333", linewidth=0.6,
-                    label=lab if xi == 0 else None)
+            v = 100.0 * b[key] / tot
+            shares[key] = round(v, 3)
+            axa.bar(xi, v, 0.62, bottom=bottom, color=color, edgecolor="#333333",
+                    linewidth=0.6, label=lab if xi == 0 else None)
             bottom += v
-        if ycap and bottom > ycap:
-            for yb in (ycap * 0.90, ycap * 0.935):
-                axa.plot([xi - 0.36, xi + 0.36], [yb - 0.09, yb + 0.09],
-                         color="white", linewidth=2.8, zorder=5,
-                         solid_capstyle="butt")
-                axa.plot([xi - 0.36, xi + 0.36], [yb - 0.09, yb + 0.09],
-                         color="#333333", linewidth=0.9, zorder=6)
-            axa.text(xi, ycap * 0.55, f"{bottom:.0f}x", ha="center",
-                     fontsize=FS - 1.8, fontweight="bold", color="#333333",
-                     bbox=dict(boxstyle="round,pad=0.18", facecolor="white",
-                               edgecolor="none", alpha=0.85), zorder=7)
-            axa.text(xi, ycap + 0.07, f"{b['peak_gib']:.0f}", ha="center",
-                     fontsize=FS - 2.2)
-        else:
-            axa.text(xi, bottom + 0.03, f"{b['peak_gib']:.0f}", ha="center",
-                     fontsize=FS - 2.2)
-    if tops:
-        axa.set_ylim(0, ycap if ycap else max(tops) * 1.18)
-    axa.set_xticks(list(xs))
-    axa.set_xticklabels([labels[i] for i in have], fontsize=FS - 4.2)
-    n_pvc = sum(1 for i in have if plats[i] == "pvc")
-    if n_pvc and n_pvc < len(have):
-        axa.axvline(n_pvc - 0.5, color="#888888", linewidth=0.8, ls=":")
-    if n_pvc:
-        axa.text((n_pvc - 1) / 2, -0.16, PLAT_LABEL["pvc"], ha="center",
-                 transform=axa.get_xaxis_transform(), fontsize=FS - 2.6)
-    if n_pvc < len(have):
-        axa.text((n_pvc + len(have) - 1) / 2, -0.16, PLAT_LABEL["h100"],
-                 ha="center", transform=axa.get_xaxis_transform(),
-                 fontsize=FS - 2.6)
-    axa.set_ylabel("Step time vs platform DDP", fontsize=FS - 2)
-    axa.set_xlabel("(a)  four-node composition; number = peak GiB/rank",
-                   fontsize=FS - 1, labelpad=18)
-    axa.legend(fontsize=FS - 4.0, frameon=True, edgecolor="#bbbbbb",
-               loc="upper left", handlelength=1.3, labelspacing=0.26,
-               borderpad=0.3, handletextpad=0.45)
+        axa.text(xi, 102, f"{b['peak_gib']:.0f}", ha="center", fontsize=FS - 2.2)
+        comp.append({"platform": plat, "mode": m, "shares_percent": shares,
+                     "peak_gib": round(b["peak_gib"], 2), "decomposed_file": b["decomposed_file"]})
+    fig_data["composition_4node"] = comp
+    axa.set_ylim(0, 112)
+    axa.set_xticks(range(len(cells)))
+    axa.set_xticklabels([{"ddp": "DDP", "zero2": "Z2", "zero3": "Z3"}[m] for _, m in cells], fontsize=FS - 2.8)
+    axa.axvline(2.5, color="#888888", linewidth=0.8, ls=":")
+    axa.text(1, -0.19, PLAT_LABEL["pvc"], ha="center", transform=axa.get_xaxis_transform(), fontsize=FS - 3.2)
+    axa.text(4, -0.19, PLAT_LABEL["h100"], ha="center", transform=axa.get_xaxis_transform(), fontsize=FS - 3.2)
+    axa.set_ylabel("Share of step (%)", fontsize=FS - 2)
+    axa.set_xlabel("(a)  four-node composition; number = peak GiB/rank", fontsize=FS - 1, labelpad=18)
+    axa.legend(fontsize=FS - 4.6, frameon=True, edgecolor="#bbbbbb", loc="lower left",
+               bbox_to_anchor=(0.0, 1.02), ncol=3, handlelength=1.1, labelspacing=0.2,
+               borderpad=0.25, handletextpad=0.35, columnspacing=0.6)
 
-    # panel (b): scaling
+    # (b) weak scaling of DDP and ZeRO-2 (their step time is stable)
+    scal = []
     for plat, marker in (("pvc", "o"), ("h100", "s")):
         rr = data[plat]
         d1 = agg(rr, 1, "ddp")
-        if not d1:
-            continue
-        for m, ls, col in (("ddp", "-", "#0072B2"),
-                           ("zero2", "-.", "#009E73"),
-                           ("zero3", "--", "#D55E00")):
+        for m, ls, col in (("ddp", "-", "#0072B2"), ("zero2", "-.", "#009E73")):
             ns, ys, es = [], [], []
             for n in (1, 2, 4):
                 a = agg(rr, n, m)
-                if a:
-                    thr1 = d1["world"] * 2048 / (d1["step_med"] / 1e3)
-                    thr = a["world"] * 2048 / (a["step_med"] / 1e3)
-                    ns.append(n)
-                    ys.append(thr / thr1)
-                    # first-order spread propagation: dy/y = dstep/step
-                    es.append(thr / thr1 * a["step_spread"] / a["step_med"]
-                              if a["step_spread"] else 0.0)
-            if ns:
-                axb.errorbar(ns, ys, yerr=es, fmt=ls, marker=marker, color=col,
-                             lw=1.3, ms=4.5, mfc="white", capsize=2,
-                             elinewidth=0.8,
-                             label=f"{PLAT_LABEL[plat].split()[0]} {MODE_LABEL[m]}")
+                thr1 = d1["world"] * 2048 / (d1["step_med"] / 1e3)
+                thr = a["world"] * 2048 / (a["step_med"] / 1e3)
+                ns.append(n)
+                ys.append(thr / thr1)
+                es.append(thr / thr1 * a["step_spread"] / a["step_med"] if a["step_spread"] else 0.0)
+            axb.errorbar(ns, ys, yerr=es, fmt=ls, marker=marker, color=col, lw=1.3, ms=4.5,
+                         mfc="white", capsize=2, elinewidth=0.8,
+                         label=f"{'Intel' if plat == 'pvc' else 'H100'} {MODE_LABEL[m]}")
+            scal.append({"platform": plat, "mode": m, "nodes": ns,
+                         "throughput_vs_1node_ddp": [round(y, 4) for y in ys]})
+    fig_data["weak_scaling"] = scal
     axb.plot([1, 4], [1, 4], ":", color="#999999", lw=0.9, label="Ideal")
     axb.set_xticks([1, 2, 4])
     axb.set_xlabel("(b)  nodes", fontsize=FS - 1)
     axb.set_ylabel("Throughput vs own 1-node DDP", fontsize=FS - 2.4)
-    axb.legend(fontsize=FS - 4.4, frameon=True, edgecolor="#bbbbbb",
-               loc="upper left", ncol=2, columnspacing=0.6, handlelength=1.3,
-               labelspacing=0.25, borderpad=0.3, handletextpad=0.4)
-    # panel (c): ZeRO-3 transport contrast at 2 nodes
-    cbars = []
-    p2 = agg(data["pvc"], 2, "zero3")
-    if p2:
-        cbars.append(("Intel\nTCP", p2))
-    h2 = agg(data["h100"], 2, "zero3")
-    if h2:
-        cbars.append(("H100\nIB", h2))
-    h2s = agg(data["h100"], 2, "zero3", transport="tcp-sockets")
-    if h2s:
-        cbars.append(("H100\nTCP", h2s))
-    for xi, (lab, b) in enumerate(cbars):
-        axc.bar(xi, b["step_med"] / 1e3, 0.58, color=C_GATHER,
-                edgecolor="#333333", linewidth=0.7,
-                yerr=b["step_spread"] / 1e3 if b["step_spread"] else None,
-                capsize=3)
-        axc.text(xi, (b["step_med"] + b["step_spread"]) / 1e3 + 0.7,
-                 f"{b['peak_gib']:.0f}", ha="center", fontsize=FS - 2.6)
-    axc.set_xticks(range(len(cbars)))
-    axc.set_xticklabels([c[0] for c in cbars], fontsize=FS - 3.4)
-    axc.set_xlim(-0.6, len(cbars) - 0.4)
-    axc.set_ylim(0, 24)
-    axc.set_ylabel("ZeRO-3 step (s)", fontsize=FS - 2)
-    axc.set_xlabel("(c)  2-node transport", fontsize=FS - 1)
+    axb.legend(fontsize=FS - 4.8, frameon=True, edgecolor="#bbbbbb", loc="upper left", ncol=1,
+               handlelength=1.3, labelspacing=0.2, borderpad=0.3, handletextpad=0.4)
+
+    # (c) ZeRO-3 step time at each logged iteration, against the training step
+    traj = zero3_trajectories(processed)
+    seen = set()
+    tj = []
+    for r in sorted(traj, key=lambda r: (r["platform"], int(r["nodes"]), r["transport"], r["rep"])):
+        w = int(r["warmup_iters"])
+        pts = [(w + int(a_), int(b_) / 1e3) for a_, b_ in (x.split(":") for x in r["heartbeats_ms"].split(";"))]
+        plat, n = r["platform"], int(r["nodes"])
+        tcp = r["transport"] == "sock"
+        host = r["transport"] == "host"
+        key = (plat, n, "tcp" if tcp else ("host" if host else ""))
+        label = None
+        if key not in seen:
+            seen.add(key)
+            label = "%s, %d node%s%s" % ("H100" if plat == "h100" else "Intel", n, "" if n == 1 else "s",
+                                         ", TCP" if tcp else (", host-staged" if host else ""))
+        axc.plot([p[0] for p in pts], [p[1] for p in pts], ls="--" if tcp else (":" if host else "-"),
+                 marker="s" if plat == "h100" else "o", ms=3.2, lw=1.0, color=TRAJ[(plat, n)],
+                 mfc="white" if tcp else TRAJ[(plat, n)], label=label)
+        tj.append({"platform": plat, "nodes": n, "transport": r["transport"], "rep": r["rep"],
+                   "job": r["job"], "warmup": w, "measured": int(r["measured_iters"]),
+                   "points_step_s": [[p[0], p[1]] for p in pts]})
+    fig_data["zero3_trajectories"] = tj
+    axc.axvline(11, color="#888888", lw=0.7, ls=":")
+    axc.text(11.6, 1.2, "step 11", fontsize=FS - 5, color="#555555")
+    axc.set_xlim(0, 44)
+    axc.set_ylim(0, 29)
+    axc.set_xlabel("(c)  ZeRO-3, training step", fontsize=FS - 1)
+    axc.set_ylabel("Step time (s)", fontsize=FS - 2)
+    axc.legend(fontsize=FS - 6.2, frameon=True, edgecolor="#bbbbbb", loc="lower left",
+               bbox_to_anchor=(-0.02, 1.02), ncol=2, handlelength=1.5, labelspacing=0.12, borderpad=0.25,
+               handletextpad=0.3, columnspacing=0.6)
     for ax in (axa, axb, axc):
         ax.tick_params(labelsize=FS - 1.8)
         ax.set_axisbelow(True)
         ax.grid(axis="y", linewidth=0.4, color="#dddddd")
-    fig.subplots_adjust(left=0.060, right=0.988, top=0.97, bottom=0.26,
-                        wspace=0.40)
-    fig.savefig(os.path.join(os.path.dirname(HERE), "figures", "zero_migration.png"), dpi=300)
+    fig.subplots_adjust(left=0.060, right=0.988, top=0.80, bottom=0.26, wspace=0.34)
+    fig.savefig(os.path.join(figures, "zero_migration.png"), dpi=300)
     print("wrote figures/zero_migration.png")
 
-    # ------------- transport contrast (ZeRO-3, 2 nodes) ---------------
-    tbars = []
-    p = agg(data["pvc"], 2, "zero3")
-    if p:
-        tbars.append(("Intel\ntcp (IPoIB)", p))
-    hib = agg(data["h100"], 2, "zero3") or agg(data["h100"], 2, "zero3",
-                                               transport="host-staged")
-    if hib:
-        tbars.append(("H100\nIB, host-staged", hib))
-    hso = agg(data["h100"], 2, "zero3", transport="tcp-sockets")
-    if hso:
-        tbars.append(("H100\nTCP sockets", hso))
-    if len(tbars) >= 2:
-        fig3, ax3 = plt.subplots(figsize=(4.6, 2.9))
-        for xi, (lab, b) in enumerate(tbars):
-            ax3.bar(xi, b["step_med"] / 1e3, 0.55, color="#5b8db8",
-                    edgecolor="#333333", linewidth=0.7,
-                    yerr=b["step_spread"] / 1e3 if b["step_spread"] else None,
-                    capsize=3)
-            ax3.text(xi, (b["step_med"] + b["step_spread"]) / 1e3 + 0.6,
-                     f"{b['peak_gib']:.0f} GiB", ha="center", fontsize=FS - 2.4)
-        ax3.set_xticks(range(len(tbars)))
-        ax3.set_xticklabels([t[0] for t in tbars], fontsize=FS - 2)
-        ax3.set_ylabel("ZeRO-3 step p50 (s), 2 nodes", fontsize=FS - 1.5)
-        ax3.set_ylim(0, max(b["step_med"] for _, b in tbars) / 1e3 * 1.22)
-        ax3.tick_params(labelsize=FS - 2)
-        ax3.set_axisbelow(True)
-        ax3.grid(axis="y", linewidth=0.4, color="#dddddd")
-        fig3.subplots_adjust(left=0.14, right=0.97, top=0.95, bottom=0.18)
-        fig3.savefig(os.path.join(os.path.dirname(HERE), "figures", "transport_contrast.png"), dpi=200)
-        print("wrote figures/transport_contrast.png")
+    # ------------- transport contrast (H100 ZeRO-3, 2 nodes) ---------------
+    fig3, ax3 = plt.subplots(figsize=(4.6, 2.9))
+    gaps = []
+    ib = {r["rep"]: r for r in traj if r["platform"] == "h100" and r["nodes"] == "2" and r["transport"] == "direct"}
+    tcp = {r["rep"]: r for r in traj if r["platform"] == "h100" and r["nodes"] == "2" and r["transport"] == "sock"}
+    for rep in sorted(ib):
+        for r, col, ls, lab in ((ib[rep], "#f46d43", "-", "InfiniBand, host-staged"),
+                                (tcp.get(rep), "#6a51a3", "--", "TCP sockets")):
+            if r is None:
+                continue
+            w = int(r["warmup_iters"])
+            pts = [(w + int(a), int(b) / 1e3) for a, b in (x.split(":") for x in r["heartbeats_ms"].split(";"))]
+            ax3.plot([p[0] for p in pts], [p[1] for p in pts], ls=ls, marker="o", ms=3, lw=1.0, color=col,
+                     label=lab if rep == min(ib) else None)
+        if rep in tcp:
+            a_ = dict((int(a), int(b)) for a, b in (x.split(":") for x in ib[rep]["heartbeats_ms"].split(";")))
+            b_ = dict((int(a), int(b)) for a, b in (x.split(":") for x in tcp[rep]["heartbeats_ms"].split(";")))
+            gaps += [b_[k] - a_[k] for k in a_ if k in b_]
+    fig_data["transport_gap_ms"] = {"min": min(gaps), "max": max(gaps), "n": len(gaps)}
+    ax3.set_xlabel("training step", fontsize=FS - 3)
+    ax3.set_ylabel("H100 ZeRO-3 step (s), 2 nodes", fontsize=FS - 3.5)
+    ax3.set_xlim(0, 44)
+    ax3.set_ylim(0, 29)
+    ax3.text(26, 5, "TCP adds %.1f to %.1f s\nat every logged step" % (min(gaps) / 1e3, max(gaps) / 1e3),
+             fontsize=FS - 4.5, ha="center")
+    ax3.legend(fontsize=FS - 5, frameon=False, loc="upper left")
+    ax3.tick_params(labelsize=FS - 3)
+    ax3.set_axisbelow(True)
+    ax3.grid(axis="y", linewidth=0.4, color="#dddddd")
+    fig3.subplots_adjust(left=0.14, right=0.97, top=0.95, bottom=0.18)
+    fig3.savefig(os.path.join(figures, "transport_contrast.png"), dpi=200)
+    print("wrote figures/transport_contrast.png")
 
     # ---------------- MoE figure --------------------------------------
-    plats_with_data = [p for p in ("pvc", "h100") if moe_runs(load(p))]
+    plats_with_data = [p for p in ("pvc", "h100") if moe_runs(load(p, args.raw))]
+    moe_data = []
     if plats_with_data:
         n = len(plats_with_data)
         fig2, axes = plt.subplots(1, n, figsize=(3.7 * n, 2.9), squeeze=False)
         axes = axes[0]
         for ax, plat in zip(axes, plats_with_data):
             tops = []
-            mm = moe_runs(load(plat))
+            mm = moe_runs(load(plat, args.raw))
             for xi, mode in enumerate(("balanced", "skewed")):
                 sel = [r for r in mm if r["mode"] == mode]
                 if not sel:
@@ -403,6 +408,10 @@ def main():
                 tops.append(max(bottom, p95))
                 ax.text(xi + 0.34, p95, f"p95 {p95:.0f}", ha="left",
                         va="center", fontsize=FS - 2.8)
+                moe_data.append({"platform": plat, "mode": mode, "median_rep_file": med["_file"],
+                                 "critical_rank": ci, "dispatch_ms": pr["dispatch_ms"][ci],
+                                 "expert_ms": pr["expert_ms"][ci], "return_ms": pr["return_ms"][ci],
+                                 "end_wait_ms": pr["end_wait_ms"][ci], "p50_ms": p50, "p95_ms": p95})
             ranks = {r["world"] for r in mm}
             ax.set_xticks([0, 1])
             ax.set_xticklabels(["Balanced", "Skewed"], fontsize=FS - 1.5)
@@ -420,9 +429,14 @@ def main():
                     columnspacing=1.0, bbox_to_anchor=(0.5, 1.005))
         fig2.subplots_adjust(left=0.15 if n == 1 else 0.10, right=0.985,
                              top=0.80, bottom=0.13, wspace=0.28)
-        fig2.savefig(os.path.join(os.path.dirname(HERE), "figures", "moe_imbalance.png"), dpi=300)
+        fig2.savefig(os.path.join(figures, "moe_imbalance.png"), dpi=300)
         print("wrote figures/moe_imbalance.png")
+    fig_data["moe_critical_rank"] = moe_data
+    with open(os.path.join(processed, "figure_data.json"), "w", encoding="utf-8", newline="\n") as f:
+        json.dump(fig_data, f, indent=1, sort_keys=True)
+    print("wrote processed/figure_data.json")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

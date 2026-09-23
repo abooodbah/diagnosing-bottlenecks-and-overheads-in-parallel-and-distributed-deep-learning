@@ -1,0 +1,575 @@
+{
+ "tag": "pvc_n4",
+ "mode": "zero2",
+ "stage": 2,
+ "rep": 3,
+ "world": 32,
+ "nodes": 4,
+ "device_kind": "xpu",
+ "backend": "xccl",
+ "params_b": 2.54688512,
+ "model": {
+  "layers": 30,
+  "hidden": 2560,
+  "heads": 20,
+  "ffn": 6912,
+  "vocab": 32768,
+  "seq": 2048,
+  "micro": 1
+ },
+ "iters": 40,
+ "warmup": 10,
+ "measure_wall_s": 332.03449098882265,
+ "step_max_ms": {
+  "p50": 8290.610158117488,
+  "p95": 8465.381123125553,
+  "mean": 8299.344895378454
+ },
+ "peak_mem_bytes_max": 15215412736,
+ "peak_mem_bytes_per_rank": [
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736,
+  15215412736
+ ],
+ "rank0_phases_ms": {
+  "fwd_p50": 114.49518310837448,
+  "bwd_p50": 3199.452475178987,
+  "step_p50": 4989.126054104418,
+  "barrier_p50": 2.812369028106332
+ },
+ "barrier_ms_mean_per_rank": [
+  3.0159316025674343,
+  2.6311872177757323,
+  2.866397163597867,
+  2.0332407439127564,
+  2.8630932501982898,
+  3.0795777100138366,
+  3.1602909206412733,
+  2.9253102431539446,
+  2.974396198987961,
+  3.025144280400127,
+  3.5320844093803316,
+  2.6772578130476177,
+  3.530251875054091,
+  3.54067895677872,
+  3.425351553596556,
+  3.1054272374603897,
+  3.28352763899602,
+  3.2569665636401623,
+  2.834276302019134,
+  3.2120831310749054,
+  2.9570890415925533,
+  3.2471822982188314,
+  3.280654188711196,
+  2.885613968828693,
+  1.5119075658731163,
+  2.366815839195624,
+  2.316706220153719,
+  2.202871593181044,
+  2.0456991100218147,
+  2.1003465983085334,
+  2.4083076743409038,
+  1.980880176415667
+ ],
+ "comms_per_rank0": {
+  "broadcast": {
+   "count": 0,
+   "time_ms": 0.0
+  },
+  "all_reduce": {
+   "count": 520,
+   "time_ms": 45.96778301993649
+  },
+  "all_gather_into_tensor": {
+   "count": 40,
+   "time_ms": -0.9515210222609234
+  }
+ },
+ "comms_all_ranks": [
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 45.96778301993649
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -0.9515210222609234
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 46.03810105619077
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -0.9423336196997774
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 45.86631401090314
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -0.9498310216378272
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 46.05863138122933
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -0.940065673145309
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 45.99990493499911
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -0.9458361039778858
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 45.92067017149152
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -0.9439228529120136
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 45.97041477222086
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -0.9421927681153015
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 45.925187370594784
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -0.9446513483880423
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 25.625476567755385
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.169494003978606
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 25.699790363674964
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.17028229642965
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 25.664634831109908
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.172109514891446
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 25.868524376750173
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.171406523554655
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 25.741402747917917
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.173927248932582
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 25.786161395512636
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.165627083058386
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 25.67562778709872
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.171334694834833
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 25.594254480974243
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.161381768149457
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": -8.586603591233995
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.171867558249044
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": -8.53801108714977
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.165034520031956
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": -8.569562654115657
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.170572677159505
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": -8.540129638042558
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.16436632742824
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": -8.555165246159646
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.171891168539627
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": -8.556841744253106
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.172234018820333
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": -8.545329848600616
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.17232588838511
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": -8.552066878757998
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": 13.172360375937163
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 40.77603197812677
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -9.250483601005495
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 40.93030278910088
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -9.249050525516445
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 40.88333409483799
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -9.249224061094392
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 40.98720337875311
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -9.248812071498481
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 40.79791948906998
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -9.250538409204598
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 40.9985011045363
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -9.248451189296876
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 40.889199520762574
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -9.249421127927162
+   }
+  },
+  {
+   "broadcast": {
+    "count": 0,
+    "time_ms": 0.0
+   },
+   "all_reduce": {
+    "count": 520,
+    "time_ms": 40.8755472020884
+   },
+   "all_gather_into_tensor": {
+    "count": 40,
+    "time_ms": -9.250557146133122
+   }
+  }
+ ],
+ "env": {
+  "transport_note": "pvc-tcp-hoststaged",
+  "NCCL_NET_GDR_LEVEL": "",
+  "job": "3472847",
+  "nodelist": "c552-[004-007]",
+  "torch": "2.13.0+xpu"
+ },
+ "ts": "2026-09-06 06:16:41"
+}

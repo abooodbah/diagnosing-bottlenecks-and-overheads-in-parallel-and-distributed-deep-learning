@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=zmig-diag
-#SBATCH --account=OTH21057
+# allocation: pass it at submit time with sbatch -A <account>
 #SBATCH --partition=pvc
 #SBATCH --nodes=2
 #SBATCH --ntasks-per-node=8

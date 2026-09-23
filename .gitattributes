@@ -1,0 +1,14 @@
+*.sh text eol=lf
+
+# Keep data, logs, recovered code, and outputs byte-exact on every
+# platform: checksums.txt and provenance/version_timeline.csv refer to
+# these exact bytes, so no line-ending conversion may touch them. These
+# lines come last so they override the rule above.
+raw/** -text
+transport_logs/** -text
+provenance/** -text
+harness/** -text
+environment/** -text
+processed/** -text
+figures/** -text
+checksums.txt -text

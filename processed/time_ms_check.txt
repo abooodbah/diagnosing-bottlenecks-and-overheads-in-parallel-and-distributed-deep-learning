@@ -1,0 +1,27 @@
+Records whose comm fields are DeepSpeed logger records (time_ms is not a time):
+  raw/pvc/pvc_n2_s0_r2.json job 3472848: step times used; comm fields excluded by layout
+  raw/pvc/pvc_n2_s0_r3.json job 3472848: step times used; comm fields excluded by layout
+  raw/pvc/pvc_n2_s2_r2.json job 3472848: step times used; comm fields excluded by layout
+  raw/pvc/pvc_n2_s2_r3.json job 3472848: step times used; comm fields excluded by layout
+  raw/pvc/pvc_n2_s3_r2.json job 3472848: step times used; comm fields excluded by layout
+  raw/pvc/pvc_n2_s3_r3.json job 3472848: step times used; comm fields excluded by layout
+  raw/pvc_v1/pvc_n4_s0_r1.json job 3472847: not read by any script (raw/pvc_v1 is outside the analysis)
+  raw/pvc_v1/pvc_n4_s0_r2.json job 3472847: not read by any script (raw/pvc_v1 is outside the analysis)
+  raw/pvc_v1/pvc_n4_s0_r3.json job 3472847: not read by any script (raw/pvc_v1 is outside the analysis)
+  raw/pvc_v1/pvc_n4_s2_r1.json job 3472847: not read by any script (raw/pvc_v1 is outside the analysis)
+  raw/pvc_v1/pvc_n4_s2_r2.json job 3472847: not read by any script (raw/pvc_v1 is outside the analysis)
+  raw/pvc_v1/pvc_n4_s2_r3.json job 3472847: not read by any script (raw/pvc_v1 is outside the analysis)
+ok   unaltered copy reproduces processed/summary.csv
+ok   unaltered copy reproduces processed/figure_data.json
+ok   unaltered copy reproduces processed/table3_zero3_ops.csv
+ok   unaltered copy reproduces processed/table3_all_reps.csv
+ok   unaltered copy reproduces processed/zero3_layer_totals.csv
+ok   unaltered copy reproduces processed/logger_model.csv
+ok   invalid time_ms altered (x1e6): all outputs byte-identical
+     the pre-2026-09-23 rule would treat 6 of 6 altered records as having valid times
+ok   invalid time_ms altered (zero): all outputs byte-identical
+     the pre-2026-09-23 rule would treat 0 of 6 altered records as having valid times
+ok   invalid time_ms altered (neg): all outputs byte-identical
+     the pre-2026-09-23 rule would treat 0 of 6 altered records as having valid times
+ok   control: altering valid times in raw/pvc/pvc_n1_s3_r1.json changes summary.csv, figure_data.json, zero3_layer_totals.csv
+RESULT: all checks passed

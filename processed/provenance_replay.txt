@@ -1,0 +1,50 @@
+Replay of provenance/edit_history.json (80 events)
+ok   diag_pvc.slurm  diag-v0   uploaded 2026-09-06T09:25:35Z  sha256 f54657001ed48741  reconstructed
+ok   diag_pvc.slurm  diag-v1   uploaded 2026-09-06T09:29:34Z  sha256 d2f25d2df0bec53c  reconstructed
+ok   diag_pvc.slurm  diag-v2   uploaded 2026-09-06T09:37:07Z  sha256 4ca87489ab96ea4d  reconstructed
+ok   diag_pvc.slurm  diag-v3   uploaded 2026-09-06T09:41:01Z  sha256 1d594a61cd150b08  reconstructed
+ok   diag_pvc.slurm  diag-v4   uploaded 2026-09-06T09:51:48Z  sha256 966dc839caf995ee  reconstructed
+ok   diag_pvc.slurm  diag-v5   uploaded 2026-09-06T09:58:54Z  sha256 474fd3ae60cfb85f  recovered original
+ok   diag_pvc.slurm  last upload equals the file read on Stampede3 on 2026-09-23
+ok   llama_bench.py  lb-v0     uploaded 2026-09-06T08:54:37Z  sha256 3c6869c3ee09ca73  recovered original
+ok   llama_bench.py  lb-v1     uploaded 2026-09-06T09:05:58Z  sha256 d438c2229d6c7592  reconstructed
+ok   llama_bench.py  lb-v2     uploaded 2026-09-06T10:19:14Z  sha256 eee85d760a92d3aa  reconstructed
+ok   llama_bench.py  lb-v3     uploaded 2026-09-06T11:39:03Z  sha256 475266e11f5eae2e  reconstructed
+ok   llama_bench.py  lb-v4     uploaded 2026-09-06T12:57:11Z  sha256 332dc3027a766a7f  reconstructed
+ok   llama_bench.py  lb-v5     uploaded 2026-09-06T15:26:31Z  sha256 55b19711fa307fac  reconstructed
+ok   llama_bench.py  lb-v6     uploaded 2026-09-09T11:43:18Z  sha256 90f4ed7183adbaa9  reconstructed
+ok   llama_bench.py  lb-v7     uploaded 2026-09-09T12:10:46Z  sha256 0ce7039e01fcc50a  reconstructed
+ok   llama_bench.py  lb-v8     uploaded 2026-09-09T14:36:45Z  sha256 70a4aa0e45e1bfe1  recovered original
+ok   llama_bench.py  first upload equals the recovered 6 Sep bundle member
+ok   llama_bench.py  last upload equals the file read on Stampede3 on 2026-09-23
+ok   moe_bench.py    moe-v0    uploaded 2026-09-06T08:54:37Z  sha256 250e42dad3af2ab0  recovered original
+ok   moe_bench.py    moe-v1    uploaded 2026-09-09T12:11:14Z  sha256 d985137f8f08bf50  recovered original
+ok   moe_bench.py    first upload equals the recovered 6 Sep bundle member
+ok   moe_bench.py    last upload equals the file read on Stampede3 on 2026-09-23
+ok   rank_env.sh     env-v0    uploaded 2026-09-06T08:54:37Z  sha256 358b9a54eee2d8eb  recovered original
+ok   rank_env.sh     env-v1    uploaded 2026-09-06T09:16:51Z  sha256 0c593d71cde70d4b  reconstructed
+ok   rank_env.sh     env-v2    uploaded 2026-09-06T09:25:35Z  sha256 15d2f91c8cec8550  reconstructed
+ok   rank_env.sh     env-v3    uploaded 2026-09-06T09:37:07Z  sha256 9e9afe0bc3a07c46  reconstructed
+ok   rank_env.sh     env-v4    uploaded 2026-09-06T09:41:01Z  sha256 e535da62724d8ec4  reconstructed
+ok   rank_env.sh     env-v5    uploaded 2026-09-06T09:58:54Z  sha256 be642842ac252f56  recovered original
+ok   rank_env.sh     first upload equals the recovered 6 Sep bundle member
+ok   rank_env.sh     last upload equals the file read on Stampede3 on 2026-09-23
+ok   zmig_h100.slurm h100sh-v0 uploaded 2026-09-06T08:54:37Z  sha256 6c4f9e66460cff89  recovered original
+ok   zmig_h100.slurm h100sh-v1 uploaded 2026-09-06T15:05:40Z  sha256 976bf06df1cb74dc  reconstructed
+ok   zmig_h100.slurm h100sh-v2 uploaded 2026-09-06T17:23:06Z  sha256 0bce53cf4b10af94  reconstructed
+ok   zmig_h100.slurm h100sh-v3 uploaded 2026-09-08T01:14:59Z  sha256 773c410b287bc71a  reconstructed
+ok   zmig_h100.slurm h100sh-v4 uploaded 2026-09-09T12:10:46Z  sha256 f10301170c3c17c6  recovered original
+ok   zmig_h100.slurm first upload equals the recovered 6 Sep bundle member
+ok   zmig_h100.slurm last upload equals the file read on Stampede3 on 2026-09-23
+ok   zmig_pvc.slurm  pvcsh-v0  uploaded 2026-09-06T08:54:37Z  sha256 035c6fb22b0bd90a  recovered original
+ok   zmig_pvc.slurm  pvcsh-v1  uploaded 2026-09-06T09:05:16Z  sha256 c626926d1753e04d  reconstructed
+ok   zmig_pvc.slurm  pvcsh-v2  uploaded 2026-09-06T09:11:18Z  sha256 b889bed7fb41fe0c  reconstructed
+ok   zmig_pvc.slurm  pvcsh-v3  uploaded 2026-09-06T09:21:04Z  sha256 a163202d04895a46  reconstructed
+ok   zmig_pvc.slurm  pvcsh-v4  uploaded 2026-09-06T10:02:23Z  sha256 b4aff76038388e82  reconstructed
+ok   zmig_pvc.slurm  pvcsh-v5  uploaded 2026-09-06T11:25:20Z  sha256 bcfe0b386af521ba  reconstructed
+ok   zmig_pvc.slurm  pvcsh-v6  uploaded 2026-09-06T11:39:03Z  sha256 e98102ab0d9c4cd5  recovered original
+ok   zmig_pvc.slurm  first upload equals the recovered 6 Sep bundle member
+ok   zmig_pvc.slurm  last upload equals the file read on Stampede3 on 2026-09-23
+--   one_allreduce.py no edit history; the recovered original is the only version
+--   zmon.sh         no edit history; the recovered original is the only version
+RESULT: all checks passed
