@@ -253,6 +253,8 @@ def main(argv=None):
     axa.text(4, -0.19, PLAT_LABEL["h100"], ha="center", transform=axa.get_xaxis_transform(), fontsize=FS - 3.2)
     axa.set_ylabel("Share of step (%)", fontsize=FS - 2)
     axa.set_xlabel("(a)  four-node composition; number = peak GiB/rank", fontsize=FS - 1, labelpad=18)
+    axa.text(0.5, -0.335, "gather bars are timed intervals and can include logger work",
+             transform=axa.transAxes, ha="center", va="top", fontsize=FS - 5.4, color="#555555")
     axa.legend(fontsize=FS - 4.6, frameon=True, edgecolor="#bbbbbb", loc="lower left",
                bbox_to_anchor=(0.0, 1.02), ncol=3, handlelength=1.1, labelspacing=0.2,
                borderpad=0.25, handletextpad=0.35, columnspacing=0.6)
@@ -298,8 +300,8 @@ def main(argv=None):
         label = None
         if key not in seen:
             seen.add(key)
-            label = "%s, %d node%s%s" % ("H100" if plat == "h100" else "Intel", n, "" if n == 1 else "s",
-                                         ", TCP" if tcp else (", host-staged" if host else ""))
+            sfx = ", TCP" if tcp else (", IB (earlier job)" if host else (", IB" if (plat == "h100" and n > 1) else ""))
+            label = "%s, %d node%s%s" % ("H100" if plat == "h100" else "Intel", n, "" if n == 1 else "s", sfx)
         axc.plot([p[0] for p in pts], [p[1] for p in pts], ls="--" if tcp else (":" if host else "-"),
                  marker="s" if plat == "h100" else "o", ms=3.2, lw=1.0, color=TRAJ[(plat, n)],
                  mfc="white" if tcp else TRAJ[(plat, n)], label=label)
@@ -308,10 +310,10 @@ def main(argv=None):
                    "points_step_s": [[p[0], p[1]] for p in pts]})
     fig_data["zero3_trajectories"] = tj
     axc.axvline(11, color="#888888", lw=0.7, ls=":")
-    axc.text(11.6, 1.2, "step 11", fontsize=FS - 5, color="#555555")
+    axc.text(11.6, 1.2, "iteration 11", fontsize=FS - 5, color="#555555")
     axc.set_xlim(0, 44)
     axc.set_ylim(0, 29)
-    axc.set_xlabel("(c)  ZeRO-3, training step", fontsize=FS - 1)
+    axc.set_xlabel("(c)  ZeRO-3, iteration index (warm-up + measured)", fontsize=FS - 1)
     axc.set_ylabel("Step time (s)", fontsize=FS - 2)
     axc.legend(fontsize=FS - 6.2, frameon=True, edgecolor="#bbbbbb", loc="lower left",
                bbox_to_anchor=(-0.02, 1.02), ncol=2, handlelength=1.5, labelspacing=0.12, borderpad=0.25,

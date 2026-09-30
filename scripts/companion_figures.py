@@ -66,7 +66,7 @@ def fig_paths(out):
                                        "11 reduce-scatters"], "#f6d7cd")
     ax.add_patch(FancyBboxPatch((1, 4), 98, 42, boxstyle="round,pad=0.4,rounding_size=1.4",
                                 linewidth=0.7, edgecolor="#444444", facecolor="#f7f7f7"))
-    ax.text(50, 40.5, "Timed interval of one collective", ha="center", va="center", fontsize=7.5, fontweight="bold")
+    ax.text(50, 40.5, "Timed interval of one collective (DeepSpeed-layer example)", ha="center", va="center", fontsize=7.2, fontweight="bold")
     y0, h0 = 21.0, 7.0
     ax.add_patch(plt.Rectangle((6, y0), 32, h0, facecolor="#c8c8c8", edgecolor="#555555", lw=0.6))
     ax.text(16.5, y0 + h0 / 2, "earlier device work", ha="center", va="center", fontsize=6.0)
@@ -80,7 +80,7 @@ def fig_paths(out):
     ax.plot([28, 28, 81, 81], [y0 - 3.0, y0 - 5.5, y0 - 5.5, y0 - 3.0], color="#222222", lw=0.8)
     ax.text(54.5, y0 - 9.0, "timed interval", ha="center", va="center", fontsize=6.3)
     ax.text(50, 6.8, "overlap disabled; step time = maximum across ranks", ha="center", va="center", fontsize=6.0)
-    ax.text(50, -1.5, "(a) state, observed collectives, and timer boundaries", ha="center", fontsize=7.8)
+    ax.text(50, -1.5, "(a) state, collectives observed in this configuration, and timer boundaries", ha="center", fontsize=7.8)
     box(bx, 1, 52, 47, 46, "Intel Max 1550", ["8 tiles per node", "oneCCL over TCP,", "host-staged"], "#e8eef5")
     box(bx, 52, 52, 47, 46, "NVIDIA H100", ["4 GPUs per node; NVLink", "within a node; NCCL over",
                                             "InfiniBand, host-staged;", "TCP-socket control"], "#e8eef5")
@@ -164,6 +164,8 @@ def fig_zero(out, data, fd):
     c.axvline(2.5, color="#888888", lw=0.7, ls=":")
     c.set_ylabel("share of exposed step (%)", fontsize=8)
     c.legend(fontsize=5.6, loc="upper center", bbox_to_anchor=(0.5, -0.34), ncol=2, frameon=False, columnspacing=0.9)
+    c.text(0.5, -0.62, "H100 ZeRO-3 bars use DeepSpeed-layer intervals; all others use torch-layer timers",
+           transform=c.transAxes, ha="center", va="top", fontsize=5.4, color="#444444")
     c.set_title("(c) four-node composition", fontsize=8.5)
     # (d) ZeRO-3 step time at each logged iteration
     traj = analyze.zero3_trajectories(PROCESSED)
@@ -178,8 +180,8 @@ def fig_zero(out, data, fd):
         lab = None
         if key not in seen:
             seen.add(key)
-            lab = "%s %d node%s%s" % ("H100" if plat == "h100" else "Intel", n, "" if n == 1 else "s",
-                                      ", TCP" if tcp else (", host-staged" if host else ""))
+            sfx = ", TCP" if tcp else (", IB (earlier job)" if host else (", IB" if (plat == "h100" and n > 1) else ""))
+            lab = "%s %d node%s%s" % ("H100" if plat == "h100" else "Intel", n, "" if n == 1 else "s", sfx)
         d.plot([q[0] for q in pts], [q[1] for q in pts], ls="--" if tcp else (":" if host else "-"),
                marker=MK[plat], ms=2.8, lw=0.9, color=analyze.TRAJ[(plat, n)],
                mfc="white" if tcp else analyze.TRAJ[(plat, n)], label=lab)
@@ -189,9 +191,9 @@ def fig_zero(out, data, fd):
     d.axvline(11, color="#888888", lw=0.6, ls=":")
     d.set_xlim(0, 44)
     d.set_ylim(0, 29)
-    d.set_xlabel("training step (warm-up + measured)", fontsize=8)
+    d.set_xlabel("iteration index (warm-up + measured)", fontsize=8)
     d.set_ylabel("ZeRO-3 step time (s)", fontsize=8)
-    d.set_title("(d) ZeRO-3 step time per logged iteration", fontsize=8.5)
+    d.set_title("(d) ZeRO-3 step per iteration (logger enabled)", fontsize=8.5)
     d.legend(fontsize=5.4, ncol=2, loc="upper center", bbox_to_anchor=(0.5, -0.24), frameon=False,
              labelspacing=0.2, handlelength=1.8, columnspacing=0.8)
     for ax in (a, b, c, d):
@@ -223,7 +225,7 @@ def fig_moe(out, moe, fd):
     cats = [("dispatch_ms", "#f5d76e", "dispatch all-to-all"), ("expert_ms", "#5b8db8", "expert computation"),
             ("return_ms", "#e0a838", "return all-to-all"), ("end_wait_ms", "#f2b27e", "final barrier wait")]
     fd["fig3"] = []
-    for ax, p, title in ((a, "pvc", "Intel (16 ranks)"), (b, "h100", "H100 (8 ranks)")):
+    for ax, p, title in ((a, "pvc", "Intel (16 ranks), selected worker"), (b, "h100", "H100 (8 ranks), selected worker")):
         for i, mode in enumerate(("balanced", "skewed")):
             ph, p50, p95, _, crit = moe_cell(moe, p, mode)
             bot = 0.0
