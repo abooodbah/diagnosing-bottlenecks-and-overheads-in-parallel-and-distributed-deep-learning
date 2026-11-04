@@ -1,4 +1,4 @@
-# Where the cost lands: sharding and expert-routing measurements
+# Diagnosing Bottlenecks and Overheads in Parallel and Distributed Deep Learning: measurement artifact
 
 Measurement artifact for the case studies in Section 9 of the survey
 "Diagnosing Bottlenecks and Overheads in Parallel and Distributed Deep
