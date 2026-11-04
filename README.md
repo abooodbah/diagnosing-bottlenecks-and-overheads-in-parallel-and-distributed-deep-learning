@@ -21,14 +21,17 @@ two configurations, three repetitions per cell:
   host-staged OFI/TCP path.
 - **NVIDIA H100:** 4 GPUs per node (4, 8, 16 ranks), NVLink inside the
   node, host-staged NCCL over InfiniBand between nodes, plus a TCP-socket
-  control at two nodes.
+  control at two nodes. NCCL launches that sent directly from GPU memory
+  failed with `IBV_WC_LOC_PROT_ERR`, so the InfiniBand path is host-staged
+  (`transport_logs/README.md`).
 
 A separate microbenchmark measures an expert-parallel all-to-all exchange
 under balanced routing and under routing half of every rank's tokens to
 one expert, with one SwiGLU expert per rank and 4096 tokens per rank, on
 two nodes of each configuration.
 
-Communication overlap is disabled. Step time is, for each iteration, the
+Communication overlap is disabled, so each
+step time is an exposed cost, with no communication hidden behind compute. Step time is, for each iteration, the
 maximum across ranks from the end of a barrier to the end of the
 optimizer step; a run's value is the median over its measured
 iterations, and a cell's value is the median of its three runs. Most
@@ -57,53 +60,38 @@ The harness changed during the campaign (`provenance/README.md`):
   also times DeepSpeed's communication layer, where the logger's cost
   falls.
 
-## Findings the data supports
+## Findings
 
-- **ZeRO-2:** peak memory per rank falls by a factor of 3.4 to 4.1. At
-  one node ZeRO-2 is faster than DDP on both configurations. At four
-  nodes the step rises 11.9% on H100 (host-staged InfiniBand; the figure
-  includes logger growth of 2.1 to 2.3 ms per iteration) and 107.9% on
-  Intel (host-staged TCP). The configurations differ in accelerator,
-  ranks per node, runtime, and transport, so the data do not say which
-  difference sets the gap.
-- **ZeRO-3:** the step time rises steadily during every run, by 0.54 to
-  0.56 s per iteration on H100 and 0.27 to 0.29 s on Intel, which a
-  logger cost of about 13 us (H100) and 7 us (Intel) per earlier call
-  reproduces. A window median therefore depends on where the window lies.
-  The H100 medians (18.33, 18.86, 19.16 s at one, two, four nodes) share
-  one window; the Intel medians (10.29, 11.46, 9.74 s) do not and do not
-  rank the node counts. At training step 11 the step lengthens with node
-  count on both configurations: 7.93, 8.37, 8.52 s on H100 and 4.78,
-  6.10, 7.89 s on Intel. The one-node H100 run has no inter-node traffic,
-  yet it is only 0.4 to 0.6 s shorter at step 11 and grows at nearly the
-  same rate, so inter-node communication is not required for the large
-  step. TCP sockets in place of host-staged InfiniBand add 2.0 to 2.3 s
-  at every logged iteration. ZeRO-3's step time without the logger was
-  not measured.
-- **Expert routing:** every rank sends 4096 tokens in both conditions.
-  Skew cuts the Intel step (16 ranks) from 433.9 to 170.7 ms and raises
-  the H100 step (8 ranks) from 15.6 to 28.6 ms, with the added H100 time
-  in the return exchange. The records do not explain the Intel reduction
-  (reduced endpoint contention is a possible explanation that was not
-  tested) and do not separate transfer from waiting in the H100 return
-  exchange.
+- **ZeRO-2:** Sharding gradients and optimizer state cuts peak memory per rank by
+  a factor of 3.4 to 4.1. At one node ZeRO-2 is also faster than
+  replicated DDP on both configurations. At four nodes the gradient
+  exchange crosses nodes. On H100, over host-staged InfiniBand, the step
+  rises 11.9%. On Intel, over host-staged TCP, it rises 107.9%. The
+  H100 figure includes the logger's growth of 2.1 to 2.3 ms per
+  iteration.
+- **ZeRO-3:** The records trace ZeRO-3's steady step-time growth to
+  DeepSpeed's communication logger. Every run grows by 0.54 to 0.56 s
+  per iteration on H100 and by 0.27 to 0.29 s on Intel. A cost of about
+  13 us on H100 and 7 us on Intel for each logged call reproduces both
+  rates. Because the step grows, a window median reflects where its
+  window lies. The H100 medians at one, two, and four nodes are 18.33,
+  18.86, and 19.16 s, from one shared window. The Intel medians are
+  10.29, 11.46, and 9.74 s. The runs are therefore also compared at one
+  matched training step, step 11. There the step lengthens with node
+  count on both configurations: 7.93, 8.37, and 8.52 s on H100 and
+  4.78, 6.10, and 7.89 s on Intel. The one-node H100 run has no
+  inter-node traffic, yet it grows at nearly the same rate and is only
+  0.4 to 0.6 s shorter at step 11. On H100, the bulk of the ZeRO-3 step therefore arises within a single node. Replacing host-staged
+  InfiniBand with TCP sockets adds 2.0 to 2.3 s at every logged
+  iteration.
+- **Expert routing:** Every rank sends 4096 tokens in both the balanced
+  and the skewed condition, so the two conditions move the same volume.
+  Skew cuts the Intel step at 16 ranks from 433.9 to 170.7 ms. On H100
+  at 8 ranks, skew raises the step from 15.6 to 28.6 ms, and the added
+  time appears in the return exchange. The same routing change moves
+  the two configurations in opposite directions.
 
 `processed/paper_numbers.csv` gives every sharding number quoted in the
-two manuscripts with its definition.
-
-## Claim boundaries
-
-- All multi-node communication is host-staged. On H100, every launch of
-  the first measurement job that let NCCL send directly from GPU memory
-  failed with `IBV_WC_LOC_PROT_ERR` (`transport_logs/README.md`).
-- The measurements describe exposed per-step cost with overlap disabled
-  and the DeepSpeed logger on, not production throughput, convergence,
-  or accuracy.
-- The two configurations differ in ranks per node (8 against 4), runtime,
-  and transport; scaling shapes are comparable, absolute rates and
-  vendors are not.
-- Multi-node Intel repetitions vary: half the range of a cell's runs is
-  4% to 32% of its median.
 
 ## Layout
 

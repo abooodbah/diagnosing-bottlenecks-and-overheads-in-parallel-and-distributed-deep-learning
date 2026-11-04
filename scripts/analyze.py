@@ -218,6 +218,8 @@ def main(argv=None):
         return 0
 
     FS = 14.5
+    FL = 13.3   # floor for every label: 8 pt when printed 14.8 cm wide
+    from matplotlib.lines import Line2D
     fig, (axa, axb, axc) = plt.subplots(
         1, 3, figsize=(9.7, 3.3),
         gridspec_kw={"width_ratios": [1.45, 0.95, 1.25]})
@@ -241,23 +243,24 @@ def main(argv=None):
             axa.bar(xi, v, 0.62, bottom=bottom, color=color, edgecolor="#333333",
                     linewidth=0.6, label=lab if xi == 0 else None)
             bottom += v
-        axa.text(xi, 102, f"{b['peak_gib']:.0f}", ha="center", fontsize=FS - 2.2)
+        axa.text(xi, 102, f"{b['peak_gib']:.0f}", ha="center", fontsize=FL)
         comp.append({"platform": plat, "mode": m, "shares_percent": shares,
                      "peak_gib": round(b["peak_gib"], 2), "decomposed_file": b["decomposed_file"]})
     fig_data["composition_4node"] = comp
-    axa.set_ylim(0, 112)
+    axa.set_ylim(0, 122)
     axa.set_xticks(range(len(cells)))
-    axa.set_xticklabels([{"ddp": "DDP", "zero2": "Z2", "zero3": "Z3"}[m] for _, m in cells], fontsize=FS - 2.8)
+    axa.set_xticklabels([{"ddp": "DDP", "zero2": "Z2", "zero3": "Z3"}[m] for _, m in cells], fontsize=FL)
     axa.axvline(2.5, color="#888888", linewidth=0.8, ls=":")
-    axa.text(1, -0.19, PLAT_LABEL["pvc"], ha="center", transform=axa.get_xaxis_transform(), fontsize=FS - 3.2)
-    axa.text(4, -0.19, PLAT_LABEL["h100"], ha="center", transform=axa.get_xaxis_transform(), fontsize=FS - 3.2)
-    axa.set_ylabel("Share of step (%)", fontsize=FS - 2)
-    axa.set_xlabel("(a)  four-node composition; number = peak GiB/rank", fontsize=FS - 1, labelpad=18)
-    axa.text(0.5, -0.335, "gather bars are timed intervals and can include logger work",
-             transform=axa.transAxes, ha="center", va="top", fontsize=FS - 5.4, color="#555555")
-    axa.legend(fontsize=FS - 4.6, frameon=True, edgecolor="#bbbbbb", loc="lower left",
-               bbox_to_anchor=(0.0, 1.02), ncol=3, handlelength=1.1, labelspacing=0.2,
-               borderpad=0.25, handletextpad=0.35, columnspacing=0.6)
+    axa.text(1, -0.20, PLAT_LABEL["pvc"], ha="center", va="top", transform=axa.get_xaxis_transform(), fontsize=FL)
+    axa.text(4, -0.20, PLAT_LABEL["h100"], ha="center", va="top", transform=axa.get_xaxis_transform(), fontsize=FL)
+    axa.set_ylabel("Share of step (%)", fontsize=FL)
+    fig.text(0.012, 0.088, "(a)  four-node composition; number = peak GiB/rank",
+             ha="left", va="bottom", fontsize=FS - 1)
+    fig.text(0.012, 0.022, "gather bars are timed intervals and can include logger work",
+             ha="left", va="bottom", fontsize=FL, color="#555555")
+    axa.legend(fontsize=FL, frameon=True, edgecolor="#bbbbbb", loc="lower left",
+               bbox_to_anchor=(0.0, 1.02), ncol=2, handlelength=1.1, labelspacing=0.2,
+               borderpad=0.25, handletextpad=0.35, columnspacing=0.8)
 
     # (b) weak scaling of DDP and ZeRO-2 (their step time is stable)
     scal = []
@@ -282,9 +285,19 @@ def main(argv=None):
     axb.plot([1, 4], [1, 4], ":", color="#999999", lw=0.9, label="Ideal")
     axb.set_xticks([1, 2, 4])
     axb.set_xlabel("(b)  nodes", fontsize=FS - 1)
-    axb.set_ylabel("Throughput vs own 1-node DDP", fontsize=FS - 2.4)
-    axb.legend(fontsize=FS - 4.8, frameon=True, edgecolor="#bbbbbb", loc="upper left", ncol=1,
-               handlelength=1.3, labelspacing=0.2, borderpad=0.3, handletextpad=0.4)
+    axb.set_ylabel("Throughput vs\nown 1-node DDP", fontsize=FL)
+    # a key instead of one entry per line: line style = mode, marker =
+    # system (filled column by column, so each row reads as a pair)
+    key_b = [Line2D([], [], color="#0072B2", ls="-", lw=1.3, label="DDP"),
+             Line2D([], [], color="#555555", ls="", marker="o", mfc="white", ms=5.5, label="Intel"),
+             Line2D([], [], color="#999999", ls=":", lw=0.9, label="Ideal"),
+             Line2D([], [], color="#009E73", ls="-.", lw=1.3, label="ZeRO-2"),
+             Line2D([], [], color="#555555", ls="", marker="s", mfc="white", ms=5.5, label="H100")]
+    axb.legend(handles=key_b, fontsize=FL, frameon=True, edgecolor="#bbbbbb", loc="upper left", ncol=2,
+               handlelength=1.05, labelspacing=0.12, borderpad=0.22, handletextpad=0.3, columnspacing=0.5,
+               borderaxespad=0.25)
+    axb.set_ylim(0.15, 4.75)   # the key sits above the highest point (2.07)
+    axb.set_yticks([1, 2, 3, 4])
 
     # (c) ZeRO-3 step time at each logged iteration, against the training step
     traj = zero3_trajectories(processed)
@@ -310,19 +323,29 @@ def main(argv=None):
                    "points_step_s": [[p[0], p[1]] for p in pts]})
     fig_data["zero3_trajectories"] = tj
     axc.axvline(11, color="#888888", lw=0.7, ls=":")
-    axc.text(11.6, 1.2, "iteration 11", fontsize=FS - 5, color="#555555")
+    axc.text(11.6, 1.2, "iteration 11", fontsize=FL, color="#555555")
     axc.set_xlim(0, 44)
     axc.set_ylim(0, 29)
-    axc.set_xlabel("(c)  ZeRO-3, iteration index (warm-up + measured)", fontsize=FS - 1)
-    axc.set_ylabel("Step time (s)", fontsize=FS - 2)
-    axc.legend(fontsize=FS - 6.2, frameon=True, edgecolor="#bbbbbb", loc="lower left",
-               bbox_to_anchor=(-0.02, 1.02), ncol=2, handlelength=1.5, labelspacing=0.12, borderpad=0.25,
-               handletextpad=0.3, columnspacing=0.6)
+    axc.set_xlabel("(c)  ZeRO-3, iteration index", fontsize=FS - 1)
+    axc.set_ylabel("Step time (s)", fontsize=FL)
+    # a key instead of one entry per series: marker and color family =
+    # system, shade = node count, dashed = TCP, dotted = the earlier job
+    # (the label "IB (earlier job)" is the one the text names)
+    key_c = [Line2D([], [], color=TRAJ[("h100", 2)], marker="s", ls="-", lw=1.0, ms=4.5, label="H100"),
+             Line2D([], [], color=TRAJ[("pvc", 2)], marker="o", ls="-", lw=1.0, ms=4.5, label="Intel"),
+             Line2D([], [], color="#bdbdbd", ls="-", lw=2.0, label="1 node"),
+             Line2D([], [], color="#444444", ls="--", lw=1.0, label="TCP"),
+             Line2D([], [], color="#7a7a7a", ls="-", lw=2.0, label="2 nodes"),
+             Line2D([], [], color="#444444", ls=":", lw=1.2, label="IB (earlier job)"),
+             Line2D([], [], color="#252525", ls="-", lw=2.0, label="4 nodes")]
+    axc.legend(handles=key_c, fontsize=FL, frameon=True, edgecolor="#bbbbbb", loc="lower right",
+               bbox_to_anchor=(1.0, 1.02), ncol=4, handlelength=1.3, labelspacing=0.2, borderpad=0.25,
+               handletextpad=0.35, columnspacing=0.7)
     for ax in (axa, axb, axc):
-        ax.tick_params(labelsize=FS - 1.8)
+        ax.tick_params(labelsize=FL)
         ax.set_axisbelow(True)
         ax.grid(axis="y", linewidth=0.4, color="#dddddd")
-    fig.subplots_adjust(left=0.060, right=0.988, top=0.80, bottom=0.26, wspace=0.34)
+    fig.subplots_adjust(left=0.072, right=0.988, top=0.745, bottom=0.305, wspace=0.42)
     fig.savefig(os.path.join(figures, "zero_migration.png"), dpi=300)
     print("wrote figures/zero_migration.png")
 
@@ -385,10 +408,10 @@ def main(argv=None):
                 ci = max(range(world), key=lambda i: sums[i])
                 bottom = 0.0
                 for v, c, lab in (
-                        (pr["dispatch_ms"][ci], C_GATHER, "Dispatch a2a"),
+                        (pr["dispatch_ms"][ci], C_GATHER, "Dispatch all-to-all"),
                         (pr["expert_ms"][ci], C_COMPUTE, "Expert"),
-                        (pr["return_ms"][ci], "#e8b84b", "Return a2a"),
-                        (pr["end_wait_ms"][ci], C_SYNC, "End wait")):
+                        (pr["return_ms"][ci], "#e8b84b", "Return all-to-all"),
+                        (pr["end_wait_ms"][ci], C_SYNC, "End-of-step wait")):
                     ax.bar(xi, v, 0.5, bottom=bottom, color=c,
                            edgecolor="#333333", linewidth=0.6,
                            label=lab if (xi == 0 and plat == plats_with_data[0])
@@ -418,8 +441,10 @@ def main(argv=None):
             ax.set_xticks([0, 1])
             ax.set_xticklabels(["Balanced", "Skewed"], fontsize=FS - 1.5)
             ax.set_xlim(-0.55, 1.95)
-            ax.set_title(f"{PLAT_LABEL[plat]} (2 nodes, {max(ranks)} ranks)",
-                         fontsize=FS - 1.4)
+            # panel letters like zero_migration's (a)-(c); the systems are
+            # identified in the caption instead of in-panel titles
+            ax.set_xlabel("(%s)" % "ab"[plats_with_data.index(plat)],
+                          fontsize=FS - 1.4, labelpad=6)
             ax.set_ylabel("ms per iteration", fontsize=FS - 1.5)
             ax.tick_params(labelsize=FS - 2)
             ax.set_axisbelow(True)
@@ -430,7 +455,7 @@ def main(argv=None):
                     ncol=5, frameon=False, handlelength=1.2,
                     columnspacing=1.0, bbox_to_anchor=(0.5, 1.005))
         fig2.subplots_adjust(left=0.15 if n == 1 else 0.10, right=0.985,
-                             top=0.80, bottom=0.13, wspace=0.28)
+                             top=0.86, bottom=0.24, wspace=0.28)
         fig2.savefig(os.path.join(figures, "moe_imbalance.png"), dpi=300)
         print("wrote figures/moe_imbalance.png")
     fig_data["moe_critical_rank"] = moe_data

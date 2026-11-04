@@ -64,6 +64,10 @@ def fig_paths(out):
                                        "reduces, 1 all-gather"], "#dcead9")
     box(ax, 69, 52, 30, 46, "ZeRO-3", ["parameters also", "partitioned; observed:", "206 all-gathers,",
                                        "11 reduce-scatters"], "#f6d7cd")
+    for x0, x1 in ((31.6, 34.4), (65.6, 68.4)):  # pre-round2 marker
+        ax.annotate("", xy=(x1, 75), xytext=(x0, 75),
+                    arrowprops=dict(arrowstyle="-|>", color="#444444",
+                                    lw=1.0, shrinkA=0, shrinkB=0))
     ax.add_patch(FancyBboxPatch((1, 4), 98, 42, boxstyle="round,pad=0.4,rounding_size=1.4",
                                 linewidth=0.7, edgecolor="#444444", facecolor="#f7f7f7"))
     ax.text(50, 40.5, "Timed interval of one collective (DeepSpeed-layer example)", ha="center", va="center", fontsize=7.2, fontweight="bold")
@@ -158,7 +162,8 @@ def fig_zero(out, data, fd):
             bot += v
         fd["fig2c"].append({"platform": p, "mode": m, "shares_percent": shares, "decomposed_file": g["decomposed_file"]})
     c.set_xticks(range(6))
-    c.set_xticklabels(["DDP", "Z2", "Z3", "DDP", "Z2", "Z3"], fontsize=7.5)
+    c.set_xticklabels(["DDP", "ZeRO-2", "ZeRO-3", "DDP", "ZeRO-2", "ZeRO-3"],
+                      fontsize=5.2)
     c.text(0.25, -0.24, "Intel", ha="center", fontsize=8, transform=c.transAxes)
     c.text(0.75, -0.24, "H100", ha="center", fontsize=8, transform=c.transAxes)
     c.axvline(2.5, color="#888888", lw=0.7, ls=":")
@@ -225,7 +230,7 @@ def fig_moe(out, moe, fd):
     cats = [("dispatch_ms", "#f5d76e", "dispatch all-to-all"), ("expert_ms", "#5b8db8", "expert computation"),
             ("return_ms", "#e0a838", "return all-to-all"), ("end_wait_ms", "#f2b27e", "final barrier wait")]
     fd["fig3"] = []
-    for ax, p, title in ((a, "pvc", "Intel (16 ranks), selected worker"), (b, "h100", "H100 (8 ranks), selected worker")):
+    for ax, p, title in ((a, "pvc", "(a) Intel (16 ranks), selected worker"), (b, "h100", "(b) H100 (8 ranks), selected worker")):
         for i, mode in enumerate(("balanced", "skewed")):
             ph, p50, p95, _, crit = moe_cell(moe, p, mode)
             bot = 0.0
@@ -252,7 +257,7 @@ def fig_moe(out, moe, fd):
     c.set_xlabel("rank", fontsize=8)
     c.set_ylabel("expert time / median rank", fontsize=8)
     c.legend(fontsize=6.4, frameon=False)
-    c.set_title("expert-time imbalance", fontsize=8.5)
+    c.set_title("(c) Expert-time imbalance", fontsize=8.5)
     for ax in axs:
         ax.tick_params(labelsize=7.5)
         ax.set_axisbelow(True)

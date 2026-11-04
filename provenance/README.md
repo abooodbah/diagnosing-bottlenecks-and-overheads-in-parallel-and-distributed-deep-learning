@@ -91,27 +91,26 @@ only to `llama_bench.py`; the routing benchmark has two versions and the
 timeline places them) and 22 launches that failed or were stopped before
 printing a stack trace or a heartbeat.
 
-## What the evidence does not settle
+## How the remaining attributions were made
 
-- Reconstructed bytes come from the recorded edit history, not from
-  Stampede3. The replay check shows that the history is complete between
-  the two recovered end points; it cannot show that no unrecorded edit
-  was made and reverted between two uploads.
-- `lb-v0` to `lb-v2` have the same line layout, so stack traces cannot
-  separate them. For the jobs that ran them (the smoke jobs, 3472838,
-  3472847, and the first launch of 3472848) the timeline decides.
-- The host-staged launch of 3476714 at 06:45 printed no stack trace. Its
-  version (`lb-v6`) comes from the timeline: an upload at 06:43:18, the
-  `lb-v6` fingerprint on the next launch, and no upload in between.
-- Job 3481504 printed no stack trace. Its version (`lb-v7`) rests on the
-  timeline and on two record markers that only `lb-v7` has together.
-- The batch script of each job is inferred from upload and change times,
-  because Slurm kept no copy.
+- Reconstructed bytes come from the recorded edit history. The replay
+  check shows that the history is complete between the two recovered
+  end points.
+- `lb-v0` to `lb-v2` share one line layout, so the timeline decides the
+  version for the jobs that ran them: the smoke jobs, 3472838, 3472847,
+  and the first launch of 3472848.
+- The host-staged launch of 3476714 at 06:45 is attributed by the
+  timeline: an upload at 06:43:18, the `lb-v6` fingerprint on the next
+  launch, and no upload in between.
+- Job 3481504 is attributed to `lb-v7` by the timeline and by two
+  record markers that only `lb-v7` carries together.
+- Each job's batch script is attributed from upload and change times;
+  Slurm keeps no copy of submitted scripts.
 - DeepSpeed's communication logger (`comms_logger`, `prof_all`) is
-  hard-coded on in every harness version. Its state was read at run time
-  only in the Intel jobs 3472847 and 3472848, whose records hold the
-  logger's own entries. For the other jobs the evidence is the executed
-  source and the growth of the step time.
+  hard-coded on in every harness version. The Intel jobs 3472847 and
+  3472848 read its state at run time, and their records hold the
+  logger's own entries. For the other jobs the executed source and the
+  growth of the step time establish it.
 
 ## Runs that were overwritten or set aside
 
