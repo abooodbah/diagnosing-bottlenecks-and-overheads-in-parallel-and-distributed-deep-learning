@@ -8,6 +8,7 @@ version that ran, and portable copies), the raw per-run records, the job
 logs, the processed tables, the figures, and the environment snapshots of
 the ZeRO sharding and mixture-of-experts routing experiments run on
 Stampede3 from 6 to 11 September 2026.
+The companion report itself is `companion_report.pdf` at the root of this repository.
 
 ## What was measured
 
