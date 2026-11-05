@@ -1,0 +1,13 @@
+stage,code,description
+TITLE_ABSTRACT,TA1,Not about distributed or parallel training
+TITLE_ABSTRACT,TA2,Inference only or post-training deployment only
+TITLE_ABSTRACT,TA3,Application-specific accuracy study without a distributed-training overhead contribution
+TITLE_ABSTRACT,TA4,No execution-time memory-placement or convergence/time-to-target mechanism
+TITLE_ABSTRACT,TA5,Insufficient information to determine relevance (send to full text rather than exclude when uncertain)
+TITLE_ABSTRACT,TA6,Non-English source outside the declared language scope
+FULL_TEXT,FT1,No direct analysis measurement mitigation or model of a distributed-training overhead
+FULL_TEXT,FT2,Inference only or post-training deployment only
+FULL_TEXT,FT3,Application-specific accuracy result without transferable systems or optimization insight
+FULL_TEXT,FT4,Insufficient methodological detail for taxonomy coding
+FULL_TEXT,FT5,Superseded duplicate/preprint version (archival version retained)
+FULL_TEXT,FT6,Outside the declared training scope after full-text review

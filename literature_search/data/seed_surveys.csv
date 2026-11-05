@@ -1,0 +1,14 @@
+ref_no,year,title_simple,doi,url
+10,2019,Demystifying Parallel and Distributed Deep Learning,10.1145/3320060,https://doi.org/10.1145/3320060
+15,2023,Communication-Efficient Distributed Learning: An Overview,10.1109/JSAC.2023.3242710,https://doi.org/10.1109/JSAC.2023.3242710
+26,2023,From distributed machine to distributed deep learning: a comprehensive survey,10.1186/s40537-023-00829-x,https://doi.org/10.1186/s40537-023-00829-x
+32,2026,Efficient Training of Large Language Models on Distributed Infrastructures: A Survey,10.1007/s44336-026-00038-z,https://doi.org/10.1007/s44336-026-00038-z
+64,2020,Distributed Training of Deep Learning Models: A Taxonomic Perspective,10.1109/TPDS.2020.3003307,https://doi.org/10.1109/TPDS.2020.3003307
+76,2024,Communication-Efficient Large-Scale Distributed Deep Learning: A Comprehensive Survey,,https://arxiv.org/abs/2404.06114
+82,2020,"Scalable Deep Learning on Distributed Infrastructures: Challenges, Techniques, and Tools",10.1145/3363554,https://doi.org/10.1145/3363554
+99,2021,Communication Optimization Strategies for Distributed Deep Neural Network Training: A Survey,10.1016/j.jpdc.2020.11.005,https://doi.org/10.1016/j.jpdc.2020.11.005
+126,2021,A Quantitative Survey of Communication Optimizations in Distributed Deep Learning,,https://arxiv.org/abs/2005.13247
+133,2025,"A Survey of End-to-End Modeling for Distributed DNN Training: Workloads, Simulators, and TCO",,https://arxiv.org/abs/2506.09275
+135,2020,Communication-Efficient Distributed Deep Learning: A Comprehensive Survey,,https://arxiv.org/abs/2003.06307
+137,2020,A Survey on Distributed Machine Learning,10.1145/3377454,https://doi.org/10.1145/3377454
+140,2024,Efficient Large Language Models: A Survey,,https://openreview.net/forum?id=bsCCJHbO8A

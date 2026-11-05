@@ -1,0 +1,27 @@
+ACM DIGITAL LIBRARY MANUAL SEARCH SHEET
+
+Database: ACM Guide to Computing Literature (not only the ACM Full-Text Collection)
+Publication window: 2009-01-01 through 2026-07-31
+Fields: Anywhere for the registered Boolean expression; preserve the result count and export RIS/CSV.
+Do not alter a query because its count is too high or low. Log any syntax adaptation verbatim.
+
+[Q1_general_scaling] General distributed-training performance and scaling
+("distributed deep learning" OR "distributed machine learning" OR "distributed training" OR "distributed DNN training" OR "parallel deep learning" OR "large-scale deep learning" OR "large language model training") AND (performance OR scaling OR overhead OR bottleneck OR efficiency OR runtime OR "time to solution")
+
+[Q2_communication_network] Communication, collectives, transports, and network architecture
+("distributed deep learning" OR "distributed machine learning" OR "distributed training" OR "distributed DNN training" OR "large language model training") AND (communication OR "collective communication" OR "all reduce" OR "all-reduce" OR "all to all" OR "parameter server" OR RDMA OR NCCL OR interconnect OR transport OR "network topology" OR "in-network aggregation" OR "hierarchical aggregation")
+
+[Q3_compression_quantization] Compression, quantization, sparsification, and reduced synchronization
+("distributed learning" OR "distributed deep learning" OR "distributed training" OR "distributed optimization" OR "federated learning" OR "data-parallel training") AND ("gradient compression" OR "compressed communication" OR quantization OR "nonuniform quantization" OR "logarithmic quantization" OR sparsification OR "sparse communication" OR "error feedback" OR "low-rank compression" OR "one-bit SGD" OR "1-bit SGD" OR "local SGD" OR "periodic averaging")
+
+[Q4_memory_state] Memory, state placement, sharding, offload, and checkpointing
+("distributed deep learning" OR "distributed training" OR "large model training" OR "large language model training" OR "transformer training") AND ("state sharding" OR "parameter sharding" OR "fully sharded data parallel" OR "optimizer state partitioning" OR offload OR "memory optimization" OR "memory wall" OR checkpointing OR "activation recomputation" OR "tensor swapping" OR prefetch OR "all gather" OR "reduce scatter")
+
+[Q5_parallelism_llm] Parallel architectures for transformers and mixture-of-experts models
+("deep learning training" OR "distributed training" OR "transformer training" OR "large language model training" OR "giant model training") AND ("data parallelism" OR "model parallelism" OR "tensor parallelism" OR "pipeline parallelism" OR "sequence parallelism" OR "context parallelism" OR "expert parallelism" OR "mixture of experts" OR "conditional computation" OR "automatic parallelization" OR "computation graph partitioning" OR "long sequence")
+
+[Q6_decentralized_convergence] Decentralized optimization, topology, synchronization, and convergence
+("distributed optimization" OR "decentralized optimization" OR "decentralized learning" OR "decentralized SGD" OR "distributed averaging" OR "multi-agent optimization" OR "distributed first-order methods") AND (gossip OR consensus OR "gradient tracking" OR "gradient push" OR topology OR "spectral gap" OR "graph clustering" OR "time-varying graph" OR "directed graph" OR asynchronous OR staleness OR quantized OR convergence OR "communication complexity")
+
+[Q7_measurement_scheduling] Scheduling, overlap, stragglers, diagnosis, benchmarking, and modeling
+("distributed deep learning" OR "distributed machine learning" OR "distributed training" OR "distributed DNN training" OR "large language model training") AND (scheduling OR scheduler OR overlap OR straggler OR "tail latency" OR diagnosis OR profiling OR "performance analysis" OR benchmark OR modeling OR simulation OR simulator OR "total cost of ownership" OR TCO OR energy OR carbon)

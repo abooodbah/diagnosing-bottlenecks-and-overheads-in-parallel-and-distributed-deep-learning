@@ -1,0 +1,7 @@
+ref_no,year,title,document_type,role_in_review,discovery_route
+39,2017,Bringing HPC Techniques to Deep Learning / baidu-allreduce,engineering note,Historical implementation context for ring all-reduce and HPC techniques,targeted known-item search
+96,2017,Scaling Deep Learning Training with NCCL,vendor engineering article,Implementation context for NCCL scaling,targeted known-item search
+97,2026,NVIDIA Collective Communication Library (NCCL) Documentation version 2.30.7,vendor technical documentation,Collective semantics and documented runtime behavior,targeted known-item search
+102,2022,Fully Sharded Data Parallel API/blog documentation,framework documentation,API and state-sharding semantics,targeted known-item search
+103,2023,Straggler Mitigation on PyTorch DDP by Hierarchical SGD,framework engineering article,Runtime mechanism and configuration semantics,targeted known-item search
+104,2025,torch.distributed.fsdp.fully_shard FSDP2 per-parameter sharding,framework documentation,API and state-placement semantics,targeted known-item search

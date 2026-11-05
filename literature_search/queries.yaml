@@ -1,0 +1,231 @@
+version: 1.0
+purpose: retrospective completeness audit for a survey of bottlenecks and overheads in distributed deep-learning training
+modern_search_start: '2009-01-01'
+cutoff_date: '2026-07-31'
+languages: [English]
+arxiv_categories:
+  - cs.DC
+  - cs.LG
+  - cs.PF
+  - cs.NI
+  - stat.ML
+  - math.OC
+  - eess.SY
+
+# Each block is searched separately. This avoids one opaque mega-query and makes
+# source-level counts, overlap, and precision auditable.
+query_blocks:
+  - id: Q1_general_scaling
+    label: General distributed-training performance and scaling
+    context:
+      - distributed deep learning
+      - distributed machine learning
+      - distributed training
+      - distributed DNN training
+      - parallel deep learning
+      - large-scale deep learning
+      - large language model training
+    mechanism:
+      - performance
+      - scaling
+      - overhead
+      - bottleneck
+      - efficiency
+      - runtime
+      - time to solution
+    usenix_terms:
+      - distributed deep learning
+      - distributed machine learning
+      - distributed training
+      - large language model training
+
+  - id: Q2_communication_network
+    label: Communication, collectives, transports, and network architecture
+    context:
+      - distributed deep learning
+      - distributed machine learning
+      - distributed training
+      - distributed DNN training
+      - large language model training
+    mechanism:
+      - communication
+      - collective communication
+      - all reduce
+      - all-reduce
+      - all to all
+      - parameter server
+      - RDMA
+      - NCCL
+      - interconnect
+      - transport
+      - network topology
+      - in-network aggregation
+      - hierarchical aggregation
+    usenix_terms:
+      - deep learning communication
+      - distributed training network
+      - machine learning RDMA
+      - parameter server
+      - in-network aggregation learning
+      - collective communication learning
+
+  - id: Q3_compression_quantization
+    label: Compression, quantization, sparsification, and reduced synchronization
+    context:
+      - distributed learning
+      - distributed deep learning
+      - distributed training
+      - distributed optimization
+      - federated learning
+      - data-parallel training
+    mechanism:
+      - gradient compression
+      - compressed communication
+      - quantization
+      - nonuniform quantization
+      - logarithmic quantization
+      - sparsification
+      - sparse communication
+      - error feedback
+      - low-rank compression
+      - one-bit SGD
+      - 1-bit SGD
+      - local SGD
+      - periodic averaging
+    usenix_terms:
+      - gradient compression distributed training
+      - communication efficient learning
+      - quantized distributed learning
+      - sparse all reduce
+
+  - id: Q4_memory_state
+    label: Memory, state placement, sharding, offload, and checkpointing
+    context:
+      - distributed deep learning
+      - distributed training
+      - large model training
+      - large language model training
+      - transformer training
+    mechanism:
+      - state sharding
+      - parameter sharding
+      - fully sharded data parallel
+      - optimizer state partitioning
+      - offload
+      - memory optimization
+      - memory wall
+      - checkpointing
+      - activation recomputation
+      - tensor swapping
+      - prefetch
+      - all gather
+      - reduce scatter
+    usenix_terms:
+      - deep learning sharding
+      - model training offload
+      - distributed checkpointing training
+      - large model memory optimization
+      - fully sharded data parallel
+
+  - id: Q5_parallelism_llm
+    label: Parallel architectures for transformers and mixture-of-experts models
+    context:
+      - deep learning training
+      - distributed training
+      - transformer training
+      - large language model training
+      - giant model training
+    mechanism:
+      - data parallelism
+      - model parallelism
+      - tensor parallelism
+      - pipeline parallelism
+      - sequence parallelism
+      - context parallelism
+      - expert parallelism
+      - mixture of experts
+      - conditional computation
+      - automatic parallelization
+      - computation graph partitioning
+      - long sequence
+    usenix_terms:
+      - model parallelism training
+      - pipeline parallelism training
+      - tensor parallelism training
+      - mixture of experts training
+      - automatic parallelization machine learning
+      - long sequence transformer training
+
+  - id: Q6_decentralized_convergence
+    label: Decentralized optimization, topology, synchronization, and convergence
+    context:
+      - distributed optimization
+      - decentralized optimization
+      - decentralized learning
+      - decentralized SGD
+      - distributed averaging
+      - multi-agent optimization
+      - distributed first-order methods
+    mechanism:
+      - gossip
+      - consensus
+      - gradient tracking
+      - gradient push
+      - topology
+      - spectral gap
+      - graph clustering
+      - time-varying graph
+      - directed graph
+      - asynchronous
+      - staleness
+      - quantized
+      - convergence
+      - communication complexity
+    usenix_terms:
+      - decentralized machine learning
+      - distributed optimization communication
+      - gossip learning
+
+  - id: Q7_measurement_scheduling
+    label: Scheduling, overlap, stragglers, diagnosis, benchmarking, and modeling
+    context:
+      - distributed deep learning
+      - distributed machine learning
+      - distributed training
+      - distributed DNN training
+      - large language model training
+    mechanism:
+      - scheduling
+      - scheduler
+      - overlap
+      - straggler
+      - tail latency
+      - diagnosis
+      - profiling
+      - performance analysis
+      - benchmark
+      - modeling
+      - simulation
+      - simulator
+      - total cost of ownership
+      - TCO
+      - energy
+      - carbon
+    usenix_terms:
+      - distributed training scheduling
+      - distributed deep learning performance
+      - machine learning straggler
+      - distributed training diagnosis
+      - machine learning benchmark
+
+# These are not part of the database keyword count. They are searched by known
+# product/project name because they establish runtime/API semantics rather than
+# comparative scientific effectiveness.
+targeted_documentation:
+  - NVIDIA NCCL documentation
+  - PyTorch DistributedDataParallel communication hooks
+  - PyTorch FullyShardedDataParallel FSDP documentation
+  - PyTorch FSDP2 fully_shard documentation
+  - PyTorch hierarchical SGD straggler mitigation
+  - MLPerf Training benchmark specification
+  - Baidu allreduce engineering note

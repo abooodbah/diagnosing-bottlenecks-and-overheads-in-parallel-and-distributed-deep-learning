@@ -1,14 +1,16 @@
 # Diagnosing Bottlenecks and Overheads in Parallel and Distributed Deep Learning: measurement artifact
 
-Measurement artifact for the case studies in Section 9 of the survey
-"Diagnosing Bottlenecks and Overheads in Parallel and Distributed Deep
-Learning: A Survey" and for the companion technical report "Measuring
-Overheads in Distributed Deep Learning". It holds the harness (every
+Measurement artifact for the companion technical report "Measuring
+Overheads in Distributed Deep Learning", which the survey "Diagnosing
+Bottlenecks and Overheads in Parallel and Distributed Deep Learning: A
+Survey" cites. It holds the harness (every
 version that ran, and portable copies), the raw per-run records, the job
 logs, the processed tables, the figures, and the environment snapshots of
 the ZeRO sharding and mixture-of-experts routing experiments run on
 Stampede3 from 6 to 11 September 2026.
 The companion report itself is `companion_report.pdf` at the root of this repository.
+The survey's literature-search queries and reference inventory are in
+`literature_search/` (see its README).
 
 ## What was measured
 
