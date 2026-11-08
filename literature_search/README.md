@@ -30,12 +30,8 @@ material).
 
 The query strings were reconstructed from the seven term groups after the
 search, so that the search can be rerun. They are not a log of the queries
-as originally submitted. The original database exports, the per-query
-dates and result counts, and the screening decisions are not included. The
-stage counts in the survey (approximately 1,800 records, approximately
-1,200 after deduplication, approximately 300 at full text, 129 included,
-then 25 added by citation tracing and targeted searches, and two revision
-passes for a final corpus of 161) are the authors' reported figures.
+as originally submitted. The original database exports and screening
+records are not included.
 
 ## Rerunning the search
 
