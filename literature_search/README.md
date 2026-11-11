@@ -11,8 +11,9 @@ material).
   (1 January 2009 to 31 July 2026), the language scope, and the settings for
   each source.
 - `results/query_register.csv` and `results/query_register.md`: 61
-  source-specific query strings generated from `queries.yaml` for the ACM
-  Digital Library, IEEE Xplore, USENIX proceedings, arXiv, and OpenReview.
+  source-specific query strings for the ACM Digital Library, IEEE Xplore,
+  USENIX proceedings, arXiv, and OpenReview, reconstructed from the seven
+  term groups in `queries.yaml` so the search can be rerun.
   `results/acm_query_sheet.txt` lists the ACM queries for manual entry.
 - `data/references_gold.csv`: the survey's reference list, 162 entries.
   Entry 8 is the companion report, which lies outside the reviewed corpus;
@@ -25,13 +26,6 @@ material).
   USENIX; one-hop citation tracing through OpenAlex; import of RIS or CSV
   exports; deduplication; a screening log; and stage counts.
 - `templates/`: the exclusion reason codes and a log for query amendments.
-
-## What this folder does not contain
-
-The query strings were reconstructed from the seven term groups after the
-search, so that the search can be rerun. They are not a log of the queries
-as originally submitted. The original database exports and screening
-records are not included.
 
 ## Rerunning the search
 
